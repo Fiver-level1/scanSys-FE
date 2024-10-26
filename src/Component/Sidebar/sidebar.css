@@ -1,0 +1,36 @@
+.sidebar-min-width{
+    width: min(100%, 400px);
+}
+
+.sidebar-li{
+    border-radius: 20px;
+    border: 1px solid rgba(0, 0, 0, 0.156);
+    color: #354259;
+    padding: 15px;
+    margin: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.sidebar-li-lang{
+    background: #CDC2AE;
+    display: block;
+    text-align: center;
+    padding: 4px 12px;
+    border-radius: 15px;
+    margin: 0 4px;
+}
+
+.sidebar {
+    position: fixed;
+    transition: transform 0.3s ease;/* Smooth transition */
+  }
+
+  .sidebar-unactive{
+    transform: translateX(-100%); /* Start hidden off-screen */
+  }
+  
+  /* Sidebar active (visible) state */
+  .sidebar-active {
+    transform: translateX(0); /* Slide in */
+  }
