@@ -19,3 +19,48 @@
 .bg-facebook{
     background-color: rgb(66,103,178);
 }
+
+/* 'fixed top-0 left-0 w-screen h-screen bright-black z-10' */
+
+.popup-overlay{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5); /* dark overlay */
+    z-index: 10;
+}
+
+.popup-content {
+    position: fixed;
+    top: 20vh;                
+    right: 50%;               
+    transform: translateX(50%); /* Centers horizontally */
+    text-align: center;       /* Similar to `text-center` */
+    color: #ff007f;           /* Custom pink color (replace with #d63384 for Tailwind's pink-600) */
+    width: min(95%, 600px);      /* Similar to `w-min` */
+    font-size: 1.125rem;      /* Similar to `text-lg` */
+    opacity: 1;               /* Similar to `opacity-100` */
+    background-color: white;  /* Similar to `bg-white` */
+    border-radius: 8px;       /* Similar to `rounded-lg` */
+    padding: 1rem;            /* Adds some padding */
+}
+
+.popup-close {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    cursor: pointer;
+    color: #354259;
+}
+
+.popup-close-icon {
+    width: 2rem;
+    height: 2rem;
+    background-color: white;
+    border-radius: 50%;
+    padding: 2px;
+}
+
+

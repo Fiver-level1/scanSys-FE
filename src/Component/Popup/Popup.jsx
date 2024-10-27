@@ -8,14 +8,16 @@ const Popup = () => {
     
 
     return (
-        <div className='fixed top-0 left-0 w-screen h-screen bright-black z-10'>
+        // popup-overlay
+        // 'fixed top-0 left-0 w-screen h-screen bright-black z-10'
+        <div className="popup-overlay">
 
-        <div className='fixed top-20 right-1/2 translate-x-1/2 text-center text-pink-600 w-min text-lg opacity-100 	 bg-white rounded-lg'>
-        <span className="float-right text-[#354259]" onClick={hideArrowClick}>
-        <svg className="h-8 w-8 inline mb-5 rounded-full bg-white p-px m-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">  <circle cx="12" cy="12" r="10" />  <line x1="15" y1="9" x2="9" y2="15" />  <line x1="9" y1="9" x2="15" y2="15"  /></svg>  
+        <div className="popup-content">
+        <span className="popup-close" onClick={hideArrowClick}>
+        <svg className="popup-close-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">  <circle cx="12" cy="12" r="10" />  <line x1="15" y1="9" x2="9" y2="15" />  <line x1="9" y1="9" x2="15" y2="15"  /></svg>  
        
         </span>    
-        <div className='bg-[#354259] text-white p-14 pb-5 text-xl rounded-tl-lg rounded-tr-lg '>Choose an option to continue</div> 
+        <div className='popup-header'>Choose an option to continue</div> 
             <ul className='bg-[#f3f0e369] p-3 rounded-lg'>
                 <li className='popup-li bg-black text-white '>
                  
