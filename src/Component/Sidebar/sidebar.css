@@ -1,49 +1,82 @@
-.sidebar-min-width{
-    width: min(100%, 400px);
+.sidebar-min-width {
+  width: min(100%, 400px);
 }
 
-.sidebar-li{
-    border-radius: 20px;
-    border: 1px solid rgba(0, 0, 0, 0.156);
-    color: #354259;
-    padding: 15px;
-    margin: 15px 20px;
-    display: flex;
-    justify-content: space-between;
-    box-shadow: 3px 2px 5px #e8e8e8, -3px -5px 5px #ffffff;
+.sidebar-li {
+  border-radius: 20px;
+  color: #354259;
+  padding: 12px 15px;
+  margin: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  box-shadow: 6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff;
+  background: #e8e8e86e;
+  border: 1px solid #e8e8e8;
+  font-size: 14px;
+  align-items: center;
+  cursor: pointer;
+  transition: 300ms;
 }
 
-.sidebar-li-lang{
-    background: #dbd8d2;
-    display: block;
-    text-align: center;
-    padding: 4px 12px;
-    border-radius: 15px;
-    margin: 0 4px;
-   
+.sidebar-li-lang {
+  background: #dbd8d2;
+  display: block;
+  text-align: center;
+  padding: 6px 12px;
+  border-radius: 15px;
+  margin: 0 4px;
+  transition: 300ms ease;
 }
 
-.sidebar-ul{
-  background-color: white;
-  height: 100vh;
+.sidebar-li-lang:hover {
+  color: red;
+  background: #d0cdc8;
+}
+
+.sidebar-ul {
+  background-color: #f2f2f2;
+  min-height: 100vh;
   display: inline-block;
-  padding-top: 2rem;
+  padding-top: 1rem;
+}
 
+.sidebar-li:hover {
+  background: #dfdddd;
+  border: 1px solid #dfdddd;
 }
 
 .sidebar {
-    position: fixed;
-    transition: transform 0.3s ease;/* Smooth transition */
-    z-index:1;
-    box-shadow: 6px 8px 9px -3px rgb(0 0 0 / 21%);
-    top: 72px;
-  }
+  position: fixed;
+  transition: transform 0.3s ease;
+  /* Smooth transition */
+  z-index: 1;
+  box-shadow: 6px 8px 15px -3px rgb(0 0 0 / 10%);
+  top: 81px;
+}
 
-  .sidebar-unactive{
-    transform: translateX(-100%); /* Start hidden off-screen */
+.sidebar-unactive {
+  transform: translateX(-100%);
+  /* Start hidden off-screen */
+}
+
+/* Sidebar active (visible) state */
+.sidebar-active {
+  transform: translateX(0);
+  /* Slide in */
+}
+
+.optName {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.optName svg {
+  font-size: 1.8rem;
+}
+
+@media only screen and (max-width:560px) {
+  .sidebar-min-width {
+    width: 100%
   }
-  
-  /* Sidebar active (visible) state */
-  .sidebar-active {
-    transform: translateX(0); /* Slide in */
-  }
+}

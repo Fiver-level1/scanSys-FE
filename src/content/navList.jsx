@@ -1,5 +1,9 @@
-
-
+import { RiAccountCircleFill } from "react-icons/ri";
+import { IoIosHelpCircleOutline } from "react-icons/io";
+import { LiaCookieSolid } from "react-icons/lia";
+import { IoDocumentTextOutline } from "react-icons/io5";
+import { CgLoadbarDoc } from "react-icons/cg";
+import { IoMdHeartEmpty } from "react-icons/io";
 export const navLang = [
     "NL",
     "FR",
@@ -10,11 +14,32 @@ export const navLang = [
 ]
 
 export const navlist = [
-    "Your Billy-account",
-    "Help",
-    "Cookies", 
-    "Terms and conditions", 
-    "Privacy Policy", 
-    "Billy in your venue?", 
-    "navlang"
+    {
+        "icon": <RiAccountCircleFill />,
+        "tittle": "Your Billy-account"
+    },
+    {
+        "icon": <IoIosHelpCircleOutline />,
+        "tittle": "Help"
+    },
+    {
+        "icon": <LiaCookieSolid />,
+        "tittle": "Cookies"
+    },
+    {
+        "icon": <IoDocumentTextOutline />,
+        "tittle": "Terms and conditions"
+    },
+    {
+        "icon": <CgLoadbarDoc />,
+        "tittle": "Privacy Policy"
+    },
+    {
+        "icon": <IoMdHeartEmpty />,
+        "tittle": "Billy in your venue?"
+    },
+    {
+        "icon": <IoMdHeartEmpty />,
+        "tittle": "navlang"
+    },
 ]

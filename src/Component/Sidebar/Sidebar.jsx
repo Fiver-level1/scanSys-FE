@@ -19,11 +19,13 @@ const Sidebar = () => {
       <ul className='sidebar-ul sidebar-min-width'>
         {navlist.map((item, index) => {
           return (
-            <li className='sidebar-li' key={index} onClick={() => handleSidebarList(item)}>
-              {item === "navlang" ? navLang.map((lang, i) => {
+            <li className='sidebar-li' key={index} onClick={() => handleSidebarList(item.tittle)}>
+              {item.tittle === "navlang" ? navLang.map((lang, i) => {
                 return (<span className='sidebar-li-lang' key={i}>{lang}</span>)
               }) : <>
-                {item} <Arrow />
+                <div className="optName">
+                  {item.icon} {item.tittle}
+                </div> <Arrow />
               </>}
             </li>
           )

@@ -1,17 +1,47 @@
-
-.nav-container{
-    background-color: white;
-    box-shadow: 2px 5px 9px 0px rgba(0,0,0,0.63);
-    padding: 20px 12px;
+.nav-container {
+    background-color: #f6f5f5;
+    box-shadow: 2px 5px 35px rgb(0 0 0 / 10%);
+    padding: 17px 12px;
 }
 
-.menu{
+.menu {
     width: 1rem;
 }
 
-.nav-icon{
-    width: 2.2rem;
-    height: 2.2rem;
+.nav-icon {
+    width: 21px;
+    height: 21px;
     color: black;
     margin: 0 1rem;
+    padding: 10px;
+    box-shadow: 6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff;
+    background: #e8e8e8;
+    border: 1px solid #e8e8e8;
+    border-radius: 0.5em;
+}
+
+
+
+/* From Uiverse.io by javierBarroso */
+.ListNavButton {
+    color: #090909;
+    padding: 0.7em 1.7em;
+    font-size: 18px;
+    border-radius: 0.5em;
+    background: #e8e8e8;
+    cursor: pointer;
+    border: 1px solid #e8e8e8;
+    transition: all 0.3s;
+    box-shadow:
+        6px 6px 12px #c5c5c5,
+        -6px -6px 12px #ffffff;
+}
+
+.ListNavButton:active {
+    color: #666;
+    box-shadow:
+        0px 0px 0px #c5c5c5,
+        0px 0px 0px #ffffff,
+        inset 4px 4px 12px #c5c5c5,
+        inset -4px -4px 12px #ffffff;
 }
