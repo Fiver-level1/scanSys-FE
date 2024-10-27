@@ -1,66 +1,188 @@
-.w-min{
-    width: min(95%, 600px);
-    /* width: min(); */
-}
-
-.bright-black{
-    background-color: rgba(0, 0, 0, 0.5);
-
-}
-
-.popup-li{
-    border-radius: 50px;
-    border: 1px solid rgba(0, 0, 0, 0.156);
-    padding: 15px;
-    margin: 15px 20px;
-    
-}
-
-.bg-facebook{
-    background-color: rgb(66,103,178);
-}
-
-/* 'fixed top-0 left-0 w-screen h-screen bright-black z-10' */
-
-.popup-overlay{
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.5); /* dark overlay */
-    z-index: 10;
-}
-
-.popup-content {
-    position: fixed;
-    top: 20vh;                
-    right: 50%;               
-    transform: translateX(50%); /* Centers horizontally */
-    text-align: center;       /* Similar to `text-center` */
-    color: #ff007f;           /* Custom pink color (replace with #d63384 for Tailwind's pink-600) */
-    width: min(95%, 600px);      /* Similar to `w-min` */
-    font-size: 1.125rem;      /* Similar to `text-lg` */
-    opacity: 1;               /* Similar to `opacity-100` */
-    background-color: white;  /* Similar to `bg-white` */
-    border-radius: 8px;       /* Similar to `rounded-lg` */
-    padding: 1rem;            /* Adds some padding */
-}
-
-.popup-close {
+/* From Uiverse.io by Harsha2lucky */
+.singinContainer {
     position: absolute;
-    top: 0.5rem;
-    right: 0.5rem;
+    top: 0;
+    bottom: 0;
+    background: #e6e7ed;
+    left: 0;
+    width: 100%;
+}
+
+.content {
+    position: relative;
+    margin: 5rem auto;
+    width: 330px;
+    padding: 60px;
+    background: #e6e7ee;
+    border-radius: 10px;
+    box-shadow: -3px -3px 7px #ffffff73, 2px 2px 5px rgba(94, 104, 121, 0.288);
+}
+
+.content .text {
+    font-size: 21px;
+    font-weight: 400;
+    text-align: center;
+    margin-bottom: 35px;
+    color: #595959;
+    font-family: Roboto;
+}
+
+.field {
+    height: 50px;
+    width: 100%;
+    display: flex;
+    position: relative;
+}
+
+.field:nth-child(2) {
+    margin-top: 20px;
+}
+
+.field .input {
+    height: 100%;
+    width: 100%;
+    padding-left: 45px;
+    outline: none;
+    border: none;
+    font-size: 14px;
+    background: #e6e7ed;
+    color: black;
+    border-radius: 10px;
+    box-shadow: inset 2px 2px 5px #BABECC,
+        inset -5px -5px 10px #ffffff73;
+}
+
+.field .input:focus {
+    box-shadow: inset 1px 1px 2px #BABECC,
+        inset -1px -1px 2px #ffffff73;
+}
+
+.field .span {
+    position: absolute;
+    color: #595959;
+    width: 50px;
+    line-height: 55px;
+}
+
+.forgot-pass {
+    text-align: left;
+    margin: 10px 0 10px 5px;
+}
+
+.forgot-pass a {
+    font-size: 16px;
+    color: #000;
+    text-decoration: none;
+}
+
+.forgot-pass:hover a {
+    text-decoration: underline;
+}
+
+.button {
+    margin: 15px 0;
+    width: 100%;
+    font-size: 15px;
+    padding: 15px 0;
+    background: #e6e7ed;
+    border-radius: 10px;
+    border: none;
+    outline: none;
     cursor: pointer;
-    color: #354259;
+    border: 1px solid #e6e7ed;
+    color: #595959;
+    box-shadow: 2px 2px 5px #BABECC, -5px -5px 10px #ffffff73;
 }
 
-.popup-close-icon {
-    width: 2rem;
-    height: 2rem;
-    background-color: white;
+.button:focus {
+    color: #3498db;
+    box-shadow: inset 2px 2px 5px #BABECC,
+        inset -5px -5px 10px #ffffff73;
+}
+
+.sign-up {
+    margin: 10px 0;
+    color: #595959;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.sign-up p {
+    font-size: 14px;
+}
+
+.sign-up a {
+    color: #3498db;
+    text-decoration: none;
+}
+
+.sign-up a:hover {
+    text-decoration: underline;
+}
+
+.loginOptions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.loginOptions ul {
+    display: flex;
+    gap: 1rem;
+    margin: 20px 0;
+}
+
+.closePopUp {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    cursor: pointer;
+}
+
+.closePopUp svg {
+    opacity: 0.4;
+    font-size: 21px;
+}
+
+/* btn-singin */
+
+.btn-singin {
+    display: grid;
+    place-items: center;
+    background: #e3edf7;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow:
+        6px 6px 10px -1px rgba(0, 0, 0, 0.15),
+        -6px -6px 10px -1px rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(0, 0, 0, 0);
+    cursor: pointer;
+    transition: transform 0.5s;
     border-radius: 50%;
-    padding: 2px;
+    border: 1px solid #e3edf7;
 }
 
+.btn-singin:hover {
+    box-shadow:
+        inset 4px 4px 6px -1px rgba(0, 0, 0, 0.2),
+        inset -4px -4px 6px -1px rgba(255, 255, 255, 0.7),
+        -0.5px -0.5px 0px rgba(255, 255, 255, 1),
+        0.5px 0.5px 0px rgba(0, 0, 0, 0.15),
+        0px 12px 10px -10px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    transform: translateY(0.5em);
+}
 
+.btn-singin svg {
+    transition: transform 0.5s;
+    width: 20px;
+    height: 20px;
+}
+
+.btn-singin:hover svg {
+    transform: scale(0.9);
+    fill: #333333;
+}
