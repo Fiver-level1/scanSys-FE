@@ -5,6 +5,7 @@
     bottom: 0;
     background: #e6e7ed;
     left: 0;
+    z-index: 100;
     width: 100%;
 }
 
@@ -107,6 +108,7 @@
     display: flex;
     align-items: center;
     gap: 10px;
+    justify-content: center;
 }
 
 .sign-up p {

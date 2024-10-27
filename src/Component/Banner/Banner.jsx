@@ -1,13 +1,20 @@
 import React from "react";
-
+import './banner.css'
+import bannerIcon from '../../assets/banner.jpg'
 const Banner = () => {
   return (
-    <div className="relative">
-      {/* <img className="w-screen h-[400px] object-cover opacity-45	" src="https://img.freepik.com/free-photo/chocolate-cookies-glaze_23-2148837158.jpg?semt=ais_hybrid"/>
-        <div className="absolute bottom-16 text-center">
-            <h1 className="font-bold">HEllo World</h1>
-        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quia amet corporis provident, saepe asperiores, tenetur quisquam consectetur reprehenderit eos mollitia eaque. Possimus, odio neque. Veritatis officiis nihil qui corrupti id.</p>
-        </div> */}
+    <div className="BannerContainer">
+      <div className="bannerWrapper">
+        <div className="companyDesc">
+          <h1>Prince Raj</h1>
+          <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veniam alias eos, distinctio laudantium veritatis placeat quaerat! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nostrum corrupti sint maiores eveniet. Nostrum.</p>
+        </div>
+        <div className="imageContainer">
+          <div className="imageHolder">
+            <img src={bannerIcon} alt="" />
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

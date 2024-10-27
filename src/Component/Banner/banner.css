@@ -1,0 +1,79 @@
+.bannerWrapper {
+    width: 80%;
+    margin: 4rem auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.companyDesc {
+    width: 55%;
+}
+
+.imageContainer {
+    border-radius: 76% 24% 70% 30% / 47% 73% 27% 53%;
+    box-shadow: 6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff;
+    background: #e8e8e8;
+    border: 1px solid #e8e8e8;
+    width: 414px;
+    height: 414px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.imageHolder {
+    display: block;
+    border-radius: 76% 24% 70% 30% / 47% 73% 27% 53%;
+    /* overflow: hidden; */
+    width: 74%;
+}
+
+.imageHolder img {
+    box-shadow: -20px 20px 60px #cecece,
+        20px -20px 60px #ffffff;
+    border-radius: 76% 24% 70% 30% / 47% 73% 27% 53%;
+    width: 100%;
+    object-fit: cover;
+    transform: scaleX(1.2);
+}
+
+.companyDesc {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+}
+
+.companyDesc h1 {
+    font-size: 2.2rem;
+    font-weight: 500;
+    font-family: Roboto;
+    color: #35425a;
+}
+
+.companyDesc p {
+    font-size: 14px;
+    font-family: Poppins;
+    opacity: 0.5;
+}
+
+@media only screen and (max-width:980px) {
+    .bannerWrapper {
+        width: 90%;
+    }
+}
+
+@media only screen and (max-width:680px) {
+    .bannerWrapper {
+        flex-direction: column-reverse;
+        gap: 30px;
+        margin: 2rem auto;
+    }
+
+    .companyDesc {
+        width: 100%;
+    }
+}
