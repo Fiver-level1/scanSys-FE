@@ -1,0 +1,17 @@
+
+.nav-container{
+    background-color: white;
+    box-shadow: 2px 5px 9px 0px rgba(0,0,0,0.63);
+    padding: 20px 12px;
+}
+
+.menu{
+    width: 1rem;
+}
+
+.nav-icon{
+    width: 2.2rem;
+    height: 2.2rem;
+    color: black;
+    margin: 0 1rem;
+}

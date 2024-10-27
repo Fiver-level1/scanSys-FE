@@ -10,20 +10,33 @@
     margin: 15px 20px;
     display: flex;
     justify-content: space-between;
+    box-shadow: 3px 2px 5px #e8e8e8, -3px -5px 5px #ffffff;
 }
 
 .sidebar-li-lang{
-    background: #CDC2AE;
+    background: #dbd8d2;
     display: block;
     text-align: center;
     padding: 4px 12px;
     border-radius: 15px;
     margin: 0 4px;
+   
+}
+
+.sidebar-ul{
+  background-color: white;
+  height: 100vh;
+  display: inline-block;
+  padding-top: 2rem;
+
 }
 
 .sidebar {
     position: fixed;
     transition: transform 0.3s ease;/* Smooth transition */
+    z-index:1;
+    box-shadow: 6px 8px 9px -3px rgb(0 0 0 / 21%);
+    top: 72px;
   }
 
   .sidebar-unactive{
