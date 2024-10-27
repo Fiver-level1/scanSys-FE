@@ -1,31 +1,36 @@
 import React, { useContext } from 'react'
 import "./sidebar.css"
 import { AppContext } from '../../context/myContext';
+import { navLang, navlist } from '../../content/navList';
+import Arrow from '../../assets/svg/arrow';
 
 const Sidebar = () => {
-    const {showPopup, hidePopup, handleArrowClickVisibility} = useContext(AppContext);
+  const { showPopup, hidePopup, handleArrowClickVisibility } = useContext(AppContext);
+
+  const handleSidebarList = (item) => {
+    if (item === "Your Billy-account") {
+      hidePopup();
+      handleArrowClickVisibility();
+    }
+  }
 
   return (
-    <div className={`sidebar z-10 sidebar-min-width ${!showPopup? "sidebar-unactive": "sidebar-active"}`}>
-        <ul className='bg-[#ECE5C7] h-screen sidebar-min-width inline-block pt-8'>
-            <li  onClick={()=>{hidePopup(); handleArrowClickVisibility()}} className='sidebar-li'>Your Billy-account
-            <svg class="h-6 w-6 text-[#354259]"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round">  <polyline points="9 18 15 12 9 6" /></svg>
+    <div className={`sidebar sidebar-min-width ${!showPopup ? "sidebar-unactive" : "sidebar-active"}`}>
+      <ul className='sidebar-ul sidebar-min-width'>
+        {navlist.map((item, index) => {
+          return (
+            <li className='sidebar-li' key={index} onClick={() => handleSidebarList(item)}>
+              {item === "navlang" ? navLang.map((lang, i) => {
+                return (<span className='sidebar-li-lang' key={i}>{lang}</span>)
+              }) : <>
+                {item} <Arrow />
+              </>}
             </li>
-            <li  onClick={hidePopup} className='sidebar-li'>Help  <svg class="h-6 w-6 text-[#354259]"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round">  <polyline points="9 18 15 12 9 6" /></svg></li>
-            <li  onClick={hidePopup} className='sidebar-li'>Cookies  <svg class="h-6 w-6 text-[#354259]"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round">  <polyline points="9 18 15 12 9 6" /></svg></li>
-            <li  onClick={hidePopup} className='sidebar-li'>Terms and conditions  <svg class="h-6 w-6 text-[#354259]"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round">  <polyline points="9 18 15 12 9 6" /></svg></li>
-            <li  onClick={hidePopup} className='sidebar-li'>Privacy Policy  <svg class="h-6 w-6 text-[#354259]"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round">  <polyline points="9 18 15 12 9 6" /></svg></li>
-            <li  onClick={hidePopup} className='sidebar-li'>Billy in your venue?   <svg class="h-6 w-6 text-[#354259]"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round">  <polyline points="9 18 15 12 9 6" /></svg></li>
-            <li  onClick={hidePopup} className='sidebar-li'>
-               <span className='sidebar-li-lang'>NL</span>
-               <span className='sidebar-li-lang'>FR</span>
-               <span className='sidebar-li-lang'>EN</span>
-               <span className='sidebar-li-lang'>ES</span>
-               <span className='sidebar-li-lang'>DE</span>
-               <span className='sidebar-li-lang'>IT</span>
-            </li>
-        </ul>
-       
+          )
+        })}
+
+      </ul>
+
     </div>
   )
 }
