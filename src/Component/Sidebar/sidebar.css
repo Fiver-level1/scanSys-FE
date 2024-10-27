@@ -9,7 +9,7 @@
   margin: 15px 20px;
   display: flex;
   justify-content: space-between;
-  box-shadow: 6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff;
+  box-shadow: 6px 6px 12px #c5c5c569, -6px -6px 12px #ffffff;
   background: #e8e8e86e;
   border: 1px solid #e8e8e8;
   font-size: 14px;
@@ -41,8 +41,8 @@
 }
 
 .sidebar-li:hover {
-  background: #dfdddd;
-  border: 1px solid #dfdddd;
+  background: #e6e4e4bd;
+  border: 1px solid #e6e4e4bd;
 }
 
 .sidebar {
