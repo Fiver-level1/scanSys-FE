@@ -76,4 +76,9 @@
     .companyDesc {
         width: 100%;
     }
+
+    .imageContainer{
+        width: 300px;
+        height: 300px;
+    }
 }
