@@ -37,9 +37,5 @@ export const navlist = [
     {
         "icon": <IoMdHeartEmpty />,
         "tittle": "Billy in your venue?"
-    },
-    {
-        "icon": <IoMdHeartEmpty />,
-        "tittle": "navlang"
-    },
+    }
 ]
