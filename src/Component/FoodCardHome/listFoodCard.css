@@ -93,6 +93,12 @@
 
 .priceTag {
     margin: 10px 0;
+    display: flex;
+    gap: 8px;
+}
+
+.priceTag h2 {
+    color: #30344c;
 }
 
 .priceTag h1 {

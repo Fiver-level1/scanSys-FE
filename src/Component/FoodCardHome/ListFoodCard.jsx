@@ -5,7 +5,7 @@ import "./listFoodCard.css";
 
 
 
-const ListFoodCard = () => {
+const ListFoodCard = ({ Qty }) => {
     return (
         <div className="wrapper">
             <div className="firstArea">
@@ -23,6 +23,15 @@ const ListFoodCard = () => {
                 <p>2 poached organic eggs, chili butter, lemon yogurt & avocado</p>
                 <div className="priceTag">
                     <h1><MdOutlineEuroSymbol /> 30.00</h1>
+                    {
+                        Qty ?
+                            <>
+                                <span>|</span>
+                                <h2>Qty : {Qty}</h2>
+                            </>
+                            :
+                            <></>
+                    }
                 </div>
             </div>
         </div>

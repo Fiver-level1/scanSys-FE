@@ -3,6 +3,7 @@ import Popup from '../Popup/Popup';
 import { AppContext } from '../../context/myContext';
 import "./Navbar.css";
 import { FaShoppingCart } from "react-icons/fa";
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
     const { showPopup, handlePopUpVisibility, hidePopup, arrowClick } = useContext(AppContext);
@@ -22,7 +23,9 @@ const Navbar = () => {
             {arrowClick && <Popup />}
 
             <div className="cartIcon">
-                <FaShoppingCart />
+                <Link to='/cart'>
+                    <FaShoppingCart />
+                </Link>
             </div>
 
         </div>

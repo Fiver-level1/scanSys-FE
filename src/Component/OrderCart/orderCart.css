@@ -1,0 +1,86 @@
+.cartWrapper {
+    width: 80%;
+    margin: 2rem auto;
+}
+
+.BackIoon svg {
+    font-size: 1.8rem;
+}
+
+.cartContentHolder {
+    margin: 2rem 0;
+    display: flex;
+    justify-content: space-between;
+    flex: 1 1 50%;
+}
+
+.ListOfOrders {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.OrderSummary h1 {
+    font-family: "Nunito Sans", sans-serif;
+    text-align: center;
+    opacity: 0.7;
+}
+
+.OrderSummary {
+    width: 45%;
+}
+
+.summaryDesc {
+    background: #ecf0f3;
+    box-shadow: -3px -3px 7px #ffffff, 3px 3px 5px #ceced1;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 10px;
+}
+
+.summaryLine {
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+    margin: 20px 0;
+}
+
+.total {
+    border-top: 2px solid rgb(0 0 0 / 13%);
+    padding: 10px 0;
+    margin: 0;
+}
+
+.total span {
+    font-weight: 500;
+}
+
+.summaryLine span {
+    font-size: 14px;
+}
+
+.summaryLine span:last-child {
+    font-family: "Nunito Sans", sans-serif;
+}
+
+.OrderNow button {
+    background: #ecf0f3;
+    box-shadow: -3px -3px 7px #ffffff, 3px 3px 5px #ceced1;
+    cursor: initial;
+    border: none;
+    padding: 15px 30px;
+    cursor: pointer !important;
+    border-radius: 6px;
+}
+
+.OrderNow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.OrderNow button:hover {
+    background-color: #e6eaed;
+}
