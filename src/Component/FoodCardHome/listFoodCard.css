@@ -36,7 +36,6 @@
 .wrapper {
     cursor: pointer;
     flex: 1 1 50%;
-    max-width: 44%;
     position: relative;
     padding: 30px;
     gap: 15px;
@@ -45,6 +44,10 @@
     align-items: center;
     justify-content: space-between;
     transition: 300ms;
+}
+
+.lisProductWrapper {
+    max-width: 49%;
 }
 
 .wrapper .img-area {

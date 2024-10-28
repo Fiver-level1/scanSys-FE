@@ -3,8 +3,8 @@ import Navbar from '../Navbar/Navbar'
 import "./home.css";
 import Sidebar from '../Sidebar/Sidebar';
 import Banner from '../Banner/Banner';
-import ListFoodCard from '../FoodCardHome/ListFoodCard';
 import FilterNav from '../Filter/FilterNav';
+import FoodContainer from '../FoodContainer/FoodContainer';
 
 const Home = () => {
 
@@ -14,16 +14,7 @@ const Home = () => {
             <Sidebar />
             <Banner />
             <FilterNav />
-            <section className="foodCardContainer">
-                <div className="foodCardHolder">
-                    <h1 className='secondaryHeader'>Ontbijt</h1>
-                    <div className="foodCardWrapper">
-                        <ListFoodCard />
-                        <ListFoodCard />
-                        <ListFoodCard />
-                    </div>
-                </div>
-            </section>
+            <FoodContainer />
         </div>
     )
 }
