@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import Popup from '../Popup/Popup';
 import { AppContext } from '../../context/myContext';
 import "./Navbar.css";
+import { FaShoppingCart } from "react-icons/fa";
 
 const Navbar = () => {
     const { showPopup, handlePopUpVisibility, hidePopup, arrowClick } = useContext(AppContext);
@@ -19,6 +20,10 @@ const Navbar = () => {
                     <svg className="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">  <line x1="18" y1="6" x2="6" y2="18" />  <line x1="6" y1="6" x2="18" y2="18" /></svg>
                 </div>}
             {arrowClick && <Popup />}
+
+            <div className="cartIcon">
+                <FaShoppingCart />
+            </div>
 
         </div>
     )

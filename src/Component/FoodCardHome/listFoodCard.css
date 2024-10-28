@@ -1,0 +1,107 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+.foodCardWrapper {
+    display: flex;
+    flex-wrap: wrap;
+    /* Allows items to wrap to the next row */
+    gap: 1rem;
+}
+
+.foodCardHolder {
+    width: 82%;
+    margin: 2rem auto;
+}
+
+.secondaryHeader {
+    margin: 1.7rem 0;
+    color: #31344bda;
+    font-size: 22px;
+    font-weight: 700;
+    font-family: "Nunito Sans", sans-serif;
+}
+
+.wrapper,
+.wrapper .img-area,
+.social-icons a,
+.buttons button {
+    background: #ecf0f3;
+    box-shadow: -3px -3px 7px #ffffff,
+        3px 3px 5px #ceced1;
+}
+
+.wrapper:hover {
+    transform: scale(1.04);
+}
+
+.wrapper {
+    cursor: pointer;
+    flex: 1 1 50%;
+    max-width: 44%;
+    position: relative;
+    padding: 30px;
+    gap: 15px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: 300ms;
+}
+
+.wrapper .img-area {
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.img-area .inner-area {
+    height: calc(100% - 25px);
+    width: calc(100% - 25px);
+    border-radius: 50%;
+}
+
+.inner-area img {
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.secondArea h2 {
+    color: #31344b;
+    font-size: 15px;
+    font-family: Poppins;
+    font-weight: 400;
+}
+
+.secondArea {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.secondArea p {
+    font-size: 12px;
+    color: black;
+    opacity: 0.5;
+}
+
+.priceTag {
+    margin: 10px 0;
+}
+
+.priceTag h1 {
+    font-family: "Nunito Sans", sans-serif;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: #A91E2C;
+    font-size: 18px;
+}
+
+.priceTag svg {
+    color: #A91E2C;
+}
