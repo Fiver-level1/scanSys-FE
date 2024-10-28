@@ -22,11 +22,11 @@ const Navbar = () => {
                 </div>}
             {arrowClick && <Popup />}
 
-            <div className="cartIcon">
-                <Link to='/cart'>
+            <Link to='/cart'>
+                <div className="cartIcon">
                     <FaShoppingCart />
-                </Link>
-            </div>
+                </div>
+            </Link>
 
         </div>
     )

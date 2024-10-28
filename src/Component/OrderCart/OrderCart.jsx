@@ -7,7 +7,7 @@ const OrderCart = () => {
     return (
         <div className="cartContainer">
             <div className="cartWrapper">
-                <Link to='/'><div className="BackIoon">
+                <Link to='/'><div className="BackIcon">
                     <IoArrowBack />
                 </div>
                 </Link>

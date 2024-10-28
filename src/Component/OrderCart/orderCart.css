@@ -3,10 +3,6 @@
     margin: 2rem auto;
 }
 
-.BackIoon svg {
-    font-size: 1.8rem;
-}
-
 .cartContentHolder {
     margin: 2rem 0;
     display: flex;
@@ -38,6 +34,11 @@
     padding: 20px;
     margin: 20px;
     border-radius: 10px;
+}
+
+.BackIcon svg {
+    font-size: 1.8rem;
+    color: rgba(0, 0, 0, 0.597);
 }
 
 .summaryLine {
