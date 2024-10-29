@@ -3,7 +3,7 @@
     position: fixed;
     top: 0;
     bottom: 0;
-    background: #e6e7ed;
+    background: #ecf0f3;
     left: 0;
     z-index: 100;
     width: 100%;
@@ -11,12 +11,13 @@
 
 .content {
     position: relative;
+    position: relative;
     margin: 5rem auto;
     width: 330px;
     padding: 60px;
-    background: #e6e7ee;
     border-radius: 10px;
-    box-shadow: -3px -3px 7px #ffffff73, 2px 2px 5px rgba(94, 104, 121, 0.288);
+    background: #ecf0f3;
+    box-shadow: -3px -3px 7px #ffffff, 3px 3px 5px #ceced1;
 }
 
 .content .text {
@@ -46,7 +47,7 @@
     outline: none;
     border: none;
     font-size: 14px;
-    background: #e6e7ed;
+    background: #ecf0f3;
     color: black;
     border-radius: 10px;
     box-shadow: inset 2px 2px 5px #BABECC,
@@ -85,7 +86,7 @@
     width: 100%;
     font-size: 15px;
     padding: 15px 0;
-    background: #e6e7ed;
+    background: #ebf0f3;
     border-radius: 10px;
     border: none;
     outline: none;

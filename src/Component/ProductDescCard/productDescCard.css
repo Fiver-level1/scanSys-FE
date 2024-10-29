@@ -89,9 +89,10 @@
 }
 
 .productDescWrapper .wrapper .about {
-    color: #44476a;
+    color: #000;
     font-weight: 400;
-    font-size: 14px;
+    font-size: 13px;
+    opacity: 0.5;
 }
 
 .productDescWrapper .wrapper .social-icons {
