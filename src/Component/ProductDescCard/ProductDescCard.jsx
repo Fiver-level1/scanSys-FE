@@ -1,9 +1,55 @@
-import React from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { RxCross2 } from "react-icons/rx";
 import './productDescCard.css'
 import { BsDash } from "react-icons/bs";
 import { FaPlus } from "react-icons/fa6";
-const ProductDescCard = ({ closeProductDesc }) => {
+import { AppContext, AppDispatchContext } from '../../context/myContext';
+import { useCookies } from 'react-cookie';
+import { MY_CART } from '../../Constants/cookieConst';
+
+const ProductDescCard = ({ closeProductDesc, productDesData }) => {
+
+    const { setMyCart } = useContext(AppDispatchContext);
+    const { myCart } = useContext(AppContext);
+    const [itemState, setItemState] = useState(0);
+    const [ cookie, setCookie, removeCookie ] = useCookies([MY_CART]);
+
+    const handleDecrementItem = () => {
+        if (itemState > 0) {
+            setItemState(itemState - 1);
+        }
+    }
+
+    useEffect(()=>{
+        const existingItem = myCart.find((item)=>item === productDesData);
+        const itemCount = existingItem? existingItem.qty: 0;
+        setItemState(itemCount);
+    },[])
+
+    const handleAddToCart = () => {
+        let myCartItems = myCart;
+        const existingItem = myCartItems.find(item => item.title === productDesData.title);
+        if (itemState != 0) {
+            productDesData.qty = itemState;
+            if (existingItem) {
+                existingItem.qty = itemState; 
+            } else {
+                myCartItems.push(productDesData); 
+            }
+        } else {
+            if (existingItem) {
+                myCartItems = myCartItems.filter((val, i) => val !== productDesData);
+            }
+        }
+
+        setMyCart(myCartItems);
+        setCookie("myCart", myCartItems, { path: '/', maxAge: 3600});
+    }
+
+    // console.log("cookies: ", cookies.myCart? cookies.myCart: "[]")
+
+    // console.log(myCart)
+
     return (
         <div className='productDescWrapper'>
             <div className="wrapper">
@@ -21,30 +67,27 @@ const ProductDescCard = ({ closeProductDesc }) => {
                 <div className="icon dots" onClick={() => closeProductDesc(false)}>
                     <RxCross2 />
                 </div>
-                <div className="name">Turkish eggs with Lebanese flatbread</div>
-                <div className="about">2 poached organic eggs, chili butter, lemon yogurt & avocado</div>
+                <div className="name">{productDesData.title}</div>
+                <div className="about">{productDesData.description}</div>
                 <div className="social-icons">
-                    <a href="#" className="fb">
-                        <p>hello</p>
-                    </a>
-                    <a href="#" className="twitter">
-                        <p>hello</p>
-                    </a>
-                    <a href="#" className="insta">
-                        <p>hello</p>
-                    </a>
-                    <a href="#" className="yt">
-                        <p>hello</p>
-                    </a>
+                    {
+                        productDesData.ingredients.map((ingredient, index) => {
+                            return (
+                                <a href="#" className="fb" key={index}>
+                                    <p>{ingredient.name}</p>
+                                </a>
+                            )
+                        })
+                    }
                 </div>
                 <div className="buttons">
                     {/* <button>Message</button> */}
                     <div className="selectionBtn">
-                        <button><FaPlus /></button>
-                        <span>2</span>
-                        <button><BsDash strokeWidth={1} /></button>
+                        <button onClick={() => setItemState(itemState + 1)}><FaPlus /></button>
+                        <span>{itemState}</span>
+                        <button onClick={handleDecrementItem}><BsDash strokeWidth={1} /></button>
                     </div>
-                    <button>Add</button>
+                    <button onClick={handleAddToCart}>Add</button>
                 </div>
             </div>
         </div>

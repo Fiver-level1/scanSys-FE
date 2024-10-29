@@ -6,6 +6,7 @@ import ProductDescCard from '../ProductDescCard/ProductDescCard';
 const FoodContainer = () => {
     const [productdata, setProductdata] = useState([]);
     const [showProductDesc, setShowProductDesc] = useState(false);
+    const [productDesData, setShowProductDescData] = useState({});
 
     useEffect(() => {
         const groupedData = productList.reduce((acc, item) => {
@@ -19,14 +20,19 @@ const FoodContainer = () => {
 
         setProductdata(Object.values(groupedData));
     }, []);
+    // console.log("productData: ",productdata);
 
 
 
     const handleShowProductDesc = (productId) => {
-        const productDescData = productList.filter((val) => val.id === productId);
+        // console.log(productId);
+        const productDescDataT = productList.filter((val) => val.id === productId);
+        // console.log(productDescDataT)
         setShowProductDesc(true);
-        // console.log(productDescData);
+        setShowProductDescData(...productDescDataT);
+
     };
+
 
     return (
         <section className="foodCardContainer">
@@ -43,7 +49,7 @@ const FoodContainer = () => {
                                             key={index}
                                             onClick={() => handleShowProductDesc(obj.id)}
                                         >
-                                            <ListFoodCard />
+                                            <ListFoodCard productData={obj}/>
                                         </div>
                                     ))
                                 }
@@ -54,7 +60,7 @@ const FoodContainer = () => {
             </div>
             {showProductDesc ?
                 <div className="PopUpCardsDesc">
-                    <ProductDescCard closeProductDesc={() => setShowProductDesc(false)} />
+                    <ProductDescCard closeProductDesc={() => setShowProductDesc(false)} productDesData={productDesData} />
                 </div> : <></>
             }
         </section>

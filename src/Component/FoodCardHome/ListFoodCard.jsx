@@ -2,10 +2,8 @@ import React from "react";
 import { MdOutlineEuroSymbol } from "react-icons/md";
 import "./listFoodCard.css";
 
-
-
-
-const ListFoodCard = ({ Qty }) => {
+const ListFoodCard = ({ Qty, productData }) => {
+    // console.log("productData: ", productData);
     return (
         <div className="wrapper">
             <div className="firstArea">
@@ -19,10 +17,10 @@ const ListFoodCard = ({ Qty }) => {
                 </div>
             </div>
             <div className="secondArea">
-                <h2>Turkish eggs with Lebanese flatbread</h2>
-                <p>2 poached organic eggs, chili butter, lemon yogurt & avocado</p>
+                <h2>{productData.title}</h2>
+                <p>{productData.description}</p>
                 <div className="priceTag">
-                    <h1><MdOutlineEuroSymbol /> 30.00</h1>
+                    <h1><MdOutlineEuroSymbol /> {productData.price}</h1>
                     {
                         Qty ?
                             <>
