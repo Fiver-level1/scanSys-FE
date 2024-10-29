@@ -4,10 +4,11 @@
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: #ecf0f3;
     display: flex;
     align-items: center;
     justify-content: center;
+    background: #ecf0f3ba;
+    backdrop-filter: blur(10px);
 }
 
 .productDescWrapper .wrapper,

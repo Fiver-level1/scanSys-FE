@@ -3,10 +3,11 @@
     position: fixed;
     top: 0;
     bottom: 0;
-    background: #ecf0f3;
     left: 0;
     z-index: 100;
     width: 100%;
+    background: #ecf0f3ba;
+    backdrop-filter: blur(10px);
 }
 
 .content {
