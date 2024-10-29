@@ -12,7 +12,7 @@ const ProductDescCard = ({ closeProductDesc, productDesData }) => {
     const { setMyCart } = useContext(AppDispatchContext);
     const { myCart } = useContext(AppContext);
     const [itemState, setItemState] = useState(0);
-    const [ cookie, setCookie, removeCookie ] = useCookies([MY_CART]);
+    const [cookie, setCookie, removeCookie] = useCookies([MY_CART]);
 
     const handleDecrementItem = () => {
         if (itemState > 0) {
@@ -20,11 +20,11 @@ const ProductDescCard = ({ closeProductDesc, productDesData }) => {
         }
     }
 
-    useEffect(()=>{
-        const existingItem = myCart.find((item)=>item === productDesData);
-        const itemCount = existingItem? existingItem.qty: 0;
+    useEffect(() => {
+        const existingItem = myCart.find((item) => item === productDesData);
+        const itemCount = existingItem ? existingItem.qty : 0;
         setItemState(itemCount);
-    },[])
+    }, [])
 
     const handleAddToCart = () => {
         let myCartItems = myCart;
@@ -32,9 +32,9 @@ const ProductDescCard = ({ closeProductDesc, productDesData }) => {
         if (itemState != 0) {
             productDesData.qty = itemState;
             if (existingItem) {
-                existingItem.qty = itemState; 
+                existingItem.qty = itemState;
             } else {
-                myCartItems.push(productDesData); 
+                myCartItems.push(productDesData);
             }
         } else {
             if (existingItem) {
@@ -43,7 +43,8 @@ const ProductDescCard = ({ closeProductDesc, productDesData }) => {
         }
 
         setMyCart(myCartItems);
-        setCookie("myCart", myCartItems, { path: '/', maxAge: 3600});
+        setCookie("myCart", myCartItems, { path: '/', maxAge: 3600 });
+        closeProductDesc(false)
     }
 
     // console.log("cookies: ", cookies.myCart? cookies.myCart: "[]")

@@ -38,11 +38,12 @@
     flex: 1 1 50%;
     position: relative;
     padding: 30px;
+    min-width: 519px;
     gap: 15px;
     border-radius: 10px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     transition: 300ms;
 }
 
