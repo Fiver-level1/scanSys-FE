@@ -6,8 +6,8 @@
     left: 0;
     z-index: 100;
     width: 100%;
-    background: #ecf0f3ba;
-    backdrop-filter: blur(10px);
+    background: #ebf0f3bc;
+    backdrop-filter: blur(20px);
 }
 
 .content {
@@ -118,12 +118,14 @@
     font-size: 14px;
 }
 
-.sign-up a {
+.sign-up span {
     color: #3498db;
+    font-size: 14px;
     text-decoration: none;
+    cursor: pointer;
 }
 
-.sign-up a:hover {
+.sign-up span:hover {
     text-decoration: underline;
 }
 

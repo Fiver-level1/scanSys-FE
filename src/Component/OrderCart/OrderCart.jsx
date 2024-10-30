@@ -8,15 +8,20 @@ import { AppContext } from '../../context/myContext';
 const OrderCart = () => {
     const [subTotal, setSubTotal] = useState(0);
     const [myCartItems, setMyCartItems] = useState([]);
-    const { myCart } = useContext(AppContext);
+    const { myCart, handleArrowClickVisibility, setredirectTo, redirectTo } = useContext(AppContext);
 
-    useEffect(()=>{
+    useEffect(() => {
         setMyCartItems([...myCart]);
         const newSubTotal = myCart.reduce((acc, item) => acc + (item.price * item.qty), 0);
         setSubTotal(newSubTotal.toFixed(2));
     }, [myCart]);
 
-    // console.log("myCart is  ", myCartItems);
+    // console.log("myCart is  ", myCartItems.length);
+
+    const handelOrderNow = () => {
+        handleArrowClickVisibility();
+        setredirectTo('/cart')
+    }
 
     return (
         <div className="cartContainer">
@@ -27,13 +32,17 @@ const OrderCart = () => {
                 </Link>
                 <div className="cartContentHolder">
                     <div className="ListOfOrders">
-                        {myCartItems.map((item, index) => {
+                        {(myCartItems && myCartItems.length > 0) ? myCartItems.map((item, index) => {
                             return (
                                 <div className="ListFoodCardWrapper" key={index}>
                                     <ListFoodCard Qty={item.qty} productData={item} />
                                 </div>
                             )
-                        })}
+                        }) : <>
+                            <div className="NoContent">
+                                <h1>No Item on Cart</h1>
+                            </div>
+                        </>}
                     </div>
                     <div className="OrderSummary">
                         <h1>Cart Summary</h1>
@@ -55,8 +64,10 @@ const OrderCart = () => {
                                 <span>$11.0</span>
                             </div>
                         </div>
-                        <div className="OrderNow">
-                            <button>Order Now</button>
+                        <div
+                            className={myCartItems.length ? "OrderNow activeOrderNow" : "OrderNow inActiveOrderNow"}
+                        >
+                            <button onClick={handelOrderNow}>Order Now</button>
                         </div>
                     </div>
                 </div>

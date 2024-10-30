@@ -4,9 +4,10 @@ import { AppContext } from '../../context/myContext';
 import "./Navbar.css";
 import { FaShoppingCart } from "react-icons/fa";
 import { Link } from 'react-router-dom';
+import Cookies from '../CookiesPopUp/Cookies';
 
 const Navbar = () => {
-    const { showPopup, handlePopUpVisibility, hidePopup, arrowClick } = useContext(AppContext);
+    const { showPopup, handlePopUpVisibility, hidePopup, arrowClick, showCookiesPopUp } = useContext(AppContext);
 
     return (
 
@@ -21,6 +22,7 @@ const Navbar = () => {
                     <svg className="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">  <line x1="18" y1="6" x2="6" y2="18" />  <line x1="6" y1="6" x2="18" y2="18" /></svg>
                 </div>}
             {arrowClick && <Popup />}
+            {showCookiesPopUp && <Cookies />}
 
             <Link to='/cart'>
                 <div className="cartIcon">

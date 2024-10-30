@@ -6,24 +6,26 @@ const AppDispatchContext = createContext("");
 
 const AppProvider = ({ children }) => {
 
-    const [ cookie, setCookie, removeCookie ] = useCookies(["myCart"]);    
+    const [cookie, setCookie, removeCookie] = useCookies(["myCart"]);
     const [showPopup, setShowPopup] = useState(false);
+    const [redirectTo, setredirectTo] = useState('/');
     const [arrowClick, setArrowClick] = useState(false);
-    const [myCart, setMyCart] = useState(cookie.myCart? cookie.myCart: []);
+    const [myCart, setMyCart] = useState(cookie.myCart ? cookie.myCart : []);
+    const [showCookiesPopUp, setShowCookiesPopUp] = useState(false);
 
-    const hidePopup = ()=>{
+    const hidePopup = () => {
         setShowPopup(false);
     }
 
-    const handlePopUpVisibility = ()=>{
+    const handlePopUpVisibility = () => {
         setShowPopup(true);
     }
 
-    const handleArrowClickVisibility = ()=>{
+    const handleArrowClickVisibility = () => {
         setArrowClick(true);
     }
 
-    const hideArrowClick = ()=>{
+    const hideArrowClick = () => {
         setArrowClick(false);
     }
 
@@ -31,7 +33,7 @@ const AppProvider = ({ children }) => {
 
 
     return (
-        <AppContext.Provider value={{showPopup, arrowClick, hidePopup, handlePopUpVisibility, handleArrowClickVisibility, hideArrowClick, myCart}}>
+        <AppContext.Provider value={{ showPopup, arrowClick, hidePopup, handlePopUpVisibility, handleArrowClickVisibility, hideArrowClick, myCart, showCookiesPopUp, setShowCookiesPopUp, setredirectTo, redirectTo }}>
             <AppDispatchContext.Provider value={{ setMyCart }}>
                 {children}
             </AppDispatchContext.Provider>
