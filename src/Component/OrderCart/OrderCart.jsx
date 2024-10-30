@@ -4,19 +4,26 @@ import './orderCart.css'
 import { IoArrowBack } from "react-icons/io5";
 import ListFoodCard from '../FoodCardHome/ListFoodCard';
 import { AppContext } from '../../context/myContext';
+import ProductDescCard from '../ProductDescCard/ProductDescCard';
 
 const OrderCart = () => {
     const [subTotal, setSubTotal] = useState(0);
     const [myCartItems, setMyCartItems] = useState([]);
+    const [showProductDesc, setShowProductDesc] = useState(false);
     const { myCart, handleArrowClickVisibility, setredirectTo, redirectTo } = useContext(AppContext);
-
+    const [productDesData, setShowProductDescData] = useState({});
     useEffect(() => {
         setMyCartItems([...myCart]);
         const newSubTotal = myCart.reduce((acc, item) => acc + (item.price * item.qty), 0);
         setSubTotal(newSubTotal.toFixed(2));
     }, [myCart]);
 
-    // console.log("myCart is  ", myCartItems.length);
+    const handleShowProductDesc = (productId) => {
+        const productDescDataT = myCartItems.filter((val) => val.id === productId);
+        setShowProductDesc(true);
+        setShowProductDescData(...productDescDataT);
+    };
+
 
     const handelOrderNow = () => {
         handleArrowClickVisibility();
@@ -34,7 +41,7 @@ const OrderCart = () => {
                     <div className="ListOfOrders">
                         {(myCartItems && myCartItems.length > 0) ? myCartItems.map((item, index) => {
                             return (
-                                <div className="ListFoodCardWrapper" key={index}>
+                                <div className="ListFoodCardWrapper" key={index} onClick={() => handleShowProductDesc(item.id)}>
                                     <ListFoodCard Qty={item.qty} productData={item} />
                                 </div>
                             )
@@ -72,6 +79,11 @@ const OrderCart = () => {
                     </div>
                 </div>
             </div>
+            {showProductDesc ?
+                <div className="PopUpCardsDesc">
+                    <ProductDescCard closeProductDesc={() => setShowProductDesc(false)} productDesData={productDesData} />
+                </div> : <></>
+            }
         </div>
         // <></>
     )

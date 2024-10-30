@@ -28,7 +28,7 @@ const ProductDescCard = ({ closeProductDesc, productDesData }) => {
 
     const handleAddToCart = () => {
         let myCartItems = myCart;
-        const existingItem = myCartItems.find(item => item.title === productDesData.title);
+        const existingItem = myCartItems.find(item => item.id === productDesData.id);
         if (itemState != 0) {
             productDesData.qty = itemState;
             if (existingItem) {

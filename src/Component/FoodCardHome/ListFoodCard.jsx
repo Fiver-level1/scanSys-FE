@@ -1,6 +1,7 @@
 import React from "react";
 import { MdOutlineEuroSymbol } from "react-icons/md";
 import "./listFoodCard.css";
+import { MdDelete } from "react-icons/md";
 
 const ListFoodCard = ({ Qty, productData }) => {
     // console.log("productData: ", productData);
@@ -32,6 +33,14 @@ const ListFoodCard = ({ Qty, productData }) => {
                     }
                 </div>
             </div>
+            {
+                Qty ?
+                    <div className="deleteItemIcon">
+                        <MdDelete />
+                    </div>
+                    :
+                    <></>
+            }
         </div>
     )
 }

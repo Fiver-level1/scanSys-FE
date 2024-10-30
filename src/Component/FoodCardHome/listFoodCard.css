@@ -115,3 +115,18 @@
 .priceTag svg {
     color: #A91E2C;
 }
+
+.deleteItemIcon {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.deleteItemIcon svg {
+    font-size: 1.5rem;
+    transition: 200ms;
+}
+
+.deleteItemIcon svg:hover {
+    color: #ed6755;
+}
