@@ -26,8 +26,11 @@ const OrderCart = () => {
 
 
     const handelOrderNow = () => {
+        if (!myCartItems.length) {
+            return;
+        }
         handleArrowClickVisibility();
-        setredirectTo('/cart')
+        setredirectTo('/orderNow')
     }
 
     return (
