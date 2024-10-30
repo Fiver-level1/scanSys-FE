@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import Cookies from '../CookiesPopUp/Cookies';
 
 const Navbar = () => {
-    const { showPopup, handlePopUpVisibility, hidePopup, arrowClick, showCookiesPopUp } = useContext(AppContext);
+    const { showPopup, handlePopUpVisibility, hidePopup, arrowClick, showCookiesPopUp, myCart } = useContext(AppContext);
 
     return (
 
@@ -27,6 +27,7 @@ const Navbar = () => {
             <Link to='/cart'>
                 <div className="cartIcon">
                     <FaShoppingCart />
+                    <span>{myCart.length && myCart.length}</span>
                 </div>
             </Link>
 

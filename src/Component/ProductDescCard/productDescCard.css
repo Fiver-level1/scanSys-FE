@@ -8,6 +8,7 @@
     align-items: center;
     justify-content: center;
     background: #ecf0f3ba;
+    z-index: 100;
     backdrop-filter: blur(10px);
 }
 
