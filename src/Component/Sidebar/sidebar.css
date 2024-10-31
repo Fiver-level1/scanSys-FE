@@ -9,9 +9,9 @@
   margin: 15px 20px;
   display: flex;
   justify-content: space-between;
-  box-shadow: 6px 6px 12px #c5c5c569, -6px -6px 12px #ffffff;
-  background: #e8e8e86e;
-  border: 1px solid #e8e8e8;
+  box-shadow: 6px 6px 12px #c5c5c569, -6px -6px 12px #f5f9fd;
+  background: #ecf0f3;
+  border: 1px solid #eeeeee;
   font-size: 14px;
   align-items: center;
   cursor: pointer;
@@ -34,7 +34,7 @@
 }
 
 .sidebar-ul {
-  background-color: #f2f2f2;
+  background-color: #ecf0f3;
   min-height: 100vh;
   display: inline-block;
   padding-top: 1rem;

@@ -3,20 +3,23 @@
     position: fixed;
     top: 0;
     bottom: 0;
-    background: #e6e7ed;
     left: 0;
     z-index: 100;
     width: 100%;
+    background: #000000bd;
+    backdrop-filter: blur(12px);
 }
 
 .content {
     position: relative;
+    position: relative;
+    position: relative;
     margin: 5rem auto;
     width: 330px;
     padding: 60px;
-    background: #e6e7ee;
     border-radius: 10px;
-    box-shadow: -3px -3px 7px #ffffff73, 2px 2px 5px rgba(94, 104, 121, 0.288);
+    background: #ecf0f3;
+    box-shadow: 3px 3px 60px #00000070;
 }
 
 .content .text {
@@ -46,7 +49,8 @@
     outline: none;
     border: none;
     font-size: 14px;
-    background: #e6e7ed;
+    background: #ecf0f3;
+    background: #ecf0f3;
     color: black;
     border-radius: 10px;
     box-shadow: inset 2px 2px 5px #BABECC,
@@ -85,7 +89,8 @@
     width: 100%;
     font-size: 15px;
     padding: 15px 0;
-    background: #e6e7ed;
+    background: #ebf0f3;
+    background: #ebf0f3;
     border-radius: 10px;
     border: none;
     outline: none;
@@ -116,12 +121,14 @@
     font-size: 14px;
 }
 
-.sign-up a {
+.sign-up span {
     color: #3498db;
+    font-size: 14px;
     text-decoration: none;
+    cursor: pointer;
 }
 
-.sign-up a:hover {
+.sign-up span:hover {
     text-decoration: underline;
 }
 

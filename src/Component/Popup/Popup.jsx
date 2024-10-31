@@ -1,9 +1,18 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import "./Popup.css";
 import { AppContext } from '../../context/myContext';
 import { IoClose } from "react-icons/io5";
+import { Link, useNavigate } from 'react-router-dom';
 const Popup = () => {
-    const { hideArrowClick } = useContext(AppContext);
+    const { hideArrowClick, redirectTo, setredirectTo } = useContext(AppContext);
+    const navigate = useNavigate();
+
+    const HandleGuestRequest = () => {
+        hideArrowClick();
+        const valRedirectTo = redirectTo;
+        setredirectTo('/');
+        navigate(valRedirectTo);
+    };
 
 
     return (
@@ -105,8 +114,9 @@ const Popup = () => {
                     </div>
                     <div className="sign-up">
                         <p>Prefer not to join?</p>
-                        <a href="#"><p>Continue as a guest</p></a>
-
+                        <div onClick={HandleGuestRequest}>
+                            <span>Continue as a guest</span>
+                        </div>
                     </div>
                 </form>
                 <div className="closePopUp" onClick={hideArrowClick}>

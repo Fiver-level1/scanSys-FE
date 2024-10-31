@@ -1,0 +1,320 @@
+/* .PopUpCardsDesc {} */
+
+.productDescWrapper .wrapper,
+.productDescWrapper .wrapper .img-area,
+.productDescWrapper .social-icons a,
+.productDescWrapper .buttons button {
+    background: #ecf0f3;
+    box-shadow: -3px -3px 7px #ffffff,
+        3px 3px 5px #ceced1;
+    cursor: initial;
+}
+
+.productDescWrapper .wrapper {
+    position: relative;
+    width: 381px;
+    padding: 0px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    min-width: 350px;
+    box-shadow: 5px 2px 40px #0000004d;
+}
+
+.productDescWrapper .wrapper .icon {
+    color: #31344b;
+    position: absolute;
+    cursor: pointer;
+    opacity: 0.7;
+    top: 3px;
+    height: 35px;
+    right: -2px;
+    width: 35px;
+    text-align: center;
+    line-height: 40px;
+    border-radius: 50%;
+    font-size: 16px;
+}
+
+.productDescWrapper .wrapper .icon i {
+    position: relative;
+    z-index: 9;
+}
+
+.productDescWrapper .wrapper .icon.arrow {
+    left: 15px;
+}
+
+.productDescWrapper .wrapper .icon.dots {
+    right: 0px;
+}
+
+.productDescWrapper .wrapper .icon.dots svg {
+    font-size: 1.2rem;
+    color: #fff;
+}
+
+.productDescWrapper .wrapper .icon.dots:hover {
+    background: transparent;
+}
+
+.productDescWrapper .wrapper .img-area {
+    width: 100%;
+    height: 300px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: none;
+    margin: 0px;
+
+}
+
+.productDescWrapper .img-area .inner-area {
+    height: calc(100% - 0px);
+    width: calc(100% - 0px);
+    border-radius: 8px;
+}
+
+.productDescWrapper .inner-area img {
+    height: 100%;
+    width: 100%;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.productDescWrapper .wrapper .name {
+    font-size: 16px;
+    font-weight: 500;
+    color: #31344b;
+}
+
+.productDescWrapper .wrapper .about {
+    color: #000;
+    font-weight: 400;
+    font-size: 13px;
+    opacity: 0.5;
+}
+
+.productDescWrapper .wrapper .social-icons {
+    margin: 4px 0;
+    display: flex;
+}
+
+.productDescWrapper .social-icons a {
+    position: relative;
+    min-width: 40px;
+    margin: 0 5px;
+    text-decoration: none;
+    /* width: 100%; */
+    border-radius: 20px;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.productDescWrapper .buttons button:hover:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    border-radius: 50%;
+    box-shadow: inset -3px -3px 7px #ffffff,
+        inset 3px 3px 5px #ceced1;
+}
+
+.productDescWrapper .buttons button:hover:before {
+    z-index: -1;
+    border-radius: 5px;
+}
+
+.productDescWrapper .social-icons a i {
+    position: relative;
+    z-index: 3;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    line-height: 40px;
+}
+
+.productDescWrapper .social-icons a.fb i {
+    color: #4267B2;
+}
+
+.productDescWrapper .social-icons a.twitter i {
+    color: #1DA1F2;
+}
+
+.productDescWrapper .social-icons a.insta i {
+    color: #E1306C;
+}
+
+.productDescWrapper .social-icons a.yt i {
+    color: #ff0000;
+}
+
+.productDescWrapper .wrapper .buttons {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.productDescWrapper .buttons button {
+    position: relative;
+    width: 100%;
+    border: none;
+    outline: none;
+    padding: 10px 0;
+    color: #31344b;
+    font-size: 15px;
+    font-weight: 400;
+    border-radius: 5px;
+    cursor: pointer;
+    z-index: 4;
+    font-size: 14px;
+    margin: 5px 0;
+}
+
+.productDescWrapper .buttons svg {
+    font-size: 14px;
+}
+
+.productDescWrapper .buttons button:first-child {
+    margin-right: 10px;
+}
+
+.productDescWrapper .buttons button:last-child {
+    margin-left: 10px;
+}
+
+.productDescWrapper .wrapper .social-share {
+    display: flex;
+    width: 100%;
+    margin-top: 30px;
+    padding: 0 5px;
+    justify-content: space-between;
+}
+
+.productDescWrapper .social-share .row {
+    color: #31344b;
+    font-size: 17px;
+    cursor: pointer;
+    position: relative;
+}
+
+.productDescWrapper .social-share .row::before {
+    position: absolute;
+    content: "";
+    height: 100%;
+    width: 2px;
+    background: #e0e6eb;
+    margin-left: -25px;
+}
+
+.productDescWrapper .row:first-child::before {
+    background: none;
+}
+
+.productDescWrapper .social-share .row i.icon-2 {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    color: #31344b;
+    transform: translateY(-50%);
+    opacity: 0;
+    pointer-events: none;
+    /* transition: opacity 0.3s ease; */
+}
+
+.productDescWrapper .row:nth-child(1):hover i.fa-heart,
+.productDescWrapper .row:nth-child(2):hover i.fa-comment {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.wrapper:hover {
+    transform: scale(1);
+}
+
+.selectionBtn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.productDescWrapper .buttons {
+    margin: 10px 0 !important;
+}
+
+.productDescWrapper .buttons .selectionBtn span {
+    font-family: Roboto;
+    font-weight: 500;
+    font-size: 16px;
+    color: #DA2C43;
+}
+
+.selectionBtn button {
+    width: 50px !important;
+}
+
+.productDescWrapper .social-icons p {
+    font-size: 11px;
+    margin: 0 4px;
+    color: #31344b;
+    opacity: 0.7;
+}
+
+.productDescWrapper .DetailsWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 90%;
+    justify-content: center;
+    align-items: center;
+    margin: 10px auto;
+}
+
+@media only screen and (max-width:400px) {
+    .productDescWrapper .wrapper {
+        width: 350px;
+    }
+
+    .productDescWrapper .wrapper .img-area {
+        height: 250px !important;
+    }
+
+    .productDescWrapper .wrapper .about {
+        font-size: 12px;
+        text-align: center;
+    }
+
+    .productDescWrapper .social-icons p {
+        font-size: 10px;
+    }
+
+    .productDescWrapper .wrapper .buttons {
+        margin: 6px 0 !important;
+    }
+
+    .productDescWrapper .buttons button {
+        padding: 6px 0;
+        font-size: 10px;
+    }
+
+    .productDescWrapper .buttons svg {
+        font-size: 10px !important;
+    }
+
+    .productDescWrapper .buttons span {
+        font-size: 13px !important;
+    }
+
+    .selectionBtn {
+        gap: 3px;
+    }
+}
