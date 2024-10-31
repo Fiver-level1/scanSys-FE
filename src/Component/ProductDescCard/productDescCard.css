@@ -180,6 +180,10 @@
     margin: 5px 0;
 }
 
+.productDescWrapper .buttons button:disabled{
+    cursor: not-allowed;
+}
+
 .productDescWrapper .buttons svg {
     font-size: 14px;
 }
