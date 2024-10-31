@@ -39,6 +39,7 @@
     position: relative;
     padding: 30px;
     /* min-width: 519px; */
+    /* min-width: 519px; */
     gap: 15px;
     border-radius: 10px;
     display: flex;
@@ -48,6 +49,8 @@
 }
 
 .lisProductWrapper {
+    width: 49%;
+    min-width: 400px;
     width: 49%;
     min-width: 400px;
 }
@@ -98,6 +101,7 @@
     display: flex;
     gap: 8px;
     align-items: center;
+    align-items: center;
 }
 
 .priceTag h2 {
@@ -143,10 +147,6 @@
     color: #DA2C43;
 }
 
-<<<<<<< HEAD
-.deleteItemIcon:hover svg {
-    color: #DA2C43;
-=======
 .deleteItemIcon svg:hover {
     color: #ed6755;
 }
@@ -263,5 +263,4 @@
         height: calc(100% - 15px);
         width: calc(100% - 15px);
     }
->>>>>>> 0290d5d (responsive done Depolyment-2)
 }
