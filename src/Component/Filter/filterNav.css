@@ -67,3 +67,20 @@
 .filters li:hover {
     background-color: #d9e2eb;
 }
+
+@media only screen and (max-width:991px) {
+    .FilterNavWrapper {
+        width: 88%;
+    }
+}
+
+@media only screen and (max-width:680px) {
+    .FilterNavWrapper {
+        gap: 1rem;
+        padding: 0 10px;
+    }
+
+    .FilterNavWrapper .field {
+        width: 70%;
+    }
+}
