@@ -1,10 +1,29 @@
-import React from "react";
+import React, { useContext } from "react";
 import { MdOutlineEuroSymbol } from "react-icons/md";
 import "./listFoodCard.css";
 import { MdDelete } from "react-icons/md";
+import { AppContext, AppDispatchContext } from "../../context/myContext";
+import { useCookies } from "react-cookie";
+import { MY_CART } from "../../Constants/cookieConst";
 
 const ListFoodCard = ({ Qty, productData }) => {
     // console.log("productData: ", productData);
+
+    const [cookies, setCookies] = useCookies([MY_CART]);
+    const { myCart, deleteItem} = useContext(AppContext);
+    const { setMyCart , setDeleteItem } = useContext(AppDispatchContext);
+
+    const deleteItemInCart= ()=>{
+        console.log("myCart: ", myCart);
+        let myCartUpdatedItems = myCart.filter((item)=> item.title !== productData.title);
+        setCookies(MY_CART, myCartUpdatedItems, { path: '/', maxAge: 3600 });
+        setMyCart(myCartUpdatedItems);
+        setDeleteItem(false);
+        console.log(myCartUpdatedItems)
+    }
+
+    // console.log(deleteItem)
+
     return (
         <div className="wrapper">
             <div className="firstArea">
@@ -35,7 +54,7 @@ const ListFoodCard = ({ Qty, productData }) => {
             </div>
             {
                 Qty ?
-                    <div className="deleteItemIcon">
+                    <div className="deleteItemIcon" onClick={deleteItemInCart}>
                         <MdDelete />
                     </div>
                     :

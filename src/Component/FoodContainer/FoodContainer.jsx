@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import ListFoodCard from '../FoodCardHome/ListFoodCard';
 import { productList } from '../../content/productData';
 import ProductDescCard from '../ProductDescCard/ProductDescCard';
+import { AppContext, AppDispatchContext } from '../../context/myContext';
 
 const FoodContainer = () => {
     const [productdata, setProductdata] = useState([]);
-    const [showProductDesc, setShowProductDesc] = useState(false);
+    const { setShowProductDesc } = useContext(AppDispatchContext);
+    const { showProductDesc } = useContext(AppContext);
     const [productDesData, setShowProductDescData] = useState({});
 
     useEffect(() => {
@@ -49,7 +51,7 @@ const FoodContainer = () => {
                                             key={index}
                                             onClick={() => handleShowProductDesc(obj.id)}
                                         >
-                                            <ListFoodCard productData={obj}/>
+                                            <ListFoodCard productData={obj}  />
                                         </div>
                                     ))
                                 }
@@ -58,7 +60,7 @@ const FoodContainer = () => {
                     ))
                 }
             </div>
-            {showProductDesc ?
+            {showProductDesc  ?
                 <div className="PopUpCardsDesc">
                     <ProductDescCard closeProductDesc={() => setShowProductDesc(false)} productDesData={productDesData} />
                 </div> : <></>

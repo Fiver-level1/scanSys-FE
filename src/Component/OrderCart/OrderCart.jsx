@@ -3,24 +3,33 @@ import { Link } from 'react-router-dom';
 import './orderCart.css'
 import { IoArrowBack } from "react-icons/io5";
 import ListFoodCard from '../FoodCardHome/ListFoodCard';
-import { AppContext } from '../../context/myContext';
+import { AppContext, AppDispatchContext } from '../../context/myContext';
 import ProductDescCard from '../ProductDescCard/ProductDescCard';
 
 const OrderCart = () => {
     const [subTotal, setSubTotal] = useState(0);
     const [myCartItems, setMyCartItems] = useState([]);
-    const [showProductDesc, setShowProductDesc] = useState(false);
-    const { myCart, handleArrowClickVisibility, setredirectTo, redirectTo } = useContext(AppContext);
+    const [deleteItem, setDeleteItem] = useState(true);
+    const { myCart, handleArrowClickVisibility, setredirectTo, redirectTo, showProductDesc } = useContext(AppContext);
+    const { setShowProductDesc } = useContext(AppDispatchContext);
     const [productDesData, setShowProductDescData] = useState({});
+
     useEffect(() => {
         setMyCartItems([...myCart]);
         const newSubTotal = myCart.reduce((acc, item) => acc + (item.price * item.qty), 0);
         setSubTotal(newSubTotal.toFixed(2));
     }, [myCart]);
 
+    useEffect(()=>{
+        console.log(deleteItem)
+    }, [deleteItem])
+
+    console.log("deleteItem: ", deleteItem)
     const handleShowProductDesc = (productId) => {
         const productDescDataT = myCartItems.filter((val) => val.id === productId);
-        setShowProductDesc(true);
+        if(deleteItem){
+            setShowProductDesc(true);
+        }
         setShowProductDescData(...productDescDataT);
     };
 
@@ -45,7 +54,7 @@ const OrderCart = () => {
                         {(myCartItems && myCartItems.length > 0) ? myCartItems.map((item, index) => {
                             return (
                                 <div className="ListFoodCardWrapper" key={index} onClick={() => handleShowProductDesc(item.id)}>
-                                    <ListFoodCard Qty={item.qty} productData={item} />
+                                    <ListFoodCard Qty={item.qty} productData={item} setDeleteItem={setDeleteItem} />
                                 </div>
                             )
                         }) : <>
@@ -82,7 +91,7 @@ const OrderCart = () => {
                     </div>
                 </div>
             </div>
-            {showProductDesc ?
+            {showProductDesc && deleteItem ?
                 <div className="PopUpCardsDesc">
                     <ProductDescCard closeProductDesc={() => setShowProductDesc(false)} productDesData={productDesData} />
                 </div> : <></>
