@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import ListFoodCard from '../FoodCardHome/ListFoodCard';
 import { productList } from '../../content/productData';
 import ProductDescCard from '../ProductDescCard/ProductDescCard';
+import '../../index.css'
 
 const FoodContainer = () => {
     const [productdata, setProductdata] = useState([]);
@@ -35,35 +36,41 @@ const FoodContainer = () => {
 
 
     return (
-        <section className="foodCardContainer">
-            <div className="foodCardHolder">
-                {
-                    productdata.map((val, ind) => (
-                        <div key={ind}>
-                            <h1 className='secondaryHeader'>{val.category}</h1>
-                            <div className="foodCardWrapper">
-                                {
-                                    val.data.map((obj, index) => (
-                                        <div
-                                            className="lisProductWrapper"
-                                            key={index}
-                                            onClick={() => handleShowProductDesc(obj.id)}
-                                        >
-                                            <ListFoodCard productData={obj}/>
-                                        </div>
-                                    ))
-                                }
+        <>
+            <section className="foodCardContainer">
+                <div className="foodCardHolder">
+                    {
+                        productdata.map((val, ind) => (
+                            <div key={ind}>
+                                <h1 className='secondaryHeader'>{val.category}</h1>
+                                <div className="foodCardWrapper">
+                                    {
+                                        val.data.map((obj, index) => (
+                                            <div
+                                                className="lisProductWrapper"
+                                                key={index}
+                                                onClick={() => handleShowProductDesc(obj.id)}
+                                            >
+                                                <ListFoodCard productData={obj} />
+                                            </div>
+                                        ))
+                                    }
+                                </div>
                             </div>
-                        </div>
-                    ))
+                        ))
+                    }
+                </div>
+
+            </section>
+            <div className={!showProductDesc ? "PopUpCardsDescInactive" : "PopUpCardsDescActive"}>
+                {
+                    showProductDesc ? <ProductDescCard
+                        closeProductDesc={() => setShowProductDesc(false)}
+                        productDesData={productDesData}
+                    /> : <></>
                 }
             </div>
-            {showProductDesc ?
-                <div className="PopUpCardsDesc">
-                    <ProductDescCard closeProductDesc={() => setShowProductDesc(false)} productDesData={productDesData} />
-                </div> : <></>
-            }
-        </section>
+        </>
     );
 };
 

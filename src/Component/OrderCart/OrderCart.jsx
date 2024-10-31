@@ -82,11 +82,14 @@ const OrderCart = () => {
                     </div>
                 </div>
             </div>
-            {showProductDesc ?
-                <div className="PopUpCardsDesc">
-                    <ProductDescCard closeProductDesc={() => setShowProductDesc(false)} productDesData={productDesData} />
-                </div> : <></>
-            }
+            <div className={!showProductDesc ? "PopUpCardsDescInactive" : "PopUpCardsDescActive"}>
+                {
+                    showProductDesc ? <ProductDescCard
+                        closeProductDesc={() => setShowProductDesc(false)}
+                        productDesData={productDesData}
+                    /> : <></>
+                }
+            </div>
         </div>
         // <></>
     )
