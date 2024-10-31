@@ -49,8 +49,8 @@ const OrderCart = () => {
                     <div className="ListOfOrders">
                         {(myCartItems && myCartItems.length > 0) ? myCartItems.map((item, index) => {
                             return (
-                                <div className="lisProductWrapper" key={index} onClick={() => handleShowProductDesc(item.id)}>
-                                    <ListFoodCard Qty={item.qty} productData={item} setDeleteItem={setDeleteItem} />
+                                <div className="listProductWrapper" key={index} onClick={() => handleShowProductDesc(item.id)}>
+                                    <ListFoodCard Qty={item.qty} productData={item} />
                                 </div>
                             )
                         }) : <>

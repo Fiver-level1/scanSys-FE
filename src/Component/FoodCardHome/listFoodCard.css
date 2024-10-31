@@ -51,8 +51,6 @@
 .lisProductWrapper {
     width: 49%;
     min-width: 400px;
-    width: 49%;
-    min-width: 400px;
 }
 
 .wrapper .img-area {
@@ -149,63 +147,6 @@
 
 .deleteItemIcon svg:hover {
     color: #ed6755;
-}
-
-@media only screen and (max-width:991px) {
-    .lisProductWrapper {
-        width: 100%;
-        min-width: 100%;
-    }
-
-    .lisProductWrapper .wrapper {
-        gap: 10%;
-    }
-
-    .foodCardHolder {
-        width: 90%;
-    }
-}
-
-@media only screen and (max-width:680px) {
-    .lisProductWrapper {
-        width: 100%;
-        min-width: 100%;
-    }
-
-    .lisProductWrapper .wrapper {
-        gap: 7%;
-        padding: 10px;
-        min-width: unset !important;
-    }
-
-    .wrapper .img-area {
-        width: 120px;
-        height: 120px;
-    }
-}
-
-@media only screen and (max-width:480px) {
-    .secondArea h2 {
-        font-size: 13px;
-    }
-
-    .secondArea p {
-        font-size: 10px;
-    }
-
-    .wrapper .img-area {
-        width: 100px;
-        height: 100px;
-    }
-
-    .priceTag h1 {
-        font-size: 15px;
-    }
-
-    .img-area .inner-area {
-        height: calc(100% - 15px);
-        width: calc(100% - 15px);
-    }
 }
 
 @media only screen and (max-width:991px) {
