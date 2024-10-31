@@ -28,9 +28,7 @@ const FoodContainer = () => {
 
 
     const handleShowProductDesc = (productId) => {
-        // console.log(productId);
         const productDescDataT = productList.filter((val) => val.id === productId);
-        // console.log(productDescDataT)
         setShowProductDesc(true);
         setShowProductDescData(...productDescDataT);
 

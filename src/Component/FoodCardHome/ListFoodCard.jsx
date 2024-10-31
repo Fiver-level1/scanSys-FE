@@ -10,19 +10,17 @@ const ListFoodCard = ({ Qty, productData }) => {
     // console.log("productData: ", productData);
 
     const [cookies, setCookies] = useCookies([MY_CART]);
-    const { myCart, deleteItem } = useContext(AppContext);
-    const { setMyCart, setDeleteItem } = useContext(AppDispatchContext);
+    const { myCart } = useContext(AppContext);
+    const { setMyCart } = useContext(AppDispatchContext);
 
     const deleteItemInCart = () => {
-        console.log("myCart: ", myCart);
+        // console.log("myCart: ", myCart);
         let myCartUpdatedItems = myCart.filter((item) => item.title !== productData.title);
         setCookies(MY_CART, myCartUpdatedItems, { path: '/', maxAge: 3600 });
         setMyCart(myCartUpdatedItems);
-        setDeleteItem(false);
-        console.log(myCartUpdatedItems)
+        // setDeleteItem(false);
+        // console.log(myCartUpdatedItems)
     }
-
-    // console.log(deleteItem)
 
     return (
         <div className="wrapper">

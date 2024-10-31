@@ -9,7 +9,6 @@ import ProductDescCard from '../ProductDescCard/ProductDescCard';
 const OrderCart = () => {
     const [subTotal, setSubTotal] = useState(0);
     const [myCartItems, setMyCartItems] = useState([]);
-    const [deleteItem, setDeleteItem] = useState(true);
     const { myCart, handleArrowClickVisibility, setredirectTo, redirectTo, showProductDesc } = useContext(AppContext);
     const { setShowProductDesc } = useContext(AppDispatchContext);
     const [productDesData, setShowProductDescData] = useState({});
@@ -20,16 +19,9 @@ const OrderCart = () => {
         setSubTotal(newSubTotal.toFixed(2));
     }, [myCart]);
 
-    useEffect(() => {
-        console.log(deleteItem)
-    }, [deleteItem])
-
-    console.log("deleteItem: ", deleteItem)
     const handleShowProductDesc = (productId) => {
         const productDescDataT = myCartItems.filter((val) => val.id === productId);
-        if (deleteItem) {
-            setShowProductDesc(true);
-        }
+        setShowProductDesc(true);
         setShowProductDescData(...productDescDataT);
     };
 
@@ -54,7 +46,7 @@ const OrderCart = () => {
                         {(myCartItems && myCartItems.length > 0) ? myCartItems.map((item, index) => {
                             return (
                                 <div className="ListFoodCardWrapper" key={index} onClick={() => handleShowProductDesc(item.id)}>
-                                    <ListFoodCard Qty={item.qty} productData={item} setDeleteItem={setDeleteItem} />
+                                    <ListFoodCard Qty={item.qty} productData={item} />
                                 </div>
                             )
                         }) : <>
@@ -93,7 +85,7 @@ const OrderCart = () => {
             </div>
             <div className={!showProductDesc ? "PopUpCardsDescInactive" : "PopUpCardsDescActive"}>
                 {
-                    showProductDesc && deleteItem ? <ProductDescCard
+                    showProductDesc ? <ProductDescCard
                         closeProductDesc={() => setShowProductDesc(false)}
                         productDesData={productDesData}
                     /> : <></>
