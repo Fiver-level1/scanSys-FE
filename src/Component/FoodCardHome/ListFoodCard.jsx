@@ -1,13 +1,14 @@
 import React, { useContext } from "react";
 import { MdOutlineEuroSymbol } from "react-icons/md";
 import "./listFoodCard.css";
-import { MdDelete } from "react-icons/md";
+import { RiDeleteBin6Line } from "react-icons/ri";
 import { AppContext, AppDispatchContext } from "../../context/myContext";
 import { useCookies } from "react-cookie";
 import { MY_CART } from "../../Constants/cookieConst";
 
 const ListFoodCard = ({ Qty, productData }) => {
     // console.log("productData: ", productData);
+
 
     const [cookies, setCookies] = useCookies([MY_CART]);
     const { myCart, deleteItem } = useContext(AppContext);
@@ -58,7 +59,7 @@ const ListFoodCard = ({ Qty, productData }) => {
                         e.stopPropagation();
                         deleteItemInCart();
                     }}>
-                        <MdDelete />
+                        <RiDeleteBin6Line /> <span>Remove</span>
                     </div>
                     :
                     <></>
