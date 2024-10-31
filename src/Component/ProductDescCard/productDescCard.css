@@ -25,7 +25,7 @@
 .productDescWrapper .wrapper {
     position: relative;
     width: 381px;
-    padding: 30px;
+    padding: 0px;
     border-radius: 10px;
     display: flex;
     align-items: center;
@@ -61,19 +61,27 @@
     right: 0px;
 }
 
+.productDescWrapper .wrapper .icon.dots svg {
+    font-size: 1.4rem;
+    color: #fff;
+}
+
+
 .productDescWrapper .wrapper .img-area {
     width: 100%;
     height: 300px;
-    border-radius: 0;
+    border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 10px;
+    box-shadow: none;
+    margin: 0px;
+
 }
 
 .productDescWrapper .img-area .inner-area {
-    height: calc(100% - 25px);
-    width: calc(100% - 25px);
+    height: calc(100% - 0px);
+    width: calc(100% - 0px);
     border-radius: 0;
 }
 
@@ -104,7 +112,6 @@
 
 .productDescWrapper .social-icons a {
     position: relative;
-    height: 40px;
     min-width: 40px;
     margin: 0 5px;
     text-decoration: none;
@@ -116,7 +123,6 @@
     justify-content: center;
 }
 
-.productDescWrapper .social-icons a:hover::before,
 .productDescWrapper .wrapper .icon:hover::before,
 .productDescWrapper .buttons button:hover:before {
     content: "";
@@ -263,4 +269,14 @@
     margin: 0 4px;
     color: #31344b;
     opacity: 0.7;
+}
+
+.productDescWrapper .DetailsWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 90%;
+    justify-content: center;
+    align-items: center;
+    margin: 10px auto;
 }

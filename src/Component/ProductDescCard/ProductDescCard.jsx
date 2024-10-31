@@ -46,10 +46,19 @@ const ProductDescCard = ({ closeProductDesc, productDesData }) => {
         setCookie("myCart", myCartItems, { path: '/', maxAge: 3600 });
         closeProductDesc(false)
     }
+    const getRandomMatteColor = () => {
+        const r = Math.floor(180 + Math.random() * 40);
+        const g = Math.floor(130 + Math.random() * 40);
+        const b = Math.floor(90 + Math.random() * 40);
+        return { r, g, b };
+    };
 
-    // console.log("cookies: ", cookies.myCart? cookies.myCart: "[]")
+    // Helper function to determine contrasting text color
+    const getContrastColor = (r, g, b) => {
+        const luminance = 0.299 * r + 0.587 * g + 0.114 * b;
+        return luminance > 186 ? "#333" : "#fff";
+    };
 
-    // console.log(myCart)
 
     return (
         <div className='productDescWrapper'>
@@ -68,27 +77,36 @@ const ProductDescCard = ({ closeProductDesc, productDesData }) => {
                 <div className="icon dots" onClick={() => closeProductDesc(false)}>
                     <RxCross2 />
                 </div>
-                <div className="name">{productDesData.title}</div>
-                <div className="about">{productDesData.description}</div>
-                <div className="social-icons">
-                    {
-                        productDesData.ingredients.map((ingredient, index) => {
-                            return (
-                                <a href="#" className="fb" key={index}>
-                                    <p>{ingredient.name}</p>
-                                </a>
-                            )
-                        })
-                    }
-                </div>
-                <div className="buttons">
-                    {/* <button>Message</button> */}
-                    <div className="selectionBtn">
-                        <button onClick={() => setItemState(itemState + 1)}><FaPlus /></button>
-                        <span>{itemState}</span>
-                        <button onClick={handleDecrementItem}><BsDash strokeWidth={1} /></button>
+                <div className="DetailsWrapper">
+                    <div className="name">{productDesData.title}</div>
+                    <div className="about">{productDesData.description}</div>
+                    <div className="social-icons">
+                        {
+                            productDesData.ingredients.map((ingredient, index) => {
+                                const { r, g, b } = getRandomMatteColor();
+                                const backgroundColor = `rgb(${r}, ${g}, ${b})`;
+                                const textColor = getContrastColor(r, g, b);
+                                return (
+                                    <a href="#" className="fb" key={index} style={{
+                                        backgroundColor
+                                    }}>
+                                        <p style={{
+                                            color: textColor
+                                        }}>{ingredient.name}</p>
+                                    </a>
+                                )
+                            })
+                        }
                     </div>
-                    <button onClick={handleAddToCart}>Add</button>
+                    <div className="buttons">
+                        {/* <button>Message</button> */}
+                        <div className="selectionBtn">
+                            <button onClick={() => setItemState(itemState + 1)}><FaPlus /></button>
+                            <span>{itemState}</span>
+                            <button onClick={handleDecrementItem}><BsDash strokeWidth={1} /></button>
+                        </div>
+                        <button onClick={handleAddToCart}>Add</button>
+                    </div>
                 </div>
             </div>
         </div>
