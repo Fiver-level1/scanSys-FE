@@ -28,6 +28,9 @@
     font-family: "Nunito Sans", sans-serif;
     text-align: center;
     opacity: 0.7;
+    border-bottom: 1px solid #00000021;
+    padding: 10px 0;
+    color: green;
 }
 
 .OrderSummary {
@@ -55,7 +58,7 @@
 }
 
 .total {
-    border-top: 2px solid rgb(0 0 0 / 13%);
+    border-top: 2px dashed rgb(0 0 0 / 13%);
     padding: 10px 0;
     margin: 0;
 }
@@ -73,7 +76,7 @@
 }
 
 .OrderNow button {
-    background: #ecf0f3;
+    background: #ff9900;
     box-shadow: -3px -3px 7px #ffffff, 3px 3px 5px #ceced1;
     border: none;
     padding: 15px 30px;
@@ -93,5 +96,26 @@
 }
 
 .activeOrderNow button:hover {
-    background-color: #e6eaed;
+    background: #e58a01;
+}
+
+.headerPrimary {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+    width: 60%;
+    margin: 1rem auto;
+    margin-bottom: 3rem;
+}
+
+.headerPrimary h1 {
+    font-size: 15px;
+}
+
+.headerPrimary p {
+    font-size: 12px;
+    opacity: 0.5;
 }

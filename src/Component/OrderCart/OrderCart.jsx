@@ -49,6 +49,10 @@ const OrderCart = () => {
                     <IoArrowBack />
                 </div>
                 </Link>
+                <div className="headerPrimary">
+                    <h1>Almost There – Your Feast Awaits!</h1>
+                    <p>Review your delicious picks! Make sure everything looks perfect before you checkout. Add or adjust items to satisfy your cravings, and get ready for a quick and tasty delivery!</p>
+                </div>
                 <div className="cartContentHolder">
                     <div className="ListOfOrders">
                         {(myCartItems && myCartItems.length > 0) ? myCartItems.map((item, index) => {
@@ -64,8 +68,8 @@ const OrderCart = () => {
                         </>}
                     </div>
                     <div className="OrderSummary">
-                        <h1>Cart Summary</h1>
                         <div className="summaryDesc">
+                            <h1>Cart Summary</h1>
                             <div className="summaryLine">
                                 <span>Subtotal:</span>
                                 <span>${subTotal}</span>
