@@ -49,8 +49,13 @@ const OrderCart = () => {
                     <div className="ListOfOrders">
                         {(myCartItems && myCartItems.length > 0) ? myCartItems.map((item, index) => {
                             return (
+<<<<<<< HEAD
                                 <div className="ListFoodCardWrapper" key={index} onClick={() => handleShowProductDesc(item.id)}>
                                     <ListFoodCard Qty={item.qty} productData={item} />
+=======
+                                <div className="lisProductWrapper" key={index} onClick={() => handleShowProductDesc(item.id)}>
+                                    <ListFoodCard Qty={item.qty} productData={item} setDeleteItem={setDeleteItem} />
+>>>>>>> 0290d5d (responsive done Depolyment-2)
                                 </div>
                             )
                         }) : <>

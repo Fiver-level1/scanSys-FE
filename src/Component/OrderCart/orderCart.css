@@ -17,10 +17,13 @@
     flex-direction: column;
     gap: 1rem;
     justify-content: center;
+    max-height: 100vh;
+    overflow: scroll;
+    padding: 10px;
 }
 
 .NoContent h1 {
-    font-size: 4rem;
+    font-size: 3.7rem;
     opacity: 0.5;
 }
 
@@ -34,7 +37,7 @@
 }
 
 .OrderSummary {
-    width: 45%;
+    width: 360px;
 }
 
 .summaryDesc {
@@ -106,7 +109,7 @@
     align-items: center;
     text-align: center;
     gap: 10px;
-    width: 60%;
+    width: 70%;
     margin: 1rem auto;
     margin-bottom: 3rem;
 }
@@ -118,4 +121,61 @@
 .headerPrimary p {
     font-size: 12px;
     opacity: 0.5;
+}
+
+.ListFoodCardWrapper {
+    margin: 10px;
+    width: 100%;
+    min-width: 400px;
+}
+
+
+@media only screen and (max-width:991px) {
+    .cartContentHolder {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+    }
+
+    .OrderSummary {
+        min-width: 400px;
+    }
+
+    .headerPrimary {
+        width: 70vw;
+    }
+}
+
+@media only screen and (max-width:680px) {
+    .cartWrapper {
+        width: 90%;
+    }
+
+    .headerPrimary {
+        width: 100%;
+    }
+
+    .NoContent h1 {
+        font-size: 3rem;
+    }
+
+    .deleteItemIcon {
+        bottom: 10px;
+    }
+
+    .deleteItemIcon span {
+        display: none;
+    }
+}
+
+@media only screen and (max-width:420px) {
+    .OrderSummary {
+        min-width: unset;
+        width: 94vw;
+    }
+
+    .NoContent h1 {
+        font-size: 2.6rem;
+    }
 }

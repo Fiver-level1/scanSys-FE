@@ -70,3 +70,14 @@
   .close:hover {
       color: #ebf0f3;
   }
+
+  @media only screen and (max-width:400px) {
+      .cookiesContent {
+          width: 300px;
+          padding: 15px 15px 40px;
+      }
+
+      .cookiesContent p {
+          font-size: 12px;
+      }
+  }

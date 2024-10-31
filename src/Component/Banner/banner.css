@@ -60,9 +60,14 @@
     opacity: 0.5;
 }
 
-@media only screen and (max-width:980px) {
+@media only screen and (max-width:991px) {
     .bannerWrapper {
         width: 90%;
+    }
+
+    .imageContainer {
+        width: 350px;
+        height: 350px;
     }
 }
 
