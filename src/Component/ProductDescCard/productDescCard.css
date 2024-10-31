@@ -1,4 +1,4 @@
-.PopUpCardsDesc {}
+/* .PopUpCardsDesc {} */
 
 .productDescWrapper .wrapper,
 .productDescWrapper .wrapper .img-area,
@@ -228,7 +228,7 @@
     transform: translateY(-50%);
     opacity: 0;
     pointer-events: none;
-    transition: all 0.3s ease;
+    /* transition: opacity 0.3s ease; */
 }
 
 .productDescWrapper .row:nth-child(1):hover i.fa-heart,
