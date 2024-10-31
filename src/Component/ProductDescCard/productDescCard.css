@@ -7,7 +7,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #ecf0f3ba;
+    background: #000000ba;
     z-index: 100;
     backdrop-filter: blur(10px);
 }
@@ -31,6 +31,8 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    min-width: 350px;
+    box-shadow: 5px 2px 40px #0000004d;
 }
 
 .productDescWrapper .wrapper .icon {
@@ -62,15 +64,18 @@
 }
 
 .productDescWrapper .wrapper .icon.dots svg {
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     color: #fff;
 }
 
+.productDescWrapper .wrapper .icon.dots:hover {
+    background: transparent;
+}
 
 .productDescWrapper .wrapper .img-area {
     width: 100%;
     height: 300px;
-    border-radius: 10px;
+    border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -82,13 +87,13 @@
 .productDescWrapper .img-area .inner-area {
     height: calc(100% - 0px);
     width: calc(100% - 0px);
-    border-radius: 0;
+    border-radius: 8px;
 }
 
 .productDescWrapper .inner-area img {
     height: 100%;
     width: 100%;
-    border-radius: 0%;
+    border-radius: 10px;
     object-fit: cover;
 }
 
@@ -123,7 +128,6 @@
     justify-content: center;
 }
 
-.productDescWrapper .wrapper .icon:hover::before,
 .productDescWrapper .buttons button:hover:before {
     content: "";
     position: absolute;
@@ -177,13 +181,18 @@
     width: 100%;
     border: none;
     outline: none;
-    padding: 12px 0;
+    padding: 10px 0;
     color: #31344b;
-    font-size: 17px;
+    font-size: 15px;
     font-weight: 400;
     border-radius: 5px;
     cursor: pointer;
     z-index: 4;
+    font-size: 14px;
+    margin: 5px 0;
+}
+
+.productDescWrapper .buttons svg {
     font-size: 14px;
 }
 
@@ -258,6 +267,7 @@
     font-family: Roboto;
     font-weight: 500;
     font-size: 16px;
+    color: #DA2C43;
 }
 
 .selectionBtn button {

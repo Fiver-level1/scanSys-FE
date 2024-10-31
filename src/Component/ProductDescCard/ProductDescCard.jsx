@@ -87,7 +87,7 @@ const ProductDescCard = ({ closeProductDesc, productDesData }) => {
                                 const backgroundColor = `rgb(${r}, ${g}, ${b})`;
                                 const textColor = getContrastColor(r, g, b);
                                 return (
-                                    <a href="#" className="fb" key={index} style={{
+                                    <a href="#" className="fb" onClick={(e) => e.preventDefault()} key={index} style={{
                                         backgroundColor
                                     }}>
                                         <p style={{
