@@ -10,12 +10,12 @@ const ListFoodCard = ({ Qty, productData }) => {
     // console.log("productData: ", productData);
 
     const [cookies, setCookies] = useCookies([MY_CART]);
-    const { myCart, deleteItem} = useContext(AppContext);
-    const { setMyCart , setDeleteItem } = useContext(AppDispatchContext);
+    const { myCart, deleteItem } = useContext(AppContext);
+    const { setMyCart, setDeleteItem } = useContext(AppDispatchContext);
 
-    const deleteItemInCart= ()=>{
+    const deleteItemInCart = () => {
         console.log("myCart: ", myCart);
-        let myCartUpdatedItems = myCart.filter((item)=> item.title !== productData.title);
+        let myCartUpdatedItems = myCart.filter((item) => item.title !== productData.title);
         setCookies(MY_CART, myCartUpdatedItems, { path: '/', maxAge: 3600 });
         setMyCart(myCartUpdatedItems);
         setDeleteItem(false);
@@ -54,7 +54,10 @@ const ListFoodCard = ({ Qty, productData }) => {
             </div>
             {
                 Qty ?
-                    <div className="deleteItemIcon" onClick={deleteItemInCart}>
+                    <div className="deleteItemIcon" onClick={(e) => {
+                        e.stopPropagation();
+                        deleteItemInCart();
+                    }}>
                         <MdDelete />
                     </div>
                     :
