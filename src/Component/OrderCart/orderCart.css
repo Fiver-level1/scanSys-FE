@@ -110,7 +110,11 @@
     align-items: center;
     text-align: center;
     gap: 10px;
+<<<<<<< HEAD
     width: 70%;
+=======
+    width: 60%;
+>>>>>>> 597ea79 (cart page UI changes)
     margin: 1rem auto;
     margin-bottom: 3rem;
 }
@@ -122,6 +126,7 @@
 .headerPrimary p {
     font-size: 12px;
     opacity: 0.5;
+<<<<<<< HEAD
 }
 
 .ListFoodCardWrapper {
@@ -188,4 +193,6 @@
     .NoContent h1 {
         font-size: 2.6rem;
     }
+=======
+>>>>>>> 597ea79 (cart page UI changes)
 }
