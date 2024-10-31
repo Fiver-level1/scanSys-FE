@@ -20,14 +20,14 @@ const OrderCart = () => {
         setSubTotal(newSubTotal.toFixed(2));
     }, [myCart]);
 
-    useEffect(()=>{
+    useEffect(() => {
         console.log(deleteItem)
     }, [deleteItem])
 
     console.log("deleteItem: ", deleteItem)
     const handleShowProductDesc = (productId) => {
         const productDescDataT = myCartItems.filter((val) => val.id === productId);
-        if(deleteItem){
+        if (deleteItem) {
             setShowProductDesc(true);
         }
         setShowProductDescData(...productDescDataT);
@@ -91,11 +91,14 @@ const OrderCart = () => {
                     </div>
                 </div>
             </div>
-            {showProductDesc && deleteItem ?
-                <div className="PopUpCardsDesc">
-                    <ProductDescCard closeProductDesc={() => setShowProductDesc(false)} productDesData={productDesData} />
-                </div> : <></>
-            }
+            <div className={!showProductDesc ? "PopUpCardsDescInactive" : "PopUpCardsDescActive"}>
+                {
+                    showProductDesc && deleteItem ? <ProductDescCard
+                        closeProductDesc={() => setShowProductDesc(false)}
+                        productDesData={productDesData}
+                    /> : <></>
+                }
+            </div>
         </div>
         // <></>
     )
