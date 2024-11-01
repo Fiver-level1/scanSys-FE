@@ -27,7 +27,7 @@ const FilterNav = () => {
                 <span className="SearchIcon" onClick={() => setToogleSearch((prev) => !prev)}>
                     {!tooglSearch ?
                         <IoSearch /> :
-                        <RxCross2 strokeWidth={1} />}
+                        <RxCross2 strokeWidth={1} onClick={()=> {setSearchValue(""); setInput("")}}/>}
                 </span>
                 <div className={!tooglSearch ? "inActivefield" : "fieldActive"}>
                     <div className="field">
