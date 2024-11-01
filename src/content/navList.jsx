@@ -16,7 +16,7 @@ export const navLang = [
 export const navlist = [
     {
         "icon": <RiAccountCircleFill />,
-        "tittle": "Your Billy-account"
+        "tittle": "Profile"
     },
     {
         "icon": <IoIosHelpCircleOutline />,
@@ -33,9 +33,5 @@ export const navlist = [
     {
         "icon": <CgLoadbarDoc />,
         "tittle": "Privacy Policy"
-    },
-    {
-        "icon": <IoMdHeartEmpty />,
-        "tittle": "Billy in your venue?"
     }
 ]

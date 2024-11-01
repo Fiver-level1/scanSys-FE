@@ -5,7 +5,7 @@ import { AppContext, AppDispatchContext } from '../../context/myContext';
 import { RxCross2 } from "react-icons/rx";
 const FilterNav = () => {
     const { productdata } = useContext(AppContext);
-    const { setSearchValue } = useContext(AppDispatchContext);
+    const { setSearchValue, adjustScroll } = useContext(AppDispatchContext);
     const [input, setInput] = useState("");
 
     const handleSearchValue = (e) => {
@@ -37,15 +37,8 @@ const FilterNav = () => {
                 <div className="filters">
                     {
                         productdata.map((item, index) => {
-                            return <a href={`#${item.category}`}><li key={index} >{item.category}</li></a>
+                            return <a onClick={(e) => adjustScroll(e, `${item.category}`)}><li key={index} >{item.category}</li></a>
                         })
-
-                    }
-                    {
-                        productdata.map((item, index) => {
-                            return <a href={`#${item.category}`}><li key={index} >{item.category}</li></a>
-                        })
-
                     }
                 </div>
             </div>

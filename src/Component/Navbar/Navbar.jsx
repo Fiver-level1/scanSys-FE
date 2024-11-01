@@ -1,17 +1,30 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import Popup from '../Popup/Popup';
 import { AppContext } from '../../context/myContext';
 import "./Navbar.css";
 import { FaShoppingCart } from "react-icons/fa";
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Cookies from '../CookiesPopUp/Cookies';
 
 const Navbar = () => {
     const { showPopup, handlePopUpVisibility, hidePopup, arrowClick, showCookiesPopUp, myCart } = useContext(AppContext);
+    const [scrollHandler, setScrollHandler] = useState(false);
+    useEffect(() => {
 
+        const handleScroll = () => {
+            if (window.scrollY > window.innerHeight * 0.7) {
+                setScrollHandler(true);
+            } else {
+                setScrollHandler(false)
+            }
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
     return (
-
-        <div className='nav-container'>
+        <div className='nav-container' style={scrollHandler ? { boxShadow: '0 .25rem 1.875rem rgba(43, 53, 79, 0.2)' } : {}}>
             {!showPopup ?
                 <div className='menu' onClick={handlePopUpVisibility}>
                     <svg className="nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">

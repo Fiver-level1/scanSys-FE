@@ -2,19 +2,22 @@ import React, { useContext } from 'react'
 import "./sidebar.css"
 import { AppContext } from '../../context/myContext';
 import { navLang, navlist } from '../../content/navList';
-import Arrow from '../../assets/svg/arrow';
+import { AiOutlineLogout } from "react-icons/ai";
 
 const Sidebar = () => {
   const { showPopup, hidePopup, handleArrowClickVisibility, setShowCookiesPopUp } = useContext(AppContext);
 
   const handleSidebarList = (item) => {
     hidePopup();
-    if (item === "Your Billy-account") {
+    if (item === "Profile") {
       handleArrowClickVisibility();
     }
     if (item === "Cookies") {
       setShowCookiesPopUp(true);
     }
+  }
+  const handelLogout = () => {
+    hidePopup();
   }
 
   return (
@@ -26,14 +29,16 @@ const Sidebar = () => {
 
               <div className="optName">
                 {item.icon} {item.tittle}
-              </div> <Arrow />
+              </div>
 
             </li>
           )
         })}
 
       </ul>
-
+      <div className="logOutBtn" onClick={handelLogout}>
+        <AiOutlineLogout /> <span>logout</span>
+      </div>
     </div>
   )
 }
