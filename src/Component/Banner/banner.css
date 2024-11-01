@@ -1,6 +1,11 @@
+.BannerContainer {
+    background: #f9f7f3;
+    padding-bottom: 8rem;
+}
+
 .bannerWrapper {
     width: 80%;
-    margin: 4rem auto;
+    margin: 0rem auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -56,9 +61,57 @@
 
 .companyDesc p {
     font-size: 14px;
-    font-family: Poppins;
+    font-family: "Nunito Sans", sans-serif;
     opacity: 0.5;
 }
+
+/* From Uiverse.io by vinodjangid07 */
+.exploreButton {
+    width: 110px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    background: #0C4B33;
+    border-radius: 30px;
+    color: white;
+    font-weight: 400;
+    border: none;
+    position: relative;
+    cursor: pointer;
+    transition-duration: .2s;
+    padding-left: 8px;
+    transition-duration: .5s;
+    margin-top: 10px;
+}
+
+.svgIcon {
+    height: 25px;
+    transition-duration: 1.5s;
+    fill: white;
+}
+
+.bell path {
+    fill: rgb(19, 19, 19);
+}
+
+.exploreButton:hover {
+    background-color: rgb(0, 0, 0);
+    transition-duration: .5s;
+}
+
+.exploreButton:active {
+    transform: scale(0.97);
+    transition-duration: .2s;
+}
+
+.exploreButton:hover .svgIcon {
+    transform: rotate(250deg);
+    transition-duration: 1.5s;
+}
+
+
 
 @media only screen and (max-width:991px) {
     .bannerWrapper {
@@ -74,8 +127,8 @@
 @media only screen and (max-width:680px) {
     .bannerWrapper {
         flex-direction: column-reverse;
-        gap: 30px;
-        margin: 2rem auto;
+        gap: 3rem;
+        padding: 1rem;
     }
 
     .companyDesc {
@@ -85,5 +138,27 @@
     .imageContainer {
         width: 300px;
         height: 300px;
+    }
+
+    .BannerContainer {
+        padding-bottom: 5rem;
+    }
+
+    .companyDesc h1 {
+        font-size: 22px;
+    }
+
+    .companyDesc p {
+        font-size: 12px;
+    }
+
+    .exploreButton {
+        width: 96px;
+        height: 34px;
+        font-size: 12px;
+    }
+
+    .svgIcon {
+        width: 20px;
     }
 }

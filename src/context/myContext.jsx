@@ -13,7 +13,7 @@ const AppProvider = ({ children }) => {
     const [myCart, setMyCart] = useState(cookie.myCart ? cookie.myCart : []);
     const [showCookiesPopUp, setShowCookiesPopUp] = useState(false);
     const [showProductDesc, setShowProductDesc] = useState(false);
- 
+
 
     const hidePopup = () => {
         setShowPopup(false);
@@ -30,12 +30,23 @@ const AppProvider = ({ children }) => {
     const hideArrowClick = () => {
         setArrowClick(false);
     }
+    function adjustScroll(event, targetId) {
+        event.preventDefault();
+        const targetElement = document.getElementById(targetId);
+        let yOffset = -32;
+        if (targetId === "filterNav") {
+            yOffset = -90;
+        }
+        const yPosition = targetElement.getBoundingClientRect().top + window.scrollY + yOffset;
+        window.scrollTo({ top: yPosition, behavior: 'smooth' });
+    }
+
 
     // console.log("my cart: ", myCart);
 
 
     return (
-        <AppContext.Provider value={{ showPopup, arrowClick, hidePopup, handlePopUpVisibility, handleArrowClickVisibility, hideArrowClick, myCart, showCookiesPopUp, setShowCookiesPopUp, setredirectTo, redirectTo, showProductDesc }}>
+        <AppContext.Provider value={{ showPopup, arrowClick, hidePopup, handlePopUpVisibility, handleArrowClickVisibility, hideArrowClick, myCart, showCookiesPopUp, setShowCookiesPopUp, setredirectTo, redirectTo, showProductDesc, adjustScroll }}>
             <AppDispatchContext.Provider value={{ setMyCart, setShowProductDesc }}>
                 {children}
             </AppDispatchContext.Provider>

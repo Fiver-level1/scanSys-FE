@@ -3,6 +3,7 @@ import ListFoodCard from '../FoodCardHome/ListFoodCard';
 import { productList } from '../../content/productData';
 import ProductDescCard from '../ProductDescCard/ProductDescCard';
 import '../../index.css'
+import './foodContainer.css'
 import { AppContext, AppDispatchContext } from '../../context/myContext';
 
 const FoodContainer = () => {
