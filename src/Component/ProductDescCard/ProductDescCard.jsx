@@ -101,11 +101,11 @@ const ProductDescCard = ({ closeProductDesc, productDesData }) => {
                     <div className="buttons">
                         {/* <button>Message</button> */}
                         <div className="selectionBtn">
-                            <button onClick={() => setItemState(itemState + 1)}><FaPlus /></button>
+                            <button onClick={() => setItemState(itemState + 1)} ><FaPlus /></button>
                             <span>{itemState}</span>
-                            <button onClick={handleDecrementItem}><BsDash strokeWidth={1} /></button>
+                            <button onClick={handleDecrementItem} disabled={itemState == 0}><BsDash strokeWidth={1} /></button>
                         </div>
-                        <button onClick={handleAddToCart}>Add</button>
+                        <button onClick={handleAddToCart} disabled={itemState == 0}>Add</button>
                     </div>
                 </div>
             </div>
