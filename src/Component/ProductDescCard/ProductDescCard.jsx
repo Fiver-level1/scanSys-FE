@@ -22,7 +22,7 @@ const ProductDescCard = ({ closeProductDesc, productDesData }) => {
 
     useEffect(() => {
         const existingItem = myCart.find((item) => item === productDesData);
-        const itemCount = existingItem ? existingItem.qty : 0;
+        const itemCount = existingItem ? existingItem.qty : 1;
         setItemState(itemCount);
     }, [])
 
@@ -103,9 +103,9 @@ const ProductDescCard = ({ closeProductDesc, productDesData }) => {
                         <div className="selectionBtn">
                             <button onClick={() => setItemState(itemState + 1)}><FaPlus /></button>
                             <span>{itemState}</span>
-                            <button onClick={handleDecrementItem}><BsDash strokeWidth={1} /></button>
+                            <button onClick={handleDecrementItem} disabled={itemState == 0}><BsDash strokeWidth={1} /></button>
                         </div>
-                        <button onClick={handleAddToCart}>Add</button>
+                        <button onClick={handleAddToCart} disabled={itemState == 0}>Add</button>
                     </div>
                 </div>
             </div>

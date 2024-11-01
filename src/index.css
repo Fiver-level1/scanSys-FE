@@ -11,6 +11,7 @@ body {
   background: #ecf0f3;
   overflow-x: hidden;
   box-sizing: border-box;
+  scroll-behavior: smooth;
 }
 
 p,
@@ -67,6 +68,11 @@ a {
 
 .productDescWrapper{
   animation: zoomIn 0.3s ease forwards;
+}
+
+button:disabled{
+  cursor: not-allowed;
+  opacity: 0.5;
 }
 
 @keyframes zoomIn {
