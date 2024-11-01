@@ -46,6 +46,7 @@ const AppProvider = ({ children }) => {
 
     function adjustScroll(event, targetId) {
         event.preventDefault();
+        console.log(targetId);
         const targetElement = document.getElementById(targetId);
         let yOffset = -32;
         if (targetId === "filterNav") {
