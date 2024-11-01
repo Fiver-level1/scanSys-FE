@@ -22,7 +22,7 @@ const ProductDescCard = ({ closeProductDesc, productDesData }) => {
 
     useEffect(() => {
         const existingItem = myCart.find((item) => item === productDesData);
-        const itemCount = existingItem ? existingItem.qty : 0;
+        const itemCount = existingItem ? existingItem.qty : 1;
         setItemState(itemCount);
     }, [])
 
