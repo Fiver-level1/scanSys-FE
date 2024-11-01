@@ -14,9 +14,9 @@ const AppProvider = ({ children }) => {
     const [showCookiesPopUp, setShowCookiesPopUp] = useState(false);
     const [showProductDesc, setShowProductDesc] = useState(false);
     const [productdata, setProductdata] = useState([]);
-    const [searchValue, setSearchValue ] = useState("");
+    const [searchValue, setSearchValue] = useState("");
 
- 
+
 
     const hidePopup = () => {
         setShowPopup(false);
@@ -33,12 +33,34 @@ const AppProvider = ({ children }) => {
     const hideArrowClick = () => {
         setArrowClick(false);
     }
+    function adjustScroll(event, targetId) {
+        event.preventDefault();
+        const targetElement = document.getElementById(targetId);
+        let yOffset = -32;
+        if (targetId === "filterNav") {
+            yOffset = -90;
+        }
+        const yPosition = targetElement.getBoundingClientRect().top + window.scrollY + yOffset;
+        window.scrollTo({ top: yPosition, behavior: 'smooth' });
+    }
+
+    function adjustScroll(event, targetId) {
+        event.preventDefault();
+        const targetElement = document.getElementById(targetId);
+        let yOffset = -32;
+        if (targetId === "filterNav") {
+            yOffset = -90;
+        }
+        const yPosition = targetElement.getBoundingClientRect().top + window.scrollY + yOffset;
+        window.scrollTo({ top: yPosition, behavior: 'smooth' });
+    }
+
 
     // console.log("my cart: ", myCart);
 
 
     return (
-        <AppContext.Provider value={{ showPopup, arrowClick, hidePopup, handlePopUpVisibility, handleArrowClickVisibility, hideArrowClick, myCart, showCookiesPopUp, setShowCookiesPopUp, setredirectTo, redirectTo, showProductDesc, productdata, searchValue }}>
+        <AppContext.Provider value={{ showPopup, arrowClick, hidePopup, handlePopUpVisibility, handleArrowClickVisibility, hideArrowClick, myCart, showCookiesPopUp, setShowCookiesPopUp, setredirectTo, redirectTo, showProductDesc, productdata, searchValue, adjustScroll }}>
             <AppDispatchContext.Provider value={{ setMyCart, setShowProductDesc, setProductdata, setSearchValue }}>
                 {children}
             </AppDispatchContext.Provider>

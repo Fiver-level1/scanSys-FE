@@ -1,27 +1,39 @@
+.FilterNavContainer {
+    transform: translateY(-5rem);
+    position: relative;
+}
+
 .FilterNavWrapper {
     width: 80%;
-    background-color: #ebf0f3;
+    background-color: #fff;
     padding: 10px 12px;
     margin: 2rem auto;
     display: flex;
-    gap: 3rem;
+    gap: 0rem;
     border-radius: 5px;
     align-items: center;
-    box-shadow: -3px -3px 7px #ffffff, 3px 3px 5px #ceced1;
+    min-height: 70px;
+    box-shadow: 0 .125rem .35rem rgba(226, 227, 228, .65);
 }
 
-.FilterNavWrapper .input {
+.FilterNavWrapper .field .input {
     height: 100%;
     width: 100%;
-    padding-left: 45px;
+    padding-left: 20px;
     outline: none;
     border: none;
     font-size: 14px;
-    background: #e6e7ed;
     color: black;
-    border-radius: 10px;
-    box-shadow: inset 2px 2px 5px #BABECC,
-        inset -5px -5px 10px #ffffff73;
+    border-radius: 8px;
+    box-shadow: none;
+    background-color: #efefef;
+}
+
+.SearchIcon {
+    padding: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
 }
 
 .FilterNavWrapper .input:focus {
@@ -38,13 +50,18 @@
 }
 
 .FilterNavWrapper .field {
-    width: 30%;
+    width: 100%;
     display: flex;
     position: relative;
+    margin: 0 !important;
+}
+
+.CrossIcon svg {
+    color: #4e5079;
+    font-size: 20px;
 }
 
 .filters {
-    width: 60%;
     overflow-x: scroll;
     display: flex;
     gap: 10px;
@@ -52,20 +69,49 @@
 }
 
 .filters li {
-    margin: 10px 0;
-    background: #ecf0f3;
-    padding: 16px 27px;
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 16px 20px;
     border-radius: 10px;
-    box-shadow: -3px -3px 7px #ffffffb5, 3px 3px 5px #ceced1;
     cursor: pointer;
     transition: 250ms;
-    color: #595959;
+    color: #4e5079;
     font-family: "Nunito Sans", sans-serif;
     font-size: 14px;
+    min-width: fit-content;
 }
 
 .filters li:hover {
-    background-color: #d9e2eb;
+    background: #efefef;
+}
+
+.SearchIcon svg {
+    font-size: 25px;
+    opacity: 0.5;
+}
+
+.inActivefield {
+    width: 0 !important;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.inActivefield .field .input {
+    padding: 0;
+}
+
+.fieldActive {
+    transition: all 300ms ease;
+    width: 100%;
+    margin: 0 10px;
+    opacity: 1;
+    visibility: visible;
+}
+
+.fieldActive~.filters {
+    width: 0;
+    scale: 0;
 }
 
 @media only screen and (max-width:991px) {
@@ -76,11 +122,15 @@
 
 @media only screen and (max-width:680px) {
     .FilterNavWrapper {
-        gap: 1rem;
+        gap: 0rem;
         padding: 0 10px;
     }
 
-    .FilterNavWrapper .field {
-        width: 70%;
+    .filters li {
+        padding: 10px;
+    }
+
+    .fieldActive {
+        margin: 0;
     }
 }
