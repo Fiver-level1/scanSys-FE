@@ -67,7 +67,7 @@ a {
   background: rgba(0, 0, 0, 0.73);
 }
 
-.productDescWrapper {
+.productDescWrapper, .singinContainer > .content, .cookiesContent{
   animation: zoomIn 0.3s ease forwards;
 }
 
