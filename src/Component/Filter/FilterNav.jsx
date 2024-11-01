@@ -8,20 +8,14 @@ const FilterNav = () => {
     const { setSearchValue } = useContext(AppDispatchContext);
     const [input, setInput] = useState("");
 
-    // console.log(productdata);
-
     const handleSearchValue = (e) => {
         setInput(e.target.value);
     }
 
-    // console.log(searchValue);
-
     useEffect(() => {
         const timerId = setTimeout(() => {
             setSearchValue(input);
-        }, 500); // 500ms delay
-
-        // Clear timeout if input changes again within the delay
+        }, 500);
         return () => clearTimeout(timerId);
     }, [input]);
 
@@ -37,7 +31,7 @@ const FilterNav = () => {
                 </span>
                 <div className={!tooglSearch ? "inActivefield" : "fieldActive"}>
                     <div className="field">
-                        <input required="" type="text" className="input" placeholder='Search' />
+                        <input required="" type="text" className="input" placeholder='Search' value={input} onChange={handleSearchValue} />
                     </div>
                 </div>
                 <div className="filters">
