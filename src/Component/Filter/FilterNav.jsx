@@ -2,14 +2,15 @@ import React, { useContext, useState, useEffect } from 'react'
 import './filterNav.css'
 import { IoSearch } from "react-icons/io5";
 import { AppContext, AppDispatchContext } from '../../context/myContext';
+import { RxCross2 } from "react-icons/rx";
 const FilterNav = () => {
     const { productdata } = useContext(AppContext);
     const { setSearchValue } = useContext(AppDispatchContext);
     const [input, setInput] = useState("");
-   
+
     // console.log(productdata);
 
-    const handleSearchValue = (e)=>{
+    const handleSearchValue = (e) => {
         setInput(e.target.value);
     }
 
@@ -25,14 +26,19 @@ const FilterNav = () => {
     }, [input]);
 
 
+    const [tooglSearch, setToogleSearch] = useState(false);
     return (
-        <nav className="FilterNavContainer">
+        <nav className="FilterNavContainer" id='filterNav'>
             <div className="FilterNavWrapper">
-                <div className="field">
-                    <input required="" type="text" className="input" placeholder='Search' value={input} onChange={handleSearchValue}/>
-                    <span className="span">
-                        <IoSearch />
-                    </span>
+                <span className="SearchIcon" onClick={() => setToogleSearch((prev) => !prev)}>
+                    {!tooglSearch ?
+                        <IoSearch /> :
+                        <RxCross2 strokeWidth={1} />}
+                </span>
+                <div className={!tooglSearch ? "inActivefield" : "fieldActive"}>
+                    <div className="field">
+                        <input required="" type="text" className="input" placeholder='Search' />
+                    </div>
                 </div>
                 <div className="filters">
                     {
@@ -41,7 +47,7 @@ const FilterNav = () => {
                         })
 
                     }
-                {
+                    {
                         productdata.map((item, index) => {
                             return <a href={`#${item.category}`}><li key={index} >{item.category}</li></a>
                         })
