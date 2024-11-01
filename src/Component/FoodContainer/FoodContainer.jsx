@@ -60,9 +60,9 @@ const FoodContainer = () => {
                 <div className="foodCardHolder">
                     {
                         productdata.map((val, ind) => (
-                            <div key={ind} id={val.category} >
+                            <div key={ind} >
                                 {/* <a href={`#${val.category}`}></a> */}
-                                <h1 className='secondaryHeader' >{val.category}</h1>
+                                <h1 className='secondaryHeader' id={val.category} >{val.category}</h1>
                                 <div className="foodCardWrapper">
                                     {
                                         val.data.map((obj, index) => (
