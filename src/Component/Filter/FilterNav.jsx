@@ -19,6 +19,15 @@ const FilterNav = () => {
         return () => clearTimeout(timerId);
     }, [input]);
 
+    function adjustScroll(event, targetId) {
+        event.preventDefault();
+        console.log(targetId);
+        const targetElement = document.getElementById(targetId);
+        let yOffset = -90;
+        const yPosition = targetElement.getBoundingClientRect().top + window.scrollY + yOffset;
+        window.scrollTo({ top: yPosition, behavior: 'smooth' });
+    }
+
 
     const [tooglSearch, setToogleSearch] = useState(false);
     return (
@@ -27,7 +36,7 @@ const FilterNav = () => {
                 <span className="SearchIcon" onClick={() => setToogleSearch((prev) => !prev)}>
                     {!tooglSearch ?
                         <IoSearch /> :
-                        <RxCross2 strokeWidth={1} />}
+                        <RxCross2 strokeWidth={1} onClick={() => { setSearchValue(""); setInput("") }} />}
                 </span>
                 <div className={!tooglSearch ? "inActivefield" : "fieldActive"}>
                     <div className="field">
@@ -37,15 +46,8 @@ const FilterNav = () => {
                 <div className="filters">
                     {
                         productdata.map((item, index) => {
-                            return <a href={`#${item.category}`}><li key={index} >{item.category}</li></a>
+                            return <a key={index} onClick={(e) => adjustScroll(e, `${item.category}`)}><li>{item.category}</li></a>
                         })
-
-                    }
-                    {
-                        productdata.map((item, index) => {
-                            return <a href={`#${item.category}`}><li key={index} >{item.category}</li></a>
-                        })
-
                     }
                 </div>
             </div>

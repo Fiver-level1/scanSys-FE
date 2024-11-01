@@ -3,19 +3,17 @@
 }
 
 .sidebar-li {
-  border-radius: 20px;
-  color: #354259;
+  color: #424767;
   padding: 12px 15px;
   margin: 15px 20px;
   display: flex;
   justify-content: space-between;
-  box-shadow: 6px 6px 12px #c5c5c569, -6px -6px 12px #f5f9fd;
-  background: #ecf0f3;
-  border: 1px solid #eeeeee;
-  font-size: 14px;
+  font-size: 13px;
   align-items: center;
   cursor: pointer;
+  font-weight: 400;
   transition: 300ms;
+  border-bottom: .0625rem solid #efefef !important;
 }
 
 .sidebar-li-lang {
@@ -34,24 +32,25 @@
 }
 
 .sidebar-ul {
-  background-color: #ecf0f3;
-  min-height: 100vh;
   display: inline-block;
   padding-top: 1rem;
 }
 
 .sidebar-li:hover {
   background: #e6e4e4bd;
-  border: 1px solid #e6e4e4bd;
 }
 
 .sidebar {
   position: fixed;
   transition: transform 0.3s ease;
-  /* Smooth transition */
   z-index: 1;
   box-shadow: 6px 8px 15px -3px rgb(0 0 0 / 10%);
   top: 81px;
+  bottom: 0;
+  background-color: #f9f7f3;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .sidebar-unactive {
@@ -71,8 +70,27 @@
   gap: 14px;
 }
 
-.optName svg {
-  font-size: 1.8rem;
+.optName svg,
+.logOutBtn svg {
+  font-size: 22px;
+}
+
+.logOutBtn svg {
+  color: #ea755e;
+}
+
+.logOutBtn {
+  padding: 12px 15px;
+  margin: 15px 20px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  cursor: pointer;
+}
+
+.logOutBtn span {
+  font-size: 13px;
+  color: #ea755e;
 }
 
 @media only screen and (max-width:560px) {
