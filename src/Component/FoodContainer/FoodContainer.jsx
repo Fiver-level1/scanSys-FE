@@ -6,13 +6,19 @@ import '../../index.css'
 import { AppContext, AppDispatchContext } from '../../context/myContext';
 
 const FoodContainer = () => {
-    const [productdata, setProductdata] = useState([]);
-    const { setShowProductDesc } = useContext(AppDispatchContext);
-    const { showProductDesc } = useContext(AppContext);
+    
+    const { setShowProductDesc, setProductdata } = useContext(AppDispatchContext);
+    const { showProductDesc, productdata, searchValue } = useContext(AppContext);
     const [productDesData, setShowProductDescData] = useState({});
 
     useEffect(() => {
-        const groupedData = productList.reduce((acc, item) => {
+        groupedDataFunc();
+    }, []);
+    // console.log("productData: ",productdata);
+
+    function groupedDataFunc(productListFilter){
+        const productListTemp = searchValue !== "" ? productListFilter: productList;
+        const groupedData = productListTemp.reduce((acc, item) => {
             const categoryName = item.category.name;
             if (!acc[categoryName]) {
                 acc[categoryName] = { category: categoryName, data: [] };
@@ -22,8 +28,21 @@ const FoodContainer = () => {
         }, {});
 
         setProductdata(Object.values(groupedData));
-    }, []);
-    // console.log("productData: ",productdata);
+    }
+
+    useEffect(()=>{
+        let searchValueTemp = searchValue.trim();
+        // console.log(searchValueTemp, productList);
+        const productDataFilter = productList.filter((item, index)=> item.title.toLowerCase().includes(searchValueTemp.toLowerCase()));
+        
+        if(searchValueTemp === ""){
+            groupedDataFunc([]);
+        }else{
+            groupedDataFunc(productDataFilter);
+        }
+       
+
+    }, [searchValue])
 
 
 
@@ -41,8 +60,9 @@ const FoodContainer = () => {
                 <div className="foodCardHolder">
                     {
                         productdata.map((val, ind) => (
-                            <div key={ind}>
-                                <h1 className='secondaryHeader'>{val.category}</h1>
+                            <div key={ind} >
+                                {/* <a href={`#${val.category}`}></a> */}
+                                <h1 className='secondaryHeader' id={val.category} >{val.category}</h1>
                                 <div className="foodCardWrapper">
                                     {
                                         val.data.map((obj, index) => (
