@@ -44,19 +44,6 @@ const AppProvider = ({ children }) => {
         window.scrollTo({ top: yPosition, behavior: 'smooth' });
     }
 
-    function adjustScroll(event, targetId) {
-        event.preventDefault();
-        console.log(targetId);
-        const targetElement = document.getElementById(targetId);
-        let yOffset = -32;
-        if (targetId === "filterNav") {
-            yOffset = -90;
-        }
-        const yPosition = targetElement.getBoundingClientRect().top + window.scrollY + yOffset;
-        window.scrollTo({ top: yPosition, behavior: 'smooth' });
-    }
-
-
     // console.log("my cart: ", myCart);
 
 

@@ -6,6 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { AiTwotoneMail } from "react-icons/ai";
 import { AiTwotoneLock } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
+import { PiUserListDuotone } from "react-icons/pi";
 const Popup = () => {
     const { hideArrowClick, redirectTo, setredirectTo } = useContext(AppContext);
     const navigate = useNavigate();
@@ -24,13 +25,19 @@ const Popup = () => {
                 <div className="text">Register</div>
                 <form action="#">
                     <div className="field">
+                        <input required="" type="text" className="input" placeholder='Full Name' />
+                        <span className="span">
+                            <PiUserListDuotone />
+                        </span>
+                    </div>
+                    <div className="field">
                         <input required="" type="text" className="input" placeholder='Email or Phone' />
                         <span className="span">
                             <AiTwotoneMail />
                         </span>
                     </div>
                     <div className="field">
-                        <input required="" type="password" className="input" placeholder='password' />
+                        <input required="" type="password" className="input" placeholder='Password' />
                         <span className="span">
                             <AiTwotoneLock />
                         </span>

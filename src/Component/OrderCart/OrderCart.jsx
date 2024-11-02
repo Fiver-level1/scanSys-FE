@@ -6,6 +6,7 @@ import ListFoodCard from '../FoodCardHome/ListFoodCard';
 import { AppContext, AppDispatchContext } from '../../context/myContext';
 import ProductDescCard from '../ProductDescCard/ProductDescCard';
 
+
 const OrderCart = () => {
     const [subTotal, setSubTotal] = useState(0);
     const [myCartItems, setMyCartItems] = useState([]);
@@ -62,19 +63,19 @@ const OrderCart = () => {
                                     <h1>Cart Summary</h1>
                                     <div className="summaryLine">
                                         <span>Subtotal:</span>
-                                        <span>${subTotal}</span>
+                                        <span>€ {subTotal}</span>
                                     </div>
                                     <div className="summaryLine">
                                         <span>Tax:</span>
-                                        <span>$2.0</span>
+                                        <span>€ 2.0</span>
                                     </div>
                                     <div className="summaryLine">
                                         <span>Discount:</span>
-                                        <span style={{ color: "green" }}>$1.0</span>
+                                        <span style={{ color: "green" }}>- € 1.0</span>
                                     </div>
                                     <div className="summaryLine total">
                                         <span>Total:</span>
-                                        <span>$11.0</span>
+                                        <span>€ 11.0</span>
                                     </div>
                                 </div>
                                 <div

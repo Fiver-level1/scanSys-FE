@@ -3,9 +3,10 @@ import "./sidebar.css"
 import { AppContext } from '../../context/myContext';
 import { navLang, navlist } from '../../content/navList';
 import { AiOutlineLogout } from "react-icons/ai";
-
+import { useNavigate } from 'react-router-dom';
 const Sidebar = () => {
-  const { showPopup, hidePopup, handleArrowClickVisibility, setShowCookiesPopUp } = useContext(AppContext);
+  const { showPopup, hidePopup, handleArrowClickVisibility, setShowCookiesPopUp, adjustScroll } = useContext(AppContext);
+  const navigate = useNavigate();
 
   const handleSidebarList = (item) => {
     hidePopup();
@@ -14,6 +15,20 @@ const Sidebar = () => {
     }
     if (item === "Cookies") {
       setShowCookiesPopUp(true);
+    }
+    if (item === "Home") {
+      navigate('/')
+    }
+    if (item === "Menu") {
+      const currentUrl = window.location.pathname;
+      navigate('/');
+      if (currentUrl === '/') {
+        adjustScroll('', "filterNav");
+        return;
+      }
+      setTimeout(() => {
+        adjustScroll('', "filterNav");
+      }, 0)
     }
   }
   const handelLogout = () => {
