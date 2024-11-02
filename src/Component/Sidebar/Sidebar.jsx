@@ -30,6 +30,9 @@ const Sidebar = () => {
         adjustScroll('', "filterNav");
       }, 0)
     }
+    if (item === "Help") {
+      navigate('/help')
+    }
   }
   const handelLogout = () => {
     hidePopup();
