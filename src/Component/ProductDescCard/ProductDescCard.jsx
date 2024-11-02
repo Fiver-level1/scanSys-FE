@@ -5,7 +5,7 @@ import { BsDash } from "react-icons/bs";
 import { FaPlus } from "react-icons/fa6";
 import { AppContext, AppDispatchContext } from '../../context/myContext';
 import { useCookies } from 'react-cookie';
-import { MY_CART } from '../../Constants/cookieConst';
+import { expireTime, MY_CART } from '../../Constants/cookieConst';
 
 const ProductDescCard = ({ closeProductDesc, productDesData }) => {
 
@@ -43,7 +43,7 @@ const ProductDescCard = ({ closeProductDesc, productDesData }) => {
         }
 
         setMyCart(myCartItems);
-        setCookie("myCart", myCartItems, { path: '/', maxAge: 3600 });
+        setCookie("myCart", myCartItems, { path: '/', expires: expireTime });
         closeProductDesc(false)
     }
     const getRandomMatteColor = () => {
