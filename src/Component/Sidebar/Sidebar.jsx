@@ -30,6 +30,12 @@ const Sidebar = () => {
         adjustScroll('', "filterNav");
       }, 0)
     }
+    if( item === "Terms and conditions"){
+      navigate("/termsAndCondition");
+    }
+    if( item === "Privacy Policy"){
+      navigate("/privacyPolicy")
+    }
   }
   const handelLogout = () => {
     hidePopup();

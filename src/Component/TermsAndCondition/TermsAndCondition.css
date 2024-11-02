@@ -1,0 +1,44 @@
+.terms-head-wrapper{
+    color: #31344b;
+}
+
+.terms-head{
+    width: 80%;
+    margin: auto;
+    padding: 3rem 0;
+    /* font-size: 30px; */
+    text-align: center;
+}
+
+.terms-content-wrapper{
+    width: 60%;
+    margin: 0rem auto;
+    text-align: justify;
+    color: #31344b;
+}
+
+.terms-content-head{
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+
+.terms-content-para{
+    font-size: 14px;
+    font-family: "Nunito Sans", sans-serif;
+    opacity: 0.8;
+}
+
+@media only screen and (max-width:660px) {
+    .terms-content-wrapper{
+        width: 90%;
+    }
+    .terms-content-head{
+        font-size: 16px;
+    }
+    .terms-content-para{
+        font-size: 11px;
+    }
+    .terms-head{
+        font-size: 20px;
+    }
+}
