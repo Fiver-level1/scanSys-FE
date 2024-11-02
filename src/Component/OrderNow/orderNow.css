@@ -1,174 +1,221 @@
-.orderNowWrapper {
+.orderNowHolder1 {
     width: 80%;
     margin: 3rem auto;
     display: flex;
     justify-content: center;
-}
-
-.header {
-    display: flex;
-    align-items: center;
-    gap: 0px;
-    margin: 2rem 0;
-    margin-left: 4rem;
-    display: flex;
+    flex-direction: column;
     align-items: center;
 }
 
-.header svg {
-    font-size: 21px;
-    color: green;
+.orderNowWrapper .form-container {
+    background-color: #f9f7f3;
+    border-radius: 10px;
+    padding: 40px;
+    max-width: 500px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.header h2 {
-    font-family: Roboto;
-    font-size: 18px;
-    text-align: center;
-}
-
-.form-container {
-    background: #ecf0f3;
-    box-shadow: -3px -3px 7px #ffffff, 3px 3px 5px #ceced1;
-    padding: 30px;
-    border-radius: 20px;
-    max-width: 400px;
-    width: 100%;
-}
-
-.OrderNowContainer p {
-    font-size: 0.8rem;
-    color: #555;
-    margin-bottom: 10px;
-    font-family: Roboto;
-    font-weight: 400;
-}
-
-.form-group label a {
-    text-decoration: underline;
-    color: #555;
+.orderNowWrapper label {
     font-size: 13px;
+    font-family: Roboto;
+    color: #424767;
 }
 
-.form-group {
+.orderNowWrapper .formGroupHolder {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.orderNowWrapper .form-group {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 8px;
     margin-bottom: 15px;
 }
 
-.form-group label {
-    font-size: 0.9rem;
-    color: #555;
-    margin-bottom: 10px;
-    display: block;
-}
-
-.formGroupHolder {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-}
-
-/* Input, Textarea, Select */
-.form-input,
-.form-textarea,
-.form-select {
+.orderNowWrapper .form-select {
     width: 100%;
-    padding: 10px;
-    font-size: 13px;
-    border-radius: 12px;
-    border: none;
-    outline: none;
-    box-shadow: inset 2px 2px 5px #ceced1, inset -4px -4px 8px #ffffff;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
     color: #333;
-    background: #ecf0f3;
-    border-radius: 10px;
-    padding: 13px 14px;
-}
-
-.form-select {
+    font-size: 13px;
     appearance: none;
 }
 
-.form-input,
-.form-textarea {
-    width: calc(100% - 25px);
-}
-
-.form-input:focus,
-.form-textarea:focus,
-.form-select:focus {
-    box-shadow: inset 1px 1px 2px #BABECC,
-        inset -1px -1px 2px #ffffff73;
-}
-
-.form-textarea {
-    resize: none;
-    height: 60px;
-}
-
-/* Checkbox */
-.form-checkbox-label {
+.orderNowWrapper .form-checkbox-label {
     display: flex;
     align-items: center;
-    font-size: 0.9rem;
-    color: #555;
-    margin-bottom: 5px;
+    gap: 5;
+    flex-direction: row;
 }
 
-.form-checkbox {
-    margin-right: 10px;
-    accent-color: #333;
-    width: 18px;
-    height: 18px;
-    transform: translateY(-10px);
+.orderNowWrapper .form-checkbox {
+    width: 11px;
 }
 
-/* Payment Button */
-.payment-option {
+.orderNowWrapper .form-checkbox-label label {
+    color: #424767;
+    font-size: 12px;
+}
+
+.orderNowWrapper .form-checkbox-label a {
+    color: #ea755f;
+    text-decoration: underline;
+}
+
+.orderNowWrapper .form-input,
+.orderNowWrapper .form-textarea {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 12px;
+}
+
+.orderNowWrapper .form-textarea {
+    height: 80px;
+    resize: vertical;
+}
+
+.orderNowWrapper .form-title {
+    font-size: 1.4em;
+    font-weight: bold;
+    color: #333;
+    margin: 20px 0;
+}
+
+.orderNowWrapper .form-title span {
+    color: #0073e6;
+}
+
+.orderNowWrapper .payOptionWrapper {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+    justify-content: space-around;
+}
+
+.orderNowWrapper .payment-option {
     display: flex;
     align-items: center;
-    padding: 10px;
-    border-radius: 12px;
-    background: #ecf0f3;
-    box-shadow: -3px -3px 7px #ffffff, 3px 3px 5px #ceced1;
+    justify-content: center;
+    padding: 12px 15px;
+    border-radius: 8px;
+    background-color: #1c2540;
     cursor: pointer;
-    align-items: center;
-    transition: transform 0.2s;
-    gap: 12px;
+    font-weight: 400;
+    color: #ffffff;
+    transition: background-color 0.3s;
+    font-size: 13px;
     width: 100%;
 }
 
-.payment-option:hover {
-    transform: translateY(-3px);
+.orderNowWrapper .payment-option:hover {
+    background-color: #ea755e;
 }
 
-.payment-option svg {
-    font-size: 24px;
-}
-
-.payment-option span {
-    font-size: 12px;
-    color: #333;
-}
-
-.payOptionWrapper {
-    display: flex;
-    align-items: center;
-    gap: 17px;
-    margin: 2rem 0;
-    margin-bottom: 1rem;
-    justify-content: space-between;
-}
-
-.form-container h1 {
-    font-size: 15px;
-    font-family: Poppins;
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    font-weight: 500;
-}
-
-.form-container h1 span {
+.orderNowWrapper .payment-option span {
     font-family: "Nunito Sans", sans-serif;
-    font-size: 20px;
-    color: #A91E2C;
+    font-size: 13px;
+}
+
+.orderNowWrapper .payment-option svg {
+    font-size: 18px;
+    margin-right: 8px;
+    color: #fff;
+}
+
+.orderNowWrapper h1 {
+    font-size: 15px;
+    font-weight: 400;
+    font-family: "Nunito Sans", sans-serif;
+}
+
+.orderNowWrapper h1 span {
+    color: #b42104;
+}
+
+.submitBtn {
+    margin-top: 2rem;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.submitBtn button {
+    cursor: pointer;
+    padding: 14px 40px;
+    border: none;
+    border-radius: 8px;
+    padding: 14px 40px;
+    border: none;
+    border-radius: 8px;
+    width: 100%;
+    background: #ea755e;
+    color: white;
+    font-size: 13px;
+    transition: 250ms;
+    box-shadow: -3px -3px 7px #ffffff, 3px 3px 5px #ceced1;
+}
+
+.payment-option .payOptSm {
+    display: none;
+}
+
+@media only screen and (max-width:680px) {
+    .orderNowHolder1 {
+        width: 90%;
+    }
+
+    .payment-option .payOptMid {
+        display: none;
+    }
+
+    .payment-option .payOptSm {
+        display: block;
+    }
+
+    .payment-option svg {
+        font-size: 15px !important;
+    }
+
+    .payment-option {
+        margin: 10px 0;
+        padding: 8px 15px;
+    }
+
+    .submitBtn {
+        margin-top: 13px;
+    }
+
+    .payOptionWrapper {
+        margin-top: 10px !important;
+    }
+
+    .orderNowWrapper h1,
+    .orderNowWrapper h1 span {
+        font-size: 13px;
+    }
+
+    .orderNowWrapper label {
+        font-size: 12px;
+    }
+
+    .orderNowWrapper .form-checkbox-label label {
+        font-size: 11px;
+    }
+
+    .orderNowWrapper .formGroupHolder {
+        gap: 3px;
+        margin-bottom: 10px;
+    }
+
+    .orderNowWrapper .form-container {
+        padding: 20px 12px;
+    }
 }
