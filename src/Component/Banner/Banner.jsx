@@ -1,6 +1,6 @@
 import React from "react";
 import './banner.css'
-import bannerIcon from '../../assets/banner.jpg'
+import bannerIcon from '../../assets/banner2.jpeg'
 import { useContext } from "react";
 import { AppContext } from "../../context/myContext";
 const Banner = () => {
@@ -9,7 +9,7 @@ const Banner = () => {
     <div className="BannerContainer">
       <div className="bannerWrapper">
         <div className="companyDesc">
-          <h1>Prince Raj</h1>
+          <h1>Food'F</h1>
           <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veniam alias eos, distinctio laudantium veritatis placeat quaerat! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nostrum corrupti sint maiores eveniet. Nostrum.</p>
           <a onClick={(e) => adjustScroll(e, "filterNav")}>
             <button class="exploreButton">

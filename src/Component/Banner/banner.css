@@ -32,7 +32,7 @@
     display: block;
     border-radius: 76% 24% 70% 30% / 47% 73% 27% 53%;
     /* overflow: hidden; */
-    width: 74%;
+    width: 91%;
 }
 
 .imageHolder img {
@@ -41,7 +41,7 @@
     border-radius: 76% 24% 70% 30% / 47% 73% 27% 53%;
     width: 100%;
     object-fit: cover;
-    transform: scaleX(1.2);
+    /* transform: scaleX(1.2); */
 }
 
 .companyDesc {
@@ -55,7 +55,7 @@
 .companyDesc h1 {
     font-size: 2.2rem;
     font-weight: 500;
-    font-family: Roboto;
+    font-family: "EB Garamond", serif;
     color: #31344b;
 }
 
@@ -67,8 +67,8 @@
 
 /* From Uiverse.io by vinodjangid07 */
 .exploreButton {
-    width: 110px;
-    height: 40px;
+    width: 100px;
+    height: 37px;
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -84,6 +84,7 @@
     padding-left: 8px;
     transition-duration: .5s;
     margin-top: 10px;
+    font-size: 12px;
 }
 
 .svgIcon {
