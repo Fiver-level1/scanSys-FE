@@ -21,6 +21,10 @@
     color: #424767;
 }
 
+.orderNowTop {
+    width: 100%;
+}
+
 .orderNowWrapper .formGroupHolder {
     margin-bottom: 20px;
     display: flex;

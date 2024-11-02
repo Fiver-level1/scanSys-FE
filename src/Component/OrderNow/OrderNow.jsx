@@ -5,11 +5,12 @@ import { Link } from 'react-router-dom';
 import { IoArrowBack } from "react-icons/io5";
 import { FaApple } from "react-icons/fa";
 import { IoLogoGoogle } from "react-icons/io";
+
 const OrderNow = () => {
     return (
         <div className='OrderNowContainer'>
             <div className="orderNowHolder1">
-                <div className="">
+                <div className="orderNowTop">
                     <Link to='/'><div className="BackIcon">
                         <IoArrowBack />
                     </div>
