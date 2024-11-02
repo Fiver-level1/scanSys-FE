@@ -32,8 +32,14 @@ const Sidebar = () => {
     }
     if (item === "Help") {
       navigate('/help')
+    if( item === "Terms and conditions"){
+      navigate("/termsAndCondition");
+    }
+    if( item === "Privacy Policy"){
+      navigate("/privacyPolicy")
     }
   }
+}
   const handelLogout = () => {
     hidePopup();
   }
@@ -61,4 +67,4 @@ const Sidebar = () => {
   )
 }
 
-export default Sidebar
+export default Sidebar;

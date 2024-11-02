@@ -1,6 +1,6 @@
 import React from 'react'
 import "./home.css";
-import Banner from '../Banner/Banner';
+import Banner from "../Banner/Banner";
 import FilterNav from '../Filter/FilterNav';
 import FoodContainer from '../FoodContainer/FoodContainer';
 

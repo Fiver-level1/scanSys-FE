@@ -7,6 +7,9 @@ import Sidebar from './Component/Sidebar/Sidebar'
 import OrderNow from './Component/OrderNow/OrderNow'
 import { CookiesProvider } from 'react-cookie';
 import Help from './Component/Help/Help'
+import TermsAndCondition from './Component/TermsAndCondition/TermsAndCondition'
+import { termsAndConditions } from './content/termsAndCondition'
+import { privacyPolicy } from './content/privacyAndPolicy'
 
 function App() {
 
@@ -20,6 +23,8 @@ function App() {
           <Route path="/cart" element={<OrderCart />} />
           <Route path="/orderNow" element={<OrderNow />} />
           <Route path="/help" element={<Help />} />
+          <Route path="/termsAndCondition" element={<TermsAndCondition content={termsAndConditions} heading="Terms and Conditions"/>} />
+          <Route path='/privacyPolicy' element={<TermsAndCondition content={privacyPolicy} heading="Privacy Policy"/>}/>
         </Routes>
       </CookiesProvider>
     </>
