@@ -285,12 +285,12 @@
 
 @media only screen and (max-width:480px) {
     .productDescWrapper .wrapper {
-        width: 340px;
+        width: 100%;
         min-width: unset;
     }
 
-    .productDescWrapper .wrapper .img-area {
-        height: 200px !important;
+    .productDescWrapper {
+        width: 96%;
     }
 
     .productDescWrapper .wrapper .about {
