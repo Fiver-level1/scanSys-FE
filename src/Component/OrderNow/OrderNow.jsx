@@ -2,19 +2,15 @@ import React from 'react'
 import './orderNow.css'
 import { IoIosCard } from "react-icons/io";
 import { Link } from 'react-router-dom';
-import { IoArrowBack } from "react-icons/io5";
 import { FaApple } from "react-icons/fa";
 import { IoLogoGoogle } from "react-icons/io";
-
+import BackNavigate from '../BackNavgate/BackNavigate';
 const OrderNow = () => {
     return (
         <div className='OrderNowContainer'>
             <div className="orderNowHolder1">
                 <div className="orderNowTop">
-                    <Link to='/'><div className="BackIcon">
-                        <IoArrowBack />
-                    </div>
-                    </Link>
+                    <BackNavigate />
                     <div className="headerPrimary">
                         <h1>Ready to Dine? Confirm and Pay</h1>
                         <p>Select your table, choose how you'd like to pay, and add your email to receive a receipt. With just a few quick steps, your meal will be on its way!</p>

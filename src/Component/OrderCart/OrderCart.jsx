@@ -1,11 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { Link } from 'react-router-dom';
 import './orderCart.css'
-import { IoArrowBack } from "react-icons/io5";
 import ListFoodCard from '../FoodCardHome/ListFoodCard';
 import { AppContext, AppDispatchContext } from '../../context/myContext';
 import ProductDescCard from '../ProductDescCard/ProductDescCard';
-
+import BackNavigate from '../BackNavgate/BackNavigate';
 
 const OrderCart = () => {
     const [subTotal, setSubTotal] = useState(0);
@@ -38,10 +36,7 @@ const OrderCart = () => {
     return (
         <div className="cartContainer">
             <div className="cartWrapper">
-                <Link to='/'><div className="BackIcon">
-                    <IoArrowBack />
-                </div>
-                </Link>
+                <BackNavigate />
                 {(myCartItems && myCartItems.length > 0) ?
                     <>
                         <div className="headerPrimary">
