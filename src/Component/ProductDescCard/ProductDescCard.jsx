@@ -14,7 +14,7 @@ const ProductDescCard = ({ closeProductDesc, productDesData }) => {
     const [itemState, setItemState] = useState(0);
     const [cookie, setCookie, removeCookie] = useCookies([MY_CART]);
 
-    console.log(productDesRef)
+    // console.log(productDesRef)
     const handleDecrementItem = () => {
         if (itemState > 0) {
             setItemState(itemState - 1);
@@ -34,6 +34,7 @@ const ProductDescCard = ({ closeProductDesc, productDesData }) => {
             productDesData.qty = itemState;
             if (existingItem) {
                 existingItem.qty = itemState;
+                myCartItems = [...myCartItems];
             } else {
                 myCartItems.push(productDesData);
             }

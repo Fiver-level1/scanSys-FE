@@ -2,7 +2,7 @@ import React, { useEffect, forwardRef } from "react";
 
 const ClickBoundary = forwardRef((props, ref )=> {
   const { onInsideClick, onOutsideClick, children } = props;
-  console.log(ref.current)
+//   console.log(ref.current)
   useEffect(() => {
     const handleDocumentClick = (event) => {
       if (ref.current && !ref.current.contains(event.target)) {
