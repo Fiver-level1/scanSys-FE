@@ -7,7 +7,7 @@ import { AppContext, AppDispatchContext } from '../../context/myContext';
 import { useCookies } from 'react-cookie';
 import { expireTime, MY_CART } from '../../Constants/cookieConst';
 
-const ProductDescCard = ({ closeProductDesc, productDesData }) => {
+const ProductDescCard = ({ closeProductDesc, productDesData, parent }) => {
 
     const { setMyCart } = useContext(AppDispatchContext);
     const { myCart, productDesRef } = useContext(AppContext);
@@ -20,6 +20,7 @@ const ProductDescCard = ({ closeProductDesc, productDesData }) => {
             setItemState(itemState - 1);
         }
     }
+    console.log(parent == "foodContainer");
 
     useEffect(() => {
         const existingItem = myCart.find((item) => item === productDesData);
@@ -105,9 +106,9 @@ const ProductDescCard = ({ closeProductDesc, productDesData }) => {
                         <div className="selectionBtn">
                             <button onClick={() => setItemState(itemState + 1)} ><FaPlus /></button>
                             <span>{itemState}</span>
-                            <button onClick={handleDecrementItem} disabled={itemState == 0}><BsDash strokeWidth={1} /></button>
+                            <button onClick={handleDecrementItem} disabled={parent == "foodContainer" && itemState == 0}><BsDash strokeWidth={1} /></button>
                         </div>
-                        <button onClick={handleAddToCart} disabled={itemState == 0}>Add</button>
+                        <button onClick={handleAddToCart} disabled={parent == "foodContainer" && itemState == 0}>Add</button>
                     </div>
                 </div>
             </div>

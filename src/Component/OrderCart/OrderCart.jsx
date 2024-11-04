@@ -137,6 +137,7 @@ const OrderCart = () => {
                     <ProductDescCard
                         closeProductDesc={() => setShowProductDesc(false)}
                         productDesData={productDesData}
+                        parent="orderCart"
                     /> </ClickBoundary> : <></>
                 }
             </div>

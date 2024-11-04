@@ -91,6 +91,7 @@ const FoodContainer = () => {
                     <ProductDescCard
                         closeProductDesc={() => setShowProductDesc(false)}
                         productDesData={productDesData}
+                        parent="foodContainer"
                     /> </ClickBoundary>  : <></>
                 }
             </div>
