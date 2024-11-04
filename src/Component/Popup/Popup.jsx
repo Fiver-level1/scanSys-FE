@@ -1,15 +1,18 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useRef } from 'react'
 import "./Popup.css";
-import { AppContext } from '../../context/myContext';
+import { AppContext, AppDispatchContext } from '../../context/myContext';
 import { IoClose } from "react-icons/io5";
 import { Link, useNavigate } from 'react-router-dom';
 import { AiTwotoneMail } from "react-icons/ai";
 import { AiTwotoneLock } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
 import { PiUserListDuotone } from "react-icons/pi";
+import ClickBoundary from '../onBlur/ClickBoundary';
 const Popup = () => {
     const { hideArrowClick, redirectTo, setredirectTo } = useContext(AppContext);
+    const { setArrowClick } = useContext(AppDispatchContext);
     const navigate = useNavigate();
+    const loginRef = useRef(null);
 
     const HandleGuestRequest = () => {
         hideArrowClick();
@@ -21,7 +24,8 @@ const Popup = () => {
 
     return (
         <div className="singinContainer">
-            <div className="content">
+            <ClickBoundary ref={loginRef} onOutsideClick = {()=>setArrowClick(false)}>
+            <div className="content" ref={loginRef}>
                 <div className="text">Register</div>
                 <form action="#">
                     <div className="field">
@@ -60,6 +64,7 @@ const Popup = () => {
                     <IoClose />
                 </div>
             </div>
+            </ClickBoundary>
         </div>
     )
 }

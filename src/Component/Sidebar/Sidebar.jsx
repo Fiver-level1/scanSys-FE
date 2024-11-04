@@ -5,7 +5,7 @@ import { navLang, navlist } from '../../content/navList';
 import { AiOutlineLogout } from "react-icons/ai";
 import { useNavigate } from 'react-router-dom';
 const Sidebar = () => {
-  const { showPopup, hidePopup, handleArrowClickVisibility, setShowCookiesPopUp, adjustScroll } = useContext(AppContext);
+  const { showPopup, hidePopup, handleArrowClickVisibility, setShowCookiesPopUp, adjustScroll, sidebarRef } = useContext(AppContext);
   const navigate = useNavigate();
 
   const handleSidebarList = (item) => {
@@ -43,9 +43,10 @@ const Sidebar = () => {
   const handelLogout = () => {
     hidePopup();
   }
+  // console.log("sidebarRef: ", sidebarRef);
 
   return (
-    <div className={`sidebar sidebar-min-width ${!showPopup ? "sidebar-unactive" : "sidebar-active"}`}>
+    <div className={`sidebar sidebar-min-width ${!showPopup ? "sidebar-unactive" : "sidebar-active"}`} ref ={sidebarRef}>
       <ul className='sidebar-ul sidebar-min-width'>
         {navlist.map((item, index) => {
           return (

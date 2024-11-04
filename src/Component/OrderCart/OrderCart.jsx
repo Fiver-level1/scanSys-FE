@@ -4,11 +4,12 @@ import ListFoodCard from '../FoodCardHome/ListFoodCard';
 import { AppContext, AppDispatchContext } from '../../context/myContext';
 import ProductDescCard from '../ProductDescCard/ProductDescCard';
 import BackNavigate from '../BackNavgate/BackNavigate';
+import ClickBoundary from '../onBlur/ClickBoundary';
 
 const OrderCart = () => {
     const [subTotal, setSubTotal] = useState(0);
     const [myCartItems, setMyCartItems] = useState([]);
-    const { myCart, handleArrowClickVisibility, setredirectTo, redirectTo, showProductDesc } = useContext(AppContext);
+    const { myCart, handleArrowClickVisibility, setredirectTo, redirectTo, showProductDesc, productDesRef } = useContext(AppContext);
     const { setShowProductDesc } = useContext(AppDispatchContext);
     const [productDesData, setShowProductDescData] = useState({});
 
@@ -130,10 +131,12 @@ const OrderCart = () => {
             </div>
             <div className={!showProductDesc ? "PopUpCardsDescInactive" : "PopUpCardsDescActive"}>
                 {
-                    showProductDesc ? <ProductDescCard
+                    showProductDesc ? 
+                    <ClickBoundary ref={productDesRef} onOutsideClick={()=>setShowProductDesc(false)}>
+                    <ProductDescCard
                         closeProductDesc={() => setShowProductDesc(false)}
                         productDesData={productDesData}
-                    /> : <></>
+                    /> </ClickBoundary> : <></>
                 }
             </div>
         </div>

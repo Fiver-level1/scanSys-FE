@@ -10,10 +10,11 @@ import { expireTime, MY_CART } from '../../Constants/cookieConst';
 const ProductDescCard = ({ closeProductDesc, productDesData }) => {
 
     const { setMyCart } = useContext(AppDispatchContext);
-    const { myCart } = useContext(AppContext);
+    const { myCart, productDesRef } = useContext(AppContext);
     const [itemState, setItemState] = useState(0);
     const [cookie, setCookie, removeCookie] = useCookies([MY_CART]);
 
+    console.log(productDesRef)
     const handleDecrementItem = () => {
         if (itemState > 0) {
             setItemState(itemState - 1);
@@ -61,7 +62,7 @@ const ProductDescCard = ({ closeProductDesc, productDesData }) => {
 
 
     return (
-        <div className='productDescWrapper'>
+        <div className='productDescWrapper' ref={productDesRef}>
             <div className="wrapper">
                 <div className="img-area">
                     <div className="inner-area">

@@ -5,11 +5,12 @@ import ProductDescCard from '../ProductDescCard/ProductDescCard';
 import '../../index.css'
 import './foodContainer.css'
 import { AppContext, AppDispatchContext } from '../../context/myContext';
+import ClickBoundary from '../onBlur/ClickBoundary';
 
 const FoodContainer = () => {
     
     const { setShowProductDesc, setProductdata } = useContext(AppDispatchContext);
-    const { showProductDesc, productdata, searchValue } = useContext(AppContext);
+    const { showProductDesc, productdata, searchValue, productDesRef } = useContext(AppContext);
     const [productDesData, setShowProductDescData] = useState({});
 
     useEffect(() => {
@@ -85,10 +86,12 @@ const FoodContainer = () => {
             </section>
             <div className={!showProductDesc ? "PopUpCardsDescInactive" : "PopUpCardsDescActive"}>
                 {
-                    showProductDesc ? <ProductDescCard
+                    showProductDesc ?
+                    <ClickBoundary ref={productDesRef} onOutsideClick={()=>setShowProductDesc(false)}>
+                    <ProductDescCard
                         closeProductDesc={() => setShowProductDesc(false)}
                         productDesData={productDesData}
-                    /> : <></>
+                    /> </ClickBoundary>  : <></>
                 }
             </div>
         </>
