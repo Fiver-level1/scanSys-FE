@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useRef, useState } from "react";
 import { useCookies } from "react-cookie";
 
 const AppContext = createContext("");
@@ -15,6 +15,8 @@ const AppProvider = ({ children }) => {
     const [showProductDesc, setShowProductDesc] = useState(false);
     const [productdata, setProductdata] = useState([]);
     const [searchValue, setSearchValue] = useState("");
+    const sidebarRef = useRef(null);
+    const productDesRef = useRef(null);
 
 
 
@@ -50,8 +52,8 @@ const AppProvider = ({ children }) => {
 
 
     return (
-        <AppContext.Provider value={{ showPopup, arrowClick, hidePopup, handlePopUpVisibility, handleArrowClickVisibility, hideArrowClick, myCart, showCookiesPopUp, setShowCookiesPopUp, setredirectTo, redirectTo, showProductDesc, productdata, searchValue, adjustScroll }}>
-            <AppDispatchContext.Provider value={{ setMyCart, setShowProductDesc, setProductdata, setSearchValue }}>
+        <AppContext.Provider value={{ showPopup, arrowClick, hidePopup, handlePopUpVisibility, handleArrowClickVisibility, hideArrowClick, myCart, showCookiesPopUp, setShowCookiesPopUp, setredirectTo, redirectTo, showProductDesc, productdata, searchValue, adjustScroll, sidebarRef, productDesRef }}>
+            <AppDispatchContext.Provider value={{ setMyCart, setShowProductDesc, setProductdata, setSearchValue, setShowPopup, setArrowClick }}>
                 {children}
             </AppDispatchContext.Provider>
         </AppContext.Provider>

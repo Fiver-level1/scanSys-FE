@@ -10,14 +10,22 @@ import Help from './Component/Help/Help'
 import TermsAndCondition from './Component/TermsAndCondition/TermsAndCondition'
 import { termsAndConditions } from './content/termsAndCondition'
 import { privacyPolicy } from './content/privacyAndPolicy'
+import ClickBoundary from './Component/onBlur/ClickBoundary'
+import { AppContext, AppDispatchContext } from './context/myContext'
+import { useContext } from 'react'
 
 function App() {
+
+  const { sidebarRef } = useContext(AppContext);
+  const { setShowPopup } = useContext(AppDispatchContext);
 
   return (
     <>
       <CookiesProvider>
         <Navbar />
-        <Sidebar />
+        <ClickBoundary ref={sidebarRef} onOutsideClick={()=>setShowPopup(false)}>
+          <Sidebar />
+        </ClickBoundary>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/cart" element={<OrderCart />} />

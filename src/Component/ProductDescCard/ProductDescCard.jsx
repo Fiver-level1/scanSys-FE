@@ -7,18 +7,20 @@ import { AppContext, AppDispatchContext } from '../../context/myContext';
 import { useCookies } from 'react-cookie';
 import { expireTime, MY_CART } from '../../Constants/cookieConst';
 
-const ProductDescCard = ({ closeProductDesc, productDesData }) => {
+const ProductDescCard = ({ closeProductDesc, productDesData, parent }) => {
 
     const { setMyCart } = useContext(AppDispatchContext);
-    const { myCart } = useContext(AppContext);
+    const { myCart, productDesRef } = useContext(AppContext);
     const [itemState, setItemState] = useState(0);
     const [cookie, setCookie, removeCookie] = useCookies([MY_CART]);
 
+    // console.log(productDesRef)
     const handleDecrementItem = () => {
         if (itemState > 0) {
             setItemState(itemState - 1);
         }
     }
+    console.log(parent == "foodContainer");
 
     useEffect(() => {
         const existingItem = myCart.find((item) => item === productDesData);
@@ -33,6 +35,7 @@ const ProductDescCard = ({ closeProductDesc, productDesData }) => {
             productDesData.qty = itemState;
             if (existingItem) {
                 existingItem.qty = itemState;
+                myCartItems = [...myCartItems];
             } else {
                 myCartItems.push(productDesData);
             }
@@ -61,7 +64,7 @@ const ProductDescCard = ({ closeProductDesc, productDesData }) => {
 
 
     return (
-        <div className='productDescWrapper'>
+        <div className='productDescWrapper' ref={productDesRef}>
             <div className="wrapper">
                 <div className="img-area">
                     <div className="inner-area">
@@ -103,9 +106,9 @@ const ProductDescCard = ({ closeProductDesc, productDesData }) => {
                         <div className="selectionBtn">
                             <button onClick={() => setItemState(itemState + 1)} ><FaPlus /></button>
                             <span>{itemState}</span>
-                            <button onClick={handleDecrementItem} disabled={itemState == 0}><BsDash strokeWidth={1} /></button>
+                            <button onClick={handleDecrementItem} disabled={parent == "foodContainer" && itemState == 0}><BsDash strokeWidth={1} /></button>
                         </div>
-                        <button onClick={handleAddToCart} disabled={itemState == 0}>Add</button>
+                        <button onClick={handleAddToCart} disabled={parent == "foodContainer" && itemState == 0}>Add</button>
                     </div>
                 </div>
             </div>
