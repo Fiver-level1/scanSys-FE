@@ -6,20 +6,28 @@ import '../../index.css'
 import './foodContainer.css'
 import { AppContext, AppDispatchContext } from '../../context/myContext';
 import ClickBoundary from '../onBlur/ClickBoundary';
+import { getRequest } from '../../Services/ApiController';
 
 const FoodContainer = () => {
-    
+
     const { setShowProductDesc, setProductdata } = useContext(AppDispatchContext);
     const { showProductDesc, productdata, searchValue, productDesRef } = useContext(AppContext);
     const [productDesData, setShowProductDescData] = useState({});
 
     useEffect(() => {
         groupedDataFunc();
+        getRequest('api/products', (err, res) => {
+            if (err) {
+                console.log("error : ", err);
+            } else {
+                console.log(res);
+            }
+        })
     }, []);
     // console.log("productData: ",productdata);
 
-    function groupedDataFunc(productListFilter){
-        const productListTemp = searchValue !== "" ? productListFilter: productList;
+    function groupedDataFunc(productListFilter) {
+        const productListTemp = searchValue !== "" ? productListFilter : productList;
         const groupedData = productListTemp.reduce((acc, item) => {
             const categoryName = item.category.name;
             if (!acc[categoryName]) {
@@ -32,17 +40,17 @@ const FoodContainer = () => {
         setProductdata(Object.values(groupedData));
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         let searchValueTemp = searchValue.trim();
         // console.log(searchValueTemp, productList);
-        const productDataFilter = productList.filter((item, index)=> item.title.toLowerCase().includes(searchValueTemp.toLowerCase()));
-        
-        if(searchValueTemp === ""){
+        const productDataFilter = productList.filter((item, index) => item.title.toLowerCase().includes(searchValueTemp.toLowerCase()));
+
+        if (searchValueTemp === "") {
             groupedDataFunc([]);
-        }else{
+        } else {
             groupedDataFunc(productDataFilter);
         }
-       
+
 
     }, [searchValue])
 
@@ -87,12 +95,12 @@ const FoodContainer = () => {
             <div className={!showProductDesc ? "PopUpCardsDescInactive" : "PopUpCardsDescActive"}>
                 {
                     showProductDesc ?
-                    <ClickBoundary ref={productDesRef} onOutsideClick={()=>setShowProductDesc(false)}>
-                    <ProductDescCard
-                        closeProductDesc={() => setShowProductDesc(false)}
-                        productDesData={productDesData}
-                        parent="foodContainer"
-                    /> </ClickBoundary>  : <></>
+                        <ClickBoundary ref={productDesRef} onOutsideClick={() => setShowProductDesc(false)}>
+                            <ProductDescCard
+                                closeProductDesc={() => setShowProductDesc(false)}
+                                productDesData={productDesData}
+                                parent="foodContainer"
+                            /> </ClickBoundary> : <></>
                 }
             </div>
         </>
