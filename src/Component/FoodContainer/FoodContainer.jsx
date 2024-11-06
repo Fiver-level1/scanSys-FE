@@ -14,16 +14,6 @@ const FoodContainer = () => {
     const { showProductDesc, productdata, searchValue, productDesRef } = useContext(AppContext);
     const [productDesData, setShowProductDescData] = useState({});
 
-    useEffect(() => {
-        groupedDataFunc();
-        getRequest('api/products', (err, res) => {
-            if (err) {
-                console.log("error : ", err);
-            } else {
-                console.log(res);
-            }
-        })
-    }, []);
     // console.log("productData: ",productdata);
 
     function groupedDataFunc(productListFilter) {

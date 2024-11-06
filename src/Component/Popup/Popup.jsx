@@ -9,7 +9,7 @@ import { FcGoogle } from "react-icons/fc";
 import { PiUserListDuotone } from "react-icons/pi";
 import ClickBoundary from '../onBlur/ClickBoundary';
 const Popup = () => {
-    const { hideArrowClick, redirectTo, setredirectTo } = useContext(AppContext);
+    const { hideArrowClick, redirectTo, setredirectTo, setSigninPopUp } = useContext(AppContext);
     const { setArrowClick } = useContext(AppDispatchContext);
     const navigate = useNavigate();
     const loginRef = useRef(null);
@@ -20,50 +20,59 @@ const Popup = () => {
         setredirectTo('/');
         navigate(valRedirectTo);
     };
-
+    const handelFormLogin = () => {
+        setSigninPopUp(true);
+        hideArrowClick();
+    }
 
     return (
         <div className="singinContainer">
-            <ClickBoundary ref={loginRef} onOutsideClick = {()=>setArrowClick(false)}>
-            <div className="content" ref={loginRef}>
-                <div className="text">Register</div>
-                <form action="#">
-                    <div className="field">
-                        <input required="" type="text" className="input" placeholder='Full Name' />
-                        <span className="span">
-                            <PiUserListDuotone />
-                        </span>
-                    </div>
-                    <div className="field">
-                        <input required="" type="text" className="input" placeholder='Email or Phone' />
-                        <span className="span">
-                            <AiTwotoneMail />
-                        </span>
-                    </div>
-                    <div className="field">
-                        <input required="" type="password" className="input" placeholder='Password' />
-                        <span className="span">
-                            <AiTwotoneLock />
-                        </span>
-                    </div>
-                    <button className="button">Sign in</button>
-                    <div className="loginOptions">
-                        <p>--- Or ---</p>
-                        <button className="btn-singin">
-                            <FcGoogle />
-                        </button>
-                    </div>
+            <ClickBoundary ref={loginRef} onOutsideClick={() => setArrowClick(false)}>
+                <div className="content" ref={loginRef}>
+                    <div className="text">Register</div>
                     <div className="sign-up">
-                        <p>Prefer not to join?</p>
-                        <div onClick={HandleGuestRequest}>
-                            <span>Continue as a guest</span>
+                        <p>Already have an account?</p>
+                        <div onClick={handelFormLogin}>
+                            <span> Go to login</span>
                         </div>
                     </div>
-                </form>
-                <div className="closePopUp" onClick={hideArrowClick}>
-                    <IoClose />
+                    <form action="#">
+                        <div className="field">
+                            <input required="" type="text" className="input" placeholder='Full Name' />
+                            <span className="span">
+                                <PiUserListDuotone />
+                            </span>
+                        </div>
+                        <div className="field">
+                            <input required="" type="text" className="input" placeholder='Email or Phone' />
+                            <span className="span">
+                                <AiTwotoneMail />
+                            </span>
+                        </div>
+                        <div className="field">
+                            <input required="" type="password" className="input" placeholder='Password' />
+                            <span className="span">
+                                <AiTwotoneLock />
+                            </span>
+                        </div>
+                        <button className="button">Register</button>
+                        <div className="loginOptions">
+                            <p>--- Or ---</p>
+                            <button className="btn-singin">
+                                <FcGoogle />
+                            </button>
+                        </div>
+                        <div className="sign-up">
+                            <p>Prefer not to join?</p>
+                            <div onClick={HandleGuestRequest}>
+                                <span>Continue as a guest</span>
+                            </div>
+                        </div>
+                    </form>
+                    <div className="closePopUp" onClick={hideArrowClick}>
+                        <IoClose />
+                    </div>
                 </div>
-            </div>
             </ClickBoundary>
         </div>
     )

@@ -1,4 +1,7 @@
-/* From Uiverse.io by Harsha2lucky */
+.singinContainer>div:first-child {
+    width: 100%;
+}
+
 .singinContainer {
     position: fixed;
     top: 0;

@@ -6,9 +6,10 @@ import { FaShoppingCart } from "react-icons/fa";
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Cookies from '../CookiesPopUp/Cookies';
+import SignIn from '../Popup/SignIn';
 
 const Navbar = () => {
-    const { showPopup, handlePopUpVisibility, hidePopup, arrowClick, showCookiesPopUp, myCart } = useContext(AppContext);
+    const { showPopup, handlePopUpVisibility, hidePopup, arrowClick, showCookiesPopUp, myCart, signInPopUp } = useContext(AppContext);
     const [scrollHandler, setScrollHandler] = useState(false);
     useEffect(() => {
 
@@ -35,6 +36,7 @@ const Navbar = () => {
                     <svg className="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">  <line x1="18" y1="6" x2="6" y2="18" />  <line x1="6" y1="6" x2="18" y2="18" /></svg>
                 </div>}
             {arrowClick && <Popup />}
+            {signInPopUp && <SignIn />}
             {showCookiesPopUp && <Cookies />}
 
             <Link to='/cart'>

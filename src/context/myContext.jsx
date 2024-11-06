@@ -14,10 +14,10 @@ const AppProvider = ({ children }) => {
     const [showCookiesPopUp, setShowCookiesPopUp] = useState(false);
     const [showProductDesc, setShowProductDesc] = useState(false);
     const [productdata, setProductdata] = useState([]);
+    const [signInPopUp, setSigninPopUp] = useState(false)
     const [searchValue, setSearchValue] = useState("");
     const sidebarRef = useRef(null);
     const productDesRef = useRef(null);
-
 
 
     const hidePopup = () => {
@@ -52,7 +52,7 @@ const AppProvider = ({ children }) => {
 
 
     return (
-        <AppContext.Provider value={{ showPopup, arrowClick, hidePopup, handlePopUpVisibility, handleArrowClickVisibility, hideArrowClick, myCart, showCookiesPopUp, setShowCookiesPopUp, setredirectTo, redirectTo, showProductDesc, productdata, searchValue, adjustScroll, sidebarRef, productDesRef }}>
+        <AppContext.Provider value={{ showPopup, arrowClick, hidePopup, handlePopUpVisibility, handleArrowClickVisibility, hideArrowClick, myCart, showCookiesPopUp, setShowCookiesPopUp, setredirectTo, redirectTo, showProductDesc, productdata, searchValue, adjustScroll, sidebarRef, productDesRef, setSigninPopUp, signInPopUp }}>
             <AppDispatchContext.Provider value={{ setMyCart, setShowProductDesc, setProductdata, setSearchValue, setShowPopup, setArrowClick }}>
                 {children}
             </AppDispatchContext.Provider>
