@@ -14,12 +14,13 @@ const OrderCart = () => {
     const { setShowProductDesc, setMyCart } = useContext(AppDispatchContext);
     const [productDesData, setShowProductDescData] = useState({});
 
-    // useEffect(() => {
-    //     setMyCartItems([...myCart]);
-    //     console.log(myCart)
-    //     const newSubTotal = myCart.reduce((acc, item) => acc + (item.price * item.qty), 0);
-    //     setSubTotal(newSubTotal.toFixed(2));
-    // }, [myCart]);
+    useEffect(() => {
+        // setMyCartItems([...myCart]);
+        console.log(myCart)
+        const newSubTotal = myCart.reduce((acc, item) => acc + (parseInt(item.product.price) * item.quantity), 0);
+        console.log(newSubTotal)
+        setSubTotal(newSubTotal.toFixed(2));
+    }, [myCart]);
 
     // useEffect(() => {
     //     // debugger;
