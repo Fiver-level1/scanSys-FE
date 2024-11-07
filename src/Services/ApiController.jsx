@@ -14,17 +14,45 @@ const getHeaders = (type) => {
 
 export const getRequest = async (endpoint, cb, data = {}) => {
     const headers = getHeaders();
+    console.log(headers);
+
     await axios
-        .get(`${domain}${endpoint}/`, data, { headers })
+        .get(`${domain}${endpoint}`, {
+            headers,
+            params: data, // Use `params` to send query parameters with GET requests
+        })
         .then((res) => cb(null, res))
         .catch((err) => cb(err, null));
 };
+
 
 
 export const postRequest = async (endpoint, cb, data = {}) => {
     const headers = getHeaders();
     await axios
-        .get(`${domain}/api${endpoint}/`, data, { headers })
+        .post(`${domain}${endpoint}/`,  data, {headers })
         .then((res) => cb(null, res))
         .catch((err) => cb(err, null));
 };
+
+export const deleteRequest = async (endpoint, cb, data = {}) => {
+    const headers = getHeaders();
+    await axios
+        .delete(`${domain}${endpoint}/`, {
+            headers,
+            data // Include `data` as part of the config for DELETE requests
+        })
+        .then((res) => cb(null, res))
+        .catch((err) => cb(err, null));
+};
+
+export const putRequest = async (endpoint, cb, data = {}) => {
+    const headers = getHeaders();
+    await axios
+        .put(`${domain}${endpoint}/`, data, { headers }) // `data` is the body, and `headers` is the config
+        .then((res) => cb(null, res))
+        .catch((err) => cb(err, null));
+};
+
+
+

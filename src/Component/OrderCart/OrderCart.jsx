@@ -5,25 +5,42 @@ import { AppContext, AppDispatchContext } from '../../context/myContext';
 import ProductDescCard from '../ProductDescCard/ProductDescCard';
 import BackNavigate from '../BackNavgate/BackNavigate';
 import ClickBoundary from '../onBlur/ClickBoundary';
+import { getCartItems } from '../../Services/CartApis';
 
 const OrderCart = () => {
     const [subTotal, setSubTotal] = useState(0);
     const [myCartItems, setMyCartItems] = useState([]);
-    const { myCart, handleArrowClickVisibility, setredirectTo, redirectTo, showProductDesc, productDesRef } = useContext(AppContext);
-    const { setShowProductDesc } = useContext(AppDispatchContext);
+    const { myCart, handleArrowClickVisibility, setredirectTo, redirectTo, showProductDesc, productDesRef, deleteItem } = useContext(AppContext);
+    const { setShowProductDesc, setMyCart } = useContext(AppDispatchContext);
     const [productDesData, setShowProductDescData] = useState({});
 
-    useEffect(() => {
-        setMyCartItems([...myCart]);
-        console.log(myCart)
-        const newSubTotal = myCart.reduce((acc, item) => acc + (item.price * item.qty), 0);
-        setSubTotal(newSubTotal.toFixed(2));
-    }, [myCart]);
+    // useEffect(() => {
+    //     setMyCartItems([...myCart]);
+    //     console.log(myCart)
+    //     const newSubTotal = myCart.reduce((acc, item) => acc + (item.price * item.qty), 0);
+    //     setSubTotal(newSubTotal.toFixed(2));
+    // }, [myCart]);
+
+    // useEffect(() => {
+    //     // debugger;
+    //     getCartItems((error, response) => {
+    //         if (error) {
+    //             console.error("Error fetching products:", error);
+    //         } else {
+    //             // console.log(response.data.cart_items)
+    //             setMyCartItems(response.data.cart_items);
+    //             setMyCart(response.data.cart_items)
+    //             console.log("MY CART Products fetched successfully:", response.data);
+    //         }
+    //     });
+    // }, []);
 
     const handleShowProductDesc = (productId) => {
-        const productDescDataT = myCartItems.filter((val) => val.id === productId);
+        // console.log(myCartItems)
+        const productDescDataT = myCart.find((val) => { if (val.product.id === productId) return val.product });
+        // console.log(productDescDataT)
         setShowProductDesc(true);
-        setShowProductDescData(...productDescDataT);
+        setShowProductDescData(productDescDataT.product);
     };
 
 
@@ -39,7 +56,7 @@ const OrderCart = () => {
         <div className="cartContainer">
             <div className="cartWrapper">
                 <BackNavigate />
-                {(myCartItems && myCartItems.length > 0) ?
+                {(myCart && myCart.length > 0) ?
                     <>
                         <div className="headerPrimary">
                             <h1>Almost There – Your Feast Awaits!</h1>
@@ -47,10 +64,11 @@ const OrderCart = () => {
                         </div>
                         <div className="cartContentHolder">
                             <div className="ListOfOrders">
-                                {myCartItems.map((item, index) => {
+                                {myCart.map((item, index) => {
+                                    // console.log("item: ", item)
                                     return (
-                                        <div className="listProductWrapper" key={index} onClick={() => handleShowProductDesc(item.id)}>
-                                            <ListFoodCard Qty={item.qty} productData={item} />
+                                        <div className="listProductWrapper" key={index} onClick={() => handleShowProductDesc(item.product.id)}>
+                                            <ListFoodCard Qty={item.quantity} productData={item?.product} />
                                         </div>
                                     )
                                 })}
@@ -132,13 +150,13 @@ const OrderCart = () => {
             </div>
             <div className={!showProductDesc ? "PopUpCardsDescInactive" : "PopUpCardsDescActive"}>
                 {
-                    showProductDesc ? 
-                    <ClickBoundary ref={productDesRef} onOutsideClick={()=>setShowProductDesc(false)}>
-                    <ProductDescCard
-                        closeProductDesc={() => setShowProductDesc(false)}
-                        productDesData={productDesData}
-                        parent="orderCart"
-                    /> </ClickBoundary> : <></>
+                    showProductDesc ?
+                        <ClickBoundary ref={productDesRef} onOutsideClick={() => setShowProductDesc(false)}>
+                            <ProductDescCard
+                                closeProductDesc={() => setShowProductDesc(false)}
+                                productDesData={productDesData}
+                                parent="orderCart"
+                            /> </ClickBoundary> : <></>
                 }
             </div>
         </div>

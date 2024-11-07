@@ -5,23 +5,19 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 import { AppContext, AppDispatchContext } from "../../context/myContext";
 import { useCookies } from "react-cookie";
 import { MY_CART } from "../../Constants/cookieConst";
+import { BASE_URL } from "../../Services/Constant";
+import { deleteCartItem } from "../../Services/CartApis";
+import FoodContainer from "../FoodContainer/FoodContainer";
 
 const ListFoodCard = ({ Qty, productData }) => {
     // console.log("productData: ", productData);
 
 
     const [cookies, setCookies] = useCookies([MY_CART]);
-    const { myCart } = useContext(AppContext);
-    const { setMyCart } = useContext(AppDispatchContext);
+    const { myCart, deleteItem } = useContext(AppContext);
+    const { setMyCart, setDeleteItem } = useContext(AppDispatchContext);
 
-    const deleteItemInCart = () => {
-        // console.log("myCart: ", myCart);
-        let myCartUpdatedItems = myCart.filter((item) => item.title !== productData.title);
-        setCookies(MY_CART, myCartUpdatedItems, { path: '/', maxAge: 3600 });
-        setMyCart(myCartUpdatedItems);
-        // setDeleteItem(false);
-        // console.log(myCartUpdatedItems)
-    }
+
 
     return (
         <div className="wrapper">
@@ -29,17 +25,17 @@ const ListFoodCard = ({ Qty, productData }) => {
                 <div className="img-area">
                     <div className="inner-area">
                         <img
-                            src="https://images.unsplash.com/photo-1492288991661-058aa541ff43?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+                            src={`${BASE_URL}${productData?.image}`}
                             alt=""
                         />
                     </div>
                 </div>
             </div>
             <div className="secondArea">
-                <h2>{productData.title}</h2>
-                <p>{productData.description}</p>
+                <h2>{productData?.name}</h2>
+                <p>{productData?.description}</p>
                 <div className="priceTag">
-                    <h1><MdOutlineEuroSymbol /> {productData.price}</h1>
+                    <h1><MdOutlineEuroSymbol /> {productData?.price}</h1>
                     {
                         Qty ?
                             <>
@@ -55,7 +51,7 @@ const ListFoodCard = ({ Qty, productData }) => {
                 Qty ?
                     <div className="deleteItemIcon" onClick={(e) => {
                         e.stopPropagation();
-                        deleteItemInCart();
+                        deleteItemInCart(productData, setDeleteItem);
                     }}>
                         <RiDeleteBin6Line /> <span>Remove</span>
                     </div>
@@ -64,6 +60,19 @@ const ListFoodCard = ({ Qty, productData }) => {
             }
         </div>
     )
+}
+
+export const deleteItemInCart = (productData, setDeleteItem) => {
+    deleteCartItem((error, response)=>{
+        if(error){
+            console.log("error: ", error);
+        }
+        if(response){
+            // console.log("response: ", response)
+        }
+    }, productData)
+
+    setDeleteItem((prev)=>!prev);
 }
 
 export default ListFoodCard

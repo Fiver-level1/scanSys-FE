@@ -22,9 +22,9 @@ const ClickBoundary = forwardRef((props, ref )=> {
   }, [onInsideClick, onOutsideClick]);
 
   return (
-    <div>
+    <>
       {children}
-    </div>
+    </>
   );
 })
 

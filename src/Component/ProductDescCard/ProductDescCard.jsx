@@ -6,11 +6,14 @@ import { FaPlus } from "react-icons/fa6";
 import { AppContext, AppDispatchContext } from '../../context/myContext';
 import { useCookies } from 'react-cookie';
 import { expireTime, MY_CART } from '../../Constants/cookieConst';
+import { BASE_URL } from '../../Services/Constant';
+import { addCartItems, changeCartItemQuantity } from '../../Services/CartApis';
+import { deleteItemInCart } from '../FoodCardHome/ListFoodCard';
 
 const ProductDescCard = ({ closeProductDesc, productDesData, parent }) => {
 
-    const { setMyCart } = useContext(AppDispatchContext);
-    const { myCart, productDesRef } = useContext(AppContext);
+    const { setMyCart, setItemAdded, setDeleteItem } = useContext(AppDispatchContext);
+    const { myCart, productDesRef, itemAdded  } = useContext(AppContext);
     const [itemState, setItemState] = useState(0);
     const [cookie, setCookie, removeCookie] = useCookies([MY_CART]);
 
@@ -20,31 +23,58 @@ const ProductDescCard = ({ closeProductDesc, productDesData, parent }) => {
             setItemState(itemState - 1);
         }
     }
-    console.log(parent == "foodContainer");
+    // console.log(parent == "foodContainer");
 
     useEffect(() => {
-        const existingItem = myCart.find((item) => item === productDesData);
-        const itemCount = existingItem ? existingItem.qty : 1;
+        // console.log(myCart);
+        const existingItem = myCart.find((item) => item.product?.id === productDesData.id);
+        console.log(existingItem)
+        const itemCount = existingItem ? existingItem.quantity : 1;
         setItemState(itemCount);
     }, [])
 
     const handleAddToCart = () => {
-        let myCartItems = myCart;
-        const existingItem = myCartItems.find(item => item.id === productDesData.id);
+        let myCartItems = myCart; 
+        const existingItem = myCartItems.find(item => item.product?.id === productDesData?.id);
+        console.log(existingItem)
         if (itemState != 0) {
             productDesData.qty = itemState;
             if (existingItem) {
-                existingItem.qty = itemState;
+                changeCartItemQuantity((error, response)=>{
+                    if (error) {
+                        console.error("Error fetching products:", error);
+                      } else {
+                        // console.log("MY CART Products added successfully:", response.data);
+                      }
+                }, productDesData);
+                existingItem.quantity = itemState;
                 myCartItems = [...myCartItems];
             } else {
+                addCartItems((error, response)=>{
+                    if (error) {
+                        console.error("Error fetching products:", error);
+                      } else {
+                        // console.log("MY CART Products added successfully:", response.data);
+                      }
+                }, productDesData)
                 myCartItems.push(productDesData);
             }
         } else {
             if (existingItem) {
+                console.log(productDesData)
+                // changeCartItemQuantity((error, response)=>{
+                //     if (error) {
+                //         console.error("Error fetching products:", error);
+                //       } else {
+                //         // console.log("MY CART Products added successfully:", response.data);
+                //       }
+                // }, productDesData);
+                deleteItemInCart(productDesData, setDeleteItem)
                 myCartItems = myCartItems.filter((val, i) => val !== productDesData);
             }
         }
-
+       
+        setItemAdded((prev)=>!prev);
         setMyCart(myCartItems);
         setCookie("myCart", myCartItems, { path: '/', expires: expireTime });
         closeProductDesc(false)
@@ -69,7 +99,7 @@ const ProductDescCard = ({ closeProductDesc, productDesData, parent }) => {
                 <div className="img-area">
                     <div className="inner-area">
                         <img
-                            src="https://images.unsplash.com/photo-1492288991661-058aa541ff43?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+                            src={`${BASE_URL}${productDesData?.image}`}
                             alt=""
                         />
                     </div>
@@ -81,11 +111,12 @@ const ProductDescCard = ({ closeProductDesc, productDesData, parent }) => {
                     <RxCross2 />
                 </div>
                 <div className="DetailsWrapper">
-                    <div className="name">{productDesData.title}</div>
-                    <div className="about">{productDesData.description}</div>
+                    <div className="name">{productDesData?.title}</div>
+                    <div className="about">{productDesData?.description}</div>
                     <div className="social-icons">
                         {
-                            productDesData.ingredients.map((ingredient, index) => {
+                            // console.log(productDesData.ing)
+                            productDesData?.ingredients && productDesData.ingredients.split(",").map((ingredient, index) => {
                                 const { r, g, b } = getRandomMatteColor();
                                 const backgroundColor = `rgb(${r}, ${g}, ${b})`;
                                 const textColor = getContrastColor(r, g, b);
@@ -95,7 +126,7 @@ const ProductDescCard = ({ closeProductDesc, productDesData, parent }) => {
                                     }}>
                                         <p style={{
                                             color: textColor
-                                        }}>{ingredient.name}</p>
+                                        }}>{ingredient}</p>
                                     </a>
                                 )
                             })

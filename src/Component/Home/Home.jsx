@@ -4,8 +4,8 @@ import Banner from "../Banner/Banner";
 import FilterNav from '../Filter/FilterNav';
 import FoodContainer from '../FoodContainer/FoodContainer';
 
-const Home = () => {
-
+const Home = () => { 
+ 
     return (
         <div >
             <Banner />

@@ -1,27 +1,41 @@
 import React, { useContext, useEffect, useState } from 'react';
 import ListFoodCard from '../FoodCardHome/ListFoodCard';
-import { productList } from '../../content/productData';
 import ProductDescCard from '../ProductDescCard/ProductDescCard';
 import '../../index.css'
 import './foodContainer.css'
 import { AppContext, AppDispatchContext } from '../../context/myContext';
 import ClickBoundary from '../onBlur/ClickBoundary';
+import { getProducts } from '../../Services/ProductApis';
 
 const FoodContainer = () => {
     
     const { setShowProductDesc, setProductdata } = useContext(AppDispatchContext);
     const { showProductDesc, productdata, searchValue, productDesRef } = useContext(AppContext);
     const [productDesData, setShowProductDescData] = useState({});
+    const [productList, setProductList] = useState([])
 
     useEffect(() => {
-        groupedDataFunc();
+
+        getProducts((error, response) => {
+            if (error) {
+                console.error("Error fetching products:", error);
+            } else {
+                setProductList(response.data);
+                // console.log("Products fetched successfully:", response.data);
+            }
+        });
+          
     }, []);
     // console.log("productData: ",productdata);
+
+    useEffect(()=>{
+        groupedDataFunc();
+    }, [productList])
 
     function groupedDataFunc(productListFilter){
         const productListTemp = searchValue !== "" ? productListFilter: productList;
         const groupedData = productListTemp.reduce((acc, item) => {
-            const categoryName = item.category.name;
+            const categoryName = item.category;
             if (!acc[categoryName]) {
                 acc[categoryName] = { category: categoryName, data: [] };
             }
