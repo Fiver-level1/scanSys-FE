@@ -1,12 +1,13 @@
-import React, { createContext, useRef, useState, useEffect } from "react";
+import React, { createContext, useRef, useState, useEffect, useContext } from "react";
 import { useCookies } from "react-cookie";
 import { getCartItems } from "../Services/CartApis";
-
+import { AuthContext } from "./AuthContext";
 const AppContext = createContext("");
 const AppDispatchContext = createContext("");
 
 const AppProvider = ({ children }) => {
 
+    const { isLogin, setisLogin } = useContext(AuthContext);
     const [cookie, setCookie, removeCookie] = useCookies(["myCart"]);
     const [showPopup, setShowPopup] = useState(false);
     const [signinPopUp, setSigninPopUp] = useState(false);
@@ -21,6 +22,8 @@ const AppProvider = ({ children }) => {
     const [itemAdded, setItemAdded] = useState(false);
     const sidebarRef = useRef(null);
     const productDesRef = useRef(null);
+    console.log("is login -- ", isLogin);
+
 
 
 
@@ -54,17 +57,19 @@ const AppProvider = ({ children }) => {
 
     useEffect(() => {
         // debugger;
-        getCartItems((error, response) => {
-            if (error) {
-                console.error("Error fetching products:", error);
-            } else {
-                // console.log("response.data.cart_items",response.data.cart_items)
-                // setMy(response.data.cart_items);
-                setMyCart(response.data.cart_items)
-                console.log("MY CART Products fetched successfully:", response.data);
-            }
-        });
-    }, [deleteItem, itemAdded]);
+        if (localStorage.getItem("access_token")) {
+            getCartItems((error, response) => {
+                if (error) {
+                    console.error("Error fetching products:", error);
+                } else {
+                    // console.log("response.data.cart_items",response.data.cart_items)
+                    // setMy(response.data.cart_items);
+                    setMyCart(response.data.cart_items)
+                    console.log("MY CART Products fetched successfully:", response.data);
+                }
+            });
+        }
+    }, [deleteItem, itemAdded, isLogin]);
 
 
     // console.log("my cart: ", myCart);

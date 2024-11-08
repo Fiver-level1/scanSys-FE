@@ -1,5 +1,5 @@
 
-import React, { useContext, useEffect, useRef } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import "./Popup.css";
 import { AppContext, AppDispatchContext } from '../../context/myContext';
 import { IoClose } from "react-icons/io5";
@@ -9,9 +9,20 @@ import { AiTwotoneLock } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
 import { PiUserListDuotone } from "react-icons/pi";
 import ClickBoundary from '../onBlur/ClickBoundary';
+import { useGoogleLogin } from '@react-oauth/google';
+import { postRequestAuth } from '../../Services/AuthControllerWithoutToken';
+import { CLIENT_ID } from '../../Services/Constant';
+import { AuthContext } from '../../context/AuthContext';
 const Popup = () => {
     const { hideArrowClick, redirectTo, setredirectTo, setSigninPopUp } = useContext(AppContext);
     const { setArrowClick } = useContext(AppDispatchContext);
+    const { isLogin, setisLogin } = useContext(AuthContext);
+    const [googleAuthPaylod, setGoogleAuthPaylod] = useState({
+        "grant_type": "convert_token",
+        "client_id": CLIENT_ID,
+        "backend": "google-oauth2",
+        "token": ""
+    })
     const navigate = useNavigate();
     const loginRef = useRef(null);
 
@@ -25,6 +36,33 @@ const Popup = () => {
         setSigninPopUp(true);
         hideArrowClick();
     }
+    console.log("is login -- ", isLogin);
+
+    const handleGoogleLogin = useGoogleLogin({
+        onSuccess: (tokenResponse) => {
+            hideArrowClick();
+            console.log('Google Login Success:', tokenResponse);
+            const updatedPayload = {
+                ...googleAuthPaylod,
+                token: tokenResponse.access_token
+            };
+            setGoogleAuthPaylod(updatedPayload);
+            postRequestAuth("/auth/convert-token", (err, res) => {
+                if (err) {
+                    console.log("Error in Google Auth:", err);
+                } else {
+                    localStorage.setItem("access_token", res.data.access_token);
+                    setisLogin(true);
+                }
+            }, updatedPayload);
+        },
+        onError: (error) => {
+            hideArrowClick();
+            console.error('Google Login Error:', error);
+        }
+    });
+
+
 
     return (
         <div className="singinContainer">
@@ -59,7 +97,7 @@ const Popup = () => {
                         <button className="button">Register</button>
                         <div className="loginOptions">
                             <p>--- Or ---</p>
-                            <button className="btn-singin">
+                            <button className="btn-singin" onClick={(e) => { e.preventDefault(); handleGoogleLogin() }}>
                                 <FcGoogle />
                             </button>
                         </div>

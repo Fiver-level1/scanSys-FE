@@ -1,14 +1,15 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import "./sidebar.css"
 import { AppContext } from '../../context/myContext';
 import { navLang, navlist } from '../../content/navList';
 import { AiOutlineLogout } from "react-icons/ai";
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
-import { FaRegUserCircle } from "react-icons/fa";
+import { RiAccountPinCircleFill } from "react-icons/ri";
 const Sidebar = () => {
   const { showPopup, hidePopup, handleArrowClickVisibility, setShowCookiesPopUp, adjustScroll, sidebarRef } = useContext(AppContext);
   const { role, userName } = useContext(AuthContext);
+  const [validProfile, setValidProfie] = useState(false);
   const navigate = useNavigate();
 
   const handleSidebarList = (item) => {
@@ -45,36 +46,67 @@ const Sidebar = () => {
   }
   const handelLogout = () => {
     hidePopup();
+    localStorage.removeItem("access_token");
+    window.location.href = "/"
   }
-  console.log("sidebarRef: ", role);
+  useEffect(() => {
+    if (role && role != "") {
+      setValidProfie(true);
+    }
+  }, [role])
 
   return (
     <div className={`sidebar sidebar-min-width ${!showPopup ? "sidebar-unactive" : "sidebar-active"}`} ref={sidebarRef}>
       <ul className='sidebar-ul sidebar-min-width'>
-        {(role && role?.toLowerCase() !== "guest") ?
+        {validProfile ?
           <div className="userProfile">
-            <FaRegUserCircle />
+            <RiAccountPinCircleFill />
             <p>{userName}</p>
-          </div> : <></>
-        }
+          </div> :
+          <></>}
         {navlist.map((item, index) => {
-          return (
-            <li className='sidebar-li' key={index} onClick={() => handleSidebarList(item.tittle)}>
-              {item.tittle === "Profile" ? (
-                (!role || role.toLowerCase() === "guest") ? (
+          if (item.tittle.toLowerCase() === "profile") {
+            return (
+              !validProfile && (
+                <li
+                  className='sidebar-li'
+                  key={index}
+                  onClick={() => handleSidebarList(item.tittle)}
+                >
                   <div className="optName">
                     {item.icon} {item.tittle}
                   </div>
-                ) : null
-              ) : (
+                </li>
+              )
+            );
+          } else if (item.tittle.toLowerCase() === "orderhistory") {
+            return (
+              validProfile && (
+                <li
+                  className='sidebar-li'
+                  key={index}
+                  onClick={() => handleSidebarList(item.tittle)}
+                >
+                  <div className="optName">
+                    {item.icon} Order History
+                  </div>
+                </li>
+              )
+            );
+          } else {
+            return (
+              <li
+                className='sidebar-li'
+                key={index}
+                onClick={() => handleSidebarList(item.tittle)}
+              >
                 <div className="optName">
                   {item.icon} {item.tittle}
                 </div>
-              )}
-            </li>
-          );
+              </li>
+            );
+          }
         })}
-
       </ul>
       <div className="logOutBtn" onClick={handelLogout}>
         <AiOutlineLogout /> <span>logout</span>

@@ -35,9 +35,7 @@ const OrderCart = () => {
     // }, []);
 
     const handleShowProductDesc = (productId) => {
-        // console.log(myCartItems)
         const productDescDataT = myCart.find((val) => { if (val?.product?.id === productId) return val?.product });
-        // console.log(productDescDataT)
         setShowProductDesc(true);
         setShowProductDescData(productDescDataT.product);
     };
@@ -155,7 +153,8 @@ const OrderCart = () => {
                                 closeProductDesc={() => setShowProductDesc(false)}
                                 productDesData={productDesData}
                                 parent="orderCart"
-                            /> </ClickBoundary> : <></>
+                            />
+                        </ClickBoundary> : <></>
                 }
             </div>
         </div>

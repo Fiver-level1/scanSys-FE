@@ -23,16 +23,14 @@ function App() {
     <>
       <CookiesProvider>
         <Navbar />
-        <ClickBoundary ref={sidebarRef} onOutsideClick={()=>setShowPopup(false)}>
-          <Sidebar />
-        </ClickBoundary>
+        <Sidebar />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/cart" element={<OrderCart />} />
           <Route path="/orderNow" element={<OrderNow />} />
           <Route path="/help" element={<Help />} />
-          <Route path="/termsAndCondition" element={<TermsAndCondition content={termsAndConditions} heading="Terms and Conditions"/>} />
-          <Route path='/privacyPolicy' element={<TermsAndCondition content={privacyPolicy} heading="Privacy Policy"/>}/>
+          <Route path="/termsAndCondition" element={<TermsAndCondition content={termsAndConditions} heading="Terms and Conditions" />} />
+          <Route path='/privacyPolicy' element={<TermsAndCondition content={privacyPolicy} heading="Privacy Policy" />} />
         </Routes>
       </CookiesProvider>
     </>

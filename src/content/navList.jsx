@@ -6,6 +6,7 @@ import { CgLoadbarDoc } from "react-icons/cg";
 import { IoMdHeartEmpty } from "react-icons/io";
 import { HiHome } from "react-icons/hi2";
 import { MdOutlineRestaurantMenu } from "react-icons/md";
+import { TbPaperBag } from "react-icons/tb";
 export const navLang = [
     "NL",
     "FR",
@@ -17,16 +18,16 @@ export const navLang = [
 
 export const navlist = [
     {
+        "icon": <RiAccountCircleFill />,
+        "tittle": "Profile"
+    },
+    {
         "icon": <HiHome />,
         "tittle": "Home"
     },
     {
         "icon": <MdOutlineRestaurantMenu />,
         "tittle": "Menu"
-    },
-    {
-        "icon": <RiAccountCircleFill />,
-        "tittle": "Profile"
     },
     {
         "icon": <IoIosHelpCircleOutline />,
@@ -43,5 +44,9 @@ export const navlist = [
     {
         "icon": <CgLoadbarDoc />,
         "tittle": "Privacy Policy"
+    },
+    {
+        "icon": <TbPaperBag />,
+        "tittle": "orderHistory"
     }
 ]

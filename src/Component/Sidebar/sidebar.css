@@ -99,15 +99,24 @@
   align-items: center;
   justify-content: center;
   gap: 12px;
-  padding: 10px;
-  border-bottom: .0625rem solid #efefef !important;
+  transform: translateY(0.7rem);
+  background: #e6e4e4bd;
+  padding: 15px 0;
+  width: 90%;
+  margin: 0px auto;
+  border-radius: 4px;
 }
 
 .userProfile p {
-  font-size: 13px;
-  text-transform: lowercase;
+  font-size: 14px;
+  text-transform: capitalize;
   color: #424767;
 }
+
+.userProfile svg {
+  color: #424767;
+}
+
 
 @media only screen and (max-width:560px) {
   .sidebar-min-width {

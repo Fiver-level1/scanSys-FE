@@ -46,6 +46,14 @@ const SignIn = () => {
                 const accessToken = res?.data?.access_token;
                 if (accessToken) {
                     localStorage.setItem("access_token", accessToken);
+                    getRequest("/api/profile/", (err, res) => {
+                        if (err) {
+                            console.log("error ", err);
+                        } else {
+                            setRole(res.data.type);
+                            setUserName(res.data.first_name);
+                        }
+                    })
                 }
             }
         }, loginInput);
