@@ -95,7 +95,7 @@ const OrderCart = () => {
                                     </div>
                                 </div>
                                 <div
-                                    className={myCartItems.length ? "OrderNow activeOrderNow" : "OrderNow inActiveOrderNow"}
+                                    className={myCart.length ? "OrderNow activeOrderNow" : "OrderNow inActiveOrderNow"}
                                 >
                                     <button onClick={handelOrderNow}>Order Now</button>
                                 </div>
