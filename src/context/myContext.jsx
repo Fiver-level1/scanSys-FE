@@ -64,8 +64,6 @@ const AppProvider = ({ children }) => {
                 console.log("MY CART Products fetched successfully:", response.data);
             }
         });
-        console.log("element deleted: ", deleteItem);
-        console.log("element added: ", itemAdded)
     }, [deleteItem, itemAdded]);
 
 

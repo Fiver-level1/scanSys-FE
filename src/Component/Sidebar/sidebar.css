@@ -71,7 +71,8 @@
 }
 
 .optName svg,
-.logOutBtn svg {
+.logOutBtn svg,
+.userProfile svg {
   font-size: 22px;
 }
 
@@ -91,6 +92,21 @@
 .logOutBtn span {
   font-size: 13px;
   color: #ea755e;
+}
+
+.userProfile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 10px;
+  border-bottom: .0625rem solid #efefef !important;
+}
+
+.userProfile p {
+  font-size: 13px;
+  text-transform: lowercase;
+  color: #424767;
 }
 
 @media only screen and (max-width:560px) {

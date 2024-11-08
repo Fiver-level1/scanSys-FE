@@ -4,8 +4,11 @@ import { AppContext } from '../../context/myContext';
 import { navLang, navlist } from '../../content/navList';
 import { AiOutlineLogout } from "react-icons/ai";
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../context/AuthContext';
+import { FaRegUserCircle } from "react-icons/fa";
 const Sidebar = () => {
   const { showPopup, hidePopup, handleArrowClickVisibility, setShowCookiesPopUp, adjustScroll, sidebarRef } = useContext(AppContext);
+  const { role, userName } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleSidebarList = (item) => {
@@ -33,31 +36,43 @@ const Sidebar = () => {
     if (item === "Help") {
       navigate('/help')
     }
-    if( item === "Terms and conditions"){
+    if (item === "Terms and conditions") {
       navigate("/termsAndCondition");
     }
-    if( item === "Privacy Policy"){
+    if (item === "Privacy Policy") {
       navigate("/privacyPolicy")
     }
-}
+  }
   const handelLogout = () => {
     hidePopup();
   }
-  // console.log("sidebarRef: ", sidebarRef);
+  console.log("sidebarRef: ", role);
 
   return (
-    <div className={`sidebar sidebar-min-width ${!showPopup ? "sidebar-unactive" : "sidebar-active"}`} ref ={sidebarRef}>
+    <div className={`sidebar sidebar-min-width ${!showPopup ? "sidebar-unactive" : "sidebar-active"}`} ref={sidebarRef}>
       <ul className='sidebar-ul sidebar-min-width'>
+        {(role && role?.toLowerCase() !== "guest") ?
+          <div className="userProfile">
+            <FaRegUserCircle />
+            <p>{userName}</p>
+          </div> : <></>
+        }
         {navlist.map((item, index) => {
           return (
             <li className='sidebar-li' key={index} onClick={() => handleSidebarList(item.tittle)}>
-
-              <div className="optName">
-                {item.icon} {item.tittle}
-              </div>
-
+              {item.tittle === "Profile" ? (
+                (!role || role.toLowerCase() === "guest") ? (
+                  <div className="optName">
+                    {item.icon} {item.tittle}
+                  </div>
+                ) : null
+              ) : (
+                <div className="optName">
+                  {item.icon} {item.tittle}
+                </div>
+              )}
             </li>
-          )
+          );
         })}
 
       </ul>

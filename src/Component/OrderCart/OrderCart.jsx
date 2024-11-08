@@ -16,9 +16,7 @@ const OrderCart = () => {
 
     useEffect(() => {
         // setMyCartItems([...myCart]);
-        console.log(myCart)
         const newSubTotal = myCart.reduce((acc, item) => acc + (parseInt(item?.product?.price) * item?.quantity), 0);
-        console.log(newSubTotal)
         setSubTotal(newSubTotal.toFixed(2));
     }, [myCart]);
 

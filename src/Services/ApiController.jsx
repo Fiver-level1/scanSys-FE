@@ -12,14 +12,12 @@ const getHeaders = (type) => {
 };
 
 
-export const getRequest = async (endpoint, cb, data = {}) => {
+export const getRequest = async (endpoint, cb) => {
     const headers = getHeaders();
-    console.log(headers);
 
     await axios
         .get(`${domain}${endpoint}`, {
-            headers,
-            params: data, // Use `params` to send query parameters with GET requests
+            headers
         })
         .then((res) => cb(null, res))
         .catch((err) => cb(err, null));
@@ -30,7 +28,7 @@ export const getRequest = async (endpoint, cb, data = {}) => {
 export const postRequest = async (endpoint, cb, data = {}) => {
     const headers = getHeaders();
     await axios
-        .post(`${domain}${endpoint}/`,  data, {headers })
+        .post(`${domain}${endpoint}/`, data, { headers })
         .then((res) => cb(null, res))
         .catch((err) => cb(err, null));
 };
