@@ -23,9 +23,9 @@ function App() {
     <>
       <CookiesProvider>
         <Navbar />
-        <ClickBoundary ref={sidebarRef} onOutsideClick={()=>setShowPopup(false)}>
+        {/* <ClickBoundary ref={sidebarRef} onOutsideClick={()=>setShowPopup(false)}> */}
           <Sidebar />
-        </ClickBoundary>
+        {/* </ClickBoundary> */}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/cart" element={<OrderCart />} />
