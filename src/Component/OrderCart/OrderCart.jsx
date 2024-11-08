@@ -17,7 +17,7 @@ const OrderCart = () => {
     useEffect(() => {
         // setMyCartItems([...myCart]);
         console.log(myCart)
-        const newSubTotal = myCart.reduce((acc, item) => acc + (parseInt(item.product.price) * item.quantity), 0);
+        const newSubTotal = myCart.reduce((acc, item) => acc + (parseInt(item?.product?.price) * item?.quantity), 0);
         console.log(newSubTotal)
         setSubTotal(newSubTotal.toFixed(2));
     }, [myCart]);
@@ -38,7 +38,7 @@ const OrderCart = () => {
 
     const handleShowProductDesc = (productId) => {
         // console.log(myCartItems)
-        const productDescDataT = myCart.find((val) => { if (val.product.id === productId) return val.product });
+        const productDescDataT = myCart.find((val) => { if (val?.product?.id === productId) return val?.product });
         // console.log(productDescDataT)
         setShowProductDesc(true);
         setShowProductDescData(productDescDataT.product);
@@ -46,7 +46,7 @@ const OrderCart = () => {
 
 
     const handelOrderNow = () => {
-        if (!myCartItems.length) {
+        if (!myCart.length) {
             return;
         }
         handleArrowClickVisibility();
@@ -57,7 +57,7 @@ const OrderCart = () => {
         <div className="cartContainer">
             <div className="cartWrapper">
                 <BackNavigate />
-                {(myCart && myCart.length > 0) ?
+                {(myCart && myCart?.length > 0) ?
                     <>
                         <div className="headerPrimary">
                             <h1>Almost There – Your Feast Awaits!</h1>
@@ -65,11 +65,11 @@ const OrderCart = () => {
                         </div>
                         <div className="cartContentHolder">
                             <div className="ListOfOrders">
-                                {myCart.map((item, index) => {
+                                {myCart?.map((item, index) => {
                                     // console.log("item: ", item)
                                     return (
-                                        <div className="listProductWrapper" key={index} onClick={() => handleShowProductDesc(item.product.id)}>
-                                            <ListFoodCard Qty={item.quantity} productData={item?.product} />
+                                        <div className="listProductWrapper" key={index} onClick={() => handleShowProductDesc(item?.product?.id)}>
+                                            <ListFoodCard Qty={item?.quantity} productData={item?.product} />
                                         </div>
                                     )
                                 })}
@@ -95,7 +95,7 @@ const OrderCart = () => {
                                     </div>
                                 </div>
                                 <div
-                                    className={myCart.length ? "OrderNow activeOrderNow" : "OrderNow inActiveOrderNow"}
+                                    className={myCart?.length ? "OrderNow activeOrderNow" : "OrderNow inActiveOrderNow"}
                                 >
                                     <button onClick={handelOrderNow}>Order Now</button>
                                 </div>
