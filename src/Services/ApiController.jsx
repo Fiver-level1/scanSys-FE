@@ -28,7 +28,7 @@ export const getRequest = async (endpoint, cb) => {
 export const postRequest = async (endpoint, cb, data = {}) => {
     const headers = getHeaders();
     await axios
-        .post(`${domain}${endpoint}/`, data, { headers })
+        .post(`${domain}${endpoint}`, data, { headers })
         .then((res) => cb(null, res))
         .catch((err) => cb(err, null));
 };
@@ -36,7 +36,7 @@ export const postRequest = async (endpoint, cb, data = {}) => {
 export const deleteRequest = async (endpoint, cb, data = {}) => {
     const headers = getHeaders();
     await axios
-        .delete(`${domain}${endpoint}/`, {
+        .delete(`${domain}${endpoint}`, {
             headers,
             data // Include `data` as part of the config for DELETE requests
         })
@@ -47,7 +47,7 @@ export const deleteRequest = async (endpoint, cb, data = {}) => {
 export const putRequest = async (endpoint, cb, data = {}) => {
     const headers = getHeaders();
     await axios
-        .put(`${domain}${endpoint}/`, data, { headers }) // `data` is the body, and `headers` is the config
+        .put(`${domain}${endpoint}`, data, { headers }) // `data` is the body, and `headers` is the config
         .then((res) => cb(null, res))
         .catch((err) => cb(err, null));
 };

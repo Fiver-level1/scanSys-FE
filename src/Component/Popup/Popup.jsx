@@ -54,7 +54,7 @@ const Popup = () => {
                 token: tokenResponse.access_token
             };
             setGoogleAuthPaylod(updatedPayload);
-            postRequestAuth("/auth/convert-token", (err, res) => {
+            postRequestAuth("/auth/convert-token/", (err, res) => {
                 if (err) {
                     console.log("Error in Google Auth:", err);
                 } else {
@@ -85,7 +85,7 @@ const Popup = () => {
     }
     const handelFormRegister = (e) => {
         e.preventDefault();
-        postRequestAuth("/api/register", (err, res) => {
+        postRequestAuth("/api/register/", (err, res) => {
             if (err) {
                 hideArrowClick();
                 console.log("error in register : ", err);

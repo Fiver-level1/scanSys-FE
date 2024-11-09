@@ -6,17 +6,21 @@ import ProductDescCard from '../ProductDescCard/ProductDescCard';
 import BackNavigate from '../BackNavgate/BackNavigate';
 import ClickBoundary from '../onBlur/ClickBoundary';
 import { getCartItems } from '../../Services/CartApis';
+import { AuthContext } from '../../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
+import { IoArrowBack } from "react-icons/io5";
 
 const OrderCart = () => {
     const [subTotal, setSubTotal] = useState(0);
     const [myCartItems, setMyCartItems] = useState([]);
     const { myCart, handleArrowClickVisibility, setredirectTo, redirectTo, showProductDesc, productDesRef, deleteItem } = useContext(AppContext);
     const { setShowProductDesc, setMyCart } = useContext(AppDispatchContext);
+    const { isLogin } = useContext(AuthContext);
     const [productDesData, setShowProductDescData] = useState({});
+    const navigate = useNavigate();
 
     useEffect(() => {
         // setMyCartItems([...myCart]);
-        console.log(myCart)
         const newSubTotal = myCart.reduce((acc, item) => acc + (parseInt(item?.product?.price) * item?.quantity), 0);
         setSubTotal(newSubTotal.toFixed(2));
     }, [myCart]);
@@ -46,6 +50,10 @@ const OrderCart = () => {
         if (!myCart.length) {
             return;
         }
+        if (isLogin) {
+            navigate("/orderNow");
+            return;
+        }
         handleArrowClickVisibility();
         setredirectTo('/orderNow')
     }
@@ -53,7 +61,9 @@ const OrderCart = () => {
     return (
         <div className="cartContainer">
             <div className="cartWrapper">
-                <BackNavigate />
+                <div className="BackIcon" onClick={() => navigate('/')} style={{ cursor: 'pointer', margin: '10px 0px' }}>
+                    <IoArrowBack />
+                </div>
                 {(myCart && myCart?.length > 0) ?
                     <>
                         <div className="headerPrimary">
@@ -74,18 +84,18 @@ const OrderCart = () => {
                             <div className="OrderSummary">
                                 <div className="summaryDesc">
                                     <h1>Cart Summary</h1>
-                                    <div className="summaryLine">
+                                    {/* <div className="summaryLine">
                                         <span>Subtotal:</span>
                                         <span>€ {subTotal}</span>
-                                    </div>
-                                    <div className="summaryLine">
+                                    </div> */}
+                                    {/* <div className="summaryLine">
                                         <span>Tax:</span>
                                         <span>€ 0.0</span>
                                     </div>
                                     <div className="summaryLine">
                                         <span>Discount:</span>
                                         <span style={{ color: "green" }}>- € 0.0</span>
-                                    </div>
+                                    </div> */}
                                     <div className="summaryLine total">
                                         <span>Total:</span>
                                         <span>€ {subTotal}</span>
