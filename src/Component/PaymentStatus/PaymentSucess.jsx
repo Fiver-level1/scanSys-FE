@@ -3,7 +3,7 @@ import { PiSealCheckFill } from "react-icons/pi";
 import { useLocation } from 'react-router-dom';  // Import useLocation
 import './paymentStatus.css'
 import { postRequest } from '../../Services/ApiController';
-
+import { Link } from 'react-router-dom';
 const PaymentSucess = () => {
     const location = useLocation();
     const { sessionId } = location.state || {};
@@ -24,9 +24,11 @@ const PaymentSucess = () => {
                     <h1>Payment Successful!</h1>
                     <p>Receipt has been sent to your email. Your order is being prepared. Visit Order History for updates on your meal status.</p>
                 </div>
-                <div className="redirectBtn">
-                    <button>View Order History</button>
-                </div>
+                <Link to="/orderHistory">
+                    <div className="redirectBtn">
+                        <button>View Order History</button>
+                    </div>
+                </Link>
             </div>
         </div>
     )

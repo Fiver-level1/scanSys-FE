@@ -1,9 +1,14 @@
-
-.order-history-card{
-    display: grid;
-    row-gap: 3px;
-    /* margin: 10px; */
+.lisProductWrapper p {
+    font-size: 14px;
+    font-family: Roboto;
 }
+
+.order-history-card {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
 
 
 /* Payment:
@@ -19,60 +24,84 @@ ACCEPTED = 'Accepted' --> green
     READY = 'Ready' --> red
     WAITING = 'waiting' --> yellow
 */
+.orderDate {
+    opacity: 0.5;
+    font-weight: 500;
+}
 
-.order-history-wrapper{
+.order-history-wrapper {
     display: block;
     row-gap: 20px;
     margin-bottom: 40px;
 }
 
-.status > p{
-    display: inline;
-    padding: 3px;
-    color: white;
-    border-radius: 6px;
-}
 
-
-.allStatus{
+.allStatus {
     display: flex;
     justify-content: space-between;
 }
 
-.status{
-    gap: 40px;
+.status {
+    gap: 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    font-family: Roboto;
+    font-size: 13px;
+    color: #424766;
 }
 
-.border-order-card{
+.status p {
+    font-size: 13px;
+    font-family: "Nunito Sans", sans-serif !important;
+    text-transform: lowercase;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.border-order-card {
     border-bottom: .0625rem solid #e5e5e5 !important;
-    margin: 5px 0 ;
+    margin: 5px 0;
 }
 
-.pending, .waiting{
-    background-color: #d1c01b;
+.pending,
+.waiting {
+    color: #c3a51d !important;
 }
 
-.completed, .accepted{
-    background-color: #38a506;
+.completed,
+.accepted {
+    color: #38a506 !important;
 }
 
-.failure, .ready{
-    background-color: #d1401b;
+.failure,
+.ready {
+    color: #d1401b !important;
 }
 
-.cooking{
-    background-color: #dc7e1e;
+.cooking {
+    color: #dc7e1e !important;
 }
+
+.foodCardHolder h5 {
+    opacity: 0.5;
+}
+
 
 @media only screen and (max-width:680px) {
-    .order-history-wrapper{
+
+    .OrderNumber,
+    .orderDate {
+        font-size: 12px;
+    }
+
+    .order-history-wrapper {
         padding: 30px !important;
     }
 
-    .allStatus{
+    .allStatus {
         flex-direction: column;
         gap: 8px
     }
