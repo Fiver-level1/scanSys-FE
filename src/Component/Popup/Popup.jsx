@@ -11,17 +11,25 @@ import { PiUserListDuotone } from "react-icons/pi";
 import ClickBoundary from '../onBlur/ClickBoundary';
 import { useGoogleLogin } from '@react-oauth/google';
 import { postRequestAuth } from '../../Services/AuthControllerWithoutToken';
-import { CLIENT_ID } from '../../Services/Constant';
+import { CLIENT_ID, CLIENT_SECRET } from '../../Services/Constant';
 import { AuthContext } from '../../context/AuthContext';
+import { getRequest } from '../../Services/ApiController';
+import { getProfileFromPayload } from '../../Utils/Utils';
 const Popup = () => {
     const { hideArrowClick, redirectTo, setredirectTo, setSigninPopUp } = useContext(AppContext);
     const { setArrowClick } = useContext(AppDispatchContext);
-    const { isLogin, setisLogin } = useContext(AuthContext);
+    const { isLogin, setisLogin, setUserName, setRole } = useContext(AuthContext);
     const [googleAuthPaylod, setGoogleAuthPaylod] = useState({
         "grant_type": "convert_token",
         "client_id": CLIENT_ID,
         "backend": "google-oauth2",
         "token": ""
+    })
+    const [formRegister, setFormRegister] = useState({
+        "email": "",
+        "username": "",
+        "first_name": "",
+        "password": ""
     })
     const navigate = useNavigate();
     const loginRef = useRef(null);
@@ -36,7 +44,6 @@ const Popup = () => {
         setSigninPopUp(true);
         hideArrowClick();
     }
-    console.log("is login -- ", isLogin);
 
     const handleGoogleLogin = useGoogleLogin({
         onSuccess: (tokenResponse) => {
@@ -62,6 +69,39 @@ const Popup = () => {
         }
     });
 
+    const extractUsername = (email) => {
+        return email.includes('@') ? email.split('@')[0] : email;
+    };
+    const handleInputRegisterChange = (e) => {
+        const { name, value } = e.target;
+        setFormRegister(prevState => ({
+            ...prevState,
+            [name]: value,
+            ...(name === "email" && { username: extractUsername(value) })
+        }));
+    };
+    const callBackFunction = () => {
+        hideArrowClick();
+    }
+    const handelFormRegister = (e) => {
+        e.preventDefault();
+        postRequestAuth("/api/register", (err, res) => {
+            if (err) {
+                hideArrowClick();
+                console.log("error in register : ", err);
+            } else {
+                const loginInputPayload = {
+                    "client_secret": CLIENT_SECRET,
+                    "client_id": CLIENT_ID,
+                    "username": formRegister.email,
+                    "password": formRegister.password,
+                    "grant_type": "password"
+                }
+                getProfileFromPayload(loginInputPayload, callBackFunction, { setisLogin, setUserName, setRole })
+            }
+        }, formRegister)
+    }
+
 
 
     return (
@@ -77,24 +117,27 @@ const Popup = () => {
                     </div>
                     <form action="#">
                         <div className="field">
-                            <input required="" type="text" className="input" placeholder='Full Name' />
+                            <input required="" type="text" className="input" placeholder='Full Name' name='first_name' value={formRegister.first_name}
+                                onChange={handleInputRegisterChange} />
                             <span className="span">
                                 <PiUserListDuotone />
                             </span>
                         </div>
                         <div className="field">
-                            <input required="" type="text" className="input" placeholder='Email or Phone' />
+                            <input required="" type="text" className="input" name='email' placeholder='Email' value={formRegister.email}
+                                onChange={handleInputRegisterChange} />
                             <span className="span">
                                 <AiTwotoneMail />
                             </span>
                         </div>
                         <div className="field">
-                            <input required="" type="password" className="input" placeholder='Password' />
+                            <input required="" type="password" className="input" name='password' placeholder='Password' value={formRegister.password}
+                                onChange={handleInputRegisterChange} />
                             <span className="span">
                                 <AiTwotoneLock />
                             </span>
                         </div>
-                        <button className="button">Register</button>
+                        <button className="button" onClick={handelFormRegister}>Register</button>
                         <div className="loginOptions">
                             <p>--- Or ---</p>
                             <button className="btn-singin" onClick={(e) => { e.preventDefault(); handleGoogleLogin() }}>

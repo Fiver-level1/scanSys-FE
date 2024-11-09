@@ -5,7 +5,7 @@ import { navLang, navlist } from '../../content/navList';
 import { AiOutlineLogout } from "react-icons/ai";
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
-import { RiAccountPinCircleFill } from "react-icons/ri";
+import { FaRegUser } from "react-icons/fa";
 const Sidebar = () => {
   const { showPopup, hidePopup, handleArrowClickVisibility, setShowCookiesPopUp, adjustScroll, sidebarRef } = useContext(AppContext);
   const { role, userName } = useContext(AuthContext);
@@ -63,7 +63,7 @@ const Sidebar = () => {
       <ul className='sidebar-ul sidebar-min-width'>
         {validProfile ?
           <div className="userProfile">
-            <RiAccountPinCircleFill />
+            <FaRegUser />
             <p>{userName}</p>
           </div> :
           <></>}

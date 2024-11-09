@@ -10,11 +10,12 @@ import ClickBoundary from '../onBlur/ClickBoundary';
 import { CLIENT_ID, CLIENT_SECRET } from '../../Services/Constant';
 import { postRequestAuth } from '../../Services/AuthControllerWithoutToken';
 import { getRequest } from '../../Services/ApiController';
+import { getProfileFromPayload } from '../../Utils/Utils';
 import { AuthContext } from '../../context/AuthContext';
 
 const SignIn = () => {
     const { hideArrowClick, setSigninPopUp } = useContext(AppContext);
-    const { setUserName, setRole } = useContext(AuthContext);
+    const { setisLogin, setUserName, setRole } = useContext(AuthContext);
     const { setArrowClick } = useContext(AppDispatchContext);
 
     const [loginInput, setLoginInput] = useState({
@@ -36,27 +37,12 @@ const SignIn = () => {
             [name]: value,
         }));
     };
+    const callBackFunction = () => {
+        setSigninPopUp(false);
+    }
     const handleFormLogin = (e) => {
         e.preventDefault();
-        postRequestAuth("auth/token", (err, res) => {
-            setSigninPopUp(false);
-            if (err) {
-                console.error("Error in authentication:", err);
-            } else {
-                const accessToken = res?.data?.access_token;
-                if (accessToken) {
-                    localStorage.setItem("access_token", accessToken);
-                    getRequest("/api/profile/", (err, res) => {
-                        if (err) {
-                            console.log("error ", err);
-                        } else {
-                            setRole(res.data.type);
-                            setUserName(res.data.first_name);
-                        }
-                    })
-                }
-            }
-        }, loginInput);
+        getProfileFromPayload(loginInput, callBackFunction, { setisLogin, setUserName, setRole });
     };
 
     return (

@@ -22,8 +22,6 @@ const AppProvider = ({ children }) => {
     const [itemAdded, setItemAdded] = useState(false);
     const sidebarRef = useRef(null);
     const productDesRef = useRef(null);
-    console.log("is login -- ", isLogin);
-
 
 
 
@@ -65,7 +63,6 @@ const AppProvider = ({ children }) => {
                     // console.log("response.data.cart_items",response.data.cart_items)
                     // setMy(response.data.cart_items);
                     setMyCart(response.data.cart_items)
-                    console.log("MY CART Products fetched successfully:", response.data);
                 }
             });
         }
