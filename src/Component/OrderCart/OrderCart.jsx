@@ -79,15 +79,15 @@ const OrderCart = () => {
                                     </div>
                                     <div className="summaryLine">
                                         <span>Tax:</span>
-                                        <span>€ 2.0</span>
+                                        <span>€ 0.0</span>
                                     </div>
                                     <div className="summaryLine">
                                         <span>Discount:</span>
-                                        <span style={{ color: "green" }}>- € 1.0</span>
+                                        <span style={{ color: "green" }}>- € 0.0</span>
                                     </div>
                                     <div className="summaryLine total">
                                         <span>Total:</span>
-                                        <span>€ 11.0</span>
+                                        <span>€ {subTotal}</span>
                                     </div>
                                 </div>
                                 <div

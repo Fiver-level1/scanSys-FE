@@ -13,7 +13,7 @@ import { deleteItemInCart } from '../FoodCardHome/ListFoodCard';
 const ProductDescCard = ({ closeProductDesc, productDesData, parent }) => {
 
     const { setMyCart, setItemAdded, setDeleteItem } = useContext(AppDispatchContext);
-    const { myCart, productDesRef, itemAdded  } = useContext(AppContext);
+    const { myCart, productDesRef, itemAdded } = useContext(AppContext);
     const [itemState, setItemState] = useState(0);
     const [cookie, setCookie, removeCookie] = useCookies([MY_CART]);
 
@@ -34,28 +34,28 @@ const ProductDescCard = ({ closeProductDesc, productDesData, parent }) => {
     }, [])
 
     const handleAddToCart = () => {
-        let myCartItems = myCart; 
+        let myCartItems = myCart;
         const existingItem = myCartItems.find(item => item.product?.id === productDesData?.id);
         console.log(existingItem)
         if (itemState != 0) {
             productDesData.qty = itemState;
             if (existingItem) {
-                changeCartItemQuantity((error, response)=>{
+                changeCartItemQuantity((error, response) => {
                     if (error) {
                         console.error("Error fetching products:", error);
-                      } else {
+                    } else {
                         // console.log("MY CART Products added successfully:", response.data);
-                      }
+                    }
                 }, productDesData);
                 existingItem.quantity = itemState;
                 myCartItems = [...myCartItems];
             } else {
-                addCartItems((error, response)=>{
+                addCartItems((error, response) => {
                     if (error) {
                         console.error("Error fetching products:", error);
-                      } else {
+                    } else {
                         // console.log("MY CART Products added successfully:", response.data);
-                      }
+                    }
                 }, productDesData)
                 myCartItems.push(productDesData);
             }
@@ -73,8 +73,8 @@ const ProductDescCard = ({ closeProductDesc, productDesData, parent }) => {
                 myCartItems = myCartItems.filter((val, i) => val !== productDesData);
             }
         }
-       
-        setItemAdded((prev)=>!prev);
+
+        setItemAdded((prev) => !prev);
         setMyCart(myCartItems);
         setCookie("myCart", myCartItems, { path: '/', expires: expireTime });
         closeProductDesc(false)
@@ -139,7 +139,7 @@ const ProductDescCard = ({ closeProductDesc, productDesData, parent }) => {
                             <span>{itemState}</span>
                             <button onClick={handleDecrementItem} disabled={parent == "foodContainer" && itemState == 0}><BsDash strokeWidth={1} /></button>
                         </div>
-                        <button onClick={handleAddToCart} disabled={parent == "foodContainer" && itemState == 0}>Add</button>
+                        <button onClick={handleAddToCart}>Add</button>
                     </div>
                 </div>
             </div>
