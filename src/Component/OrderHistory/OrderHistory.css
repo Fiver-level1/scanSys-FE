@@ -1,0 +1,79 @@
+
+.order-history-card{
+    display: grid;
+    row-gap: 3px;
+    /* margin: 10px; */
+}
+
+
+/* Payment:
+
+COMPLETED, --> green
+FAILED, --> red
+Pending  --> yellow
+
+Order: 
+
+ACCEPTED = 'Accepted' --> green
+    COOKING = 'Cooking' --> orange
+    READY = 'Ready' --> red
+    WAITING = 'waiting' --> yellow
+*/
+
+.order-history-wrapper{
+    display: block;
+    row-gap: 20px;
+    margin-bottom: 40px;
+}
+
+.status > p{
+    display: inline;
+    padding: 3px;
+    color: white;
+    border-radius: 6px;
+}
+
+
+.allStatus{
+    display: flex;
+    justify-content: space-between;
+}
+
+.status{
+    gap: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.border-order-card{
+    border-bottom: .0625rem solid #e5e5e5 !important;
+    margin: 5px 0 ;
+}
+
+.pending, .waiting{
+    background-color: #d1c01b;
+}
+
+.completed, .accepted{
+    background-color: #38a506;
+}
+
+.failure, .ready{
+    background-color: #d1401b;
+}
+
+.cooking{
+    background-color: #dc7e1e;
+}
+
+@media only screen and (max-width:680px) {
+    .order-history-wrapper{
+        padding: 30px !important;
+    }
+
+    .allStatus{
+        flex-direction: column;
+        gap: 8px
+    }
+}
