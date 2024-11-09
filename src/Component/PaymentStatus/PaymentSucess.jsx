@@ -8,13 +8,16 @@ const PaymentSucess = () => {
     const location = useLocation();
     const { sessionId } = location.state || {};
     useEffect(() => {
-        postRequest(`/stripe/update-payment-status/${sessionId}/`, (err, res) => {
+        const payload = {
+            "checkout_ids": [sessionId]
+        }
+        postRequest(`/stripe/update-payment-status`, (err, res) => {
             if (err) {
                 console.log("error in payment verication ", err);
             } else {
                 console.log("or bhai ab tho ho gyi payment", res);
             }
-        });
+        }, payload);
     }, [sessionId]);
     return (
         <div className='paymentStatusContainer'>

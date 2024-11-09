@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import "../FoodCardHome/listFoodCard.css"
 import "./OrderHistory.css";
 import { getRequestAuth } from '../../Services/AuthControllerWithoutToken';
-import { getRequest } from '../../Services/ApiController';
+import { getRequest, postRequest } from '../../Services/ApiController';
 import { AuthContext } from '../../context/AuthContext';
 import BackNavigate from '../BackNavgate/BackNavigate';
 import { PiCookingPotDuotone } from "react-icons/pi";
@@ -14,15 +14,38 @@ const OrderHistory = () => {
 
     useEffect(() => {
         // if(!isLogin){
+
         getRequest("/api/orders/", (error, response) => {
             if (error) {
 
             } else {
-                setOrderData(response.data)
+                const data = response.data;
+                const sortedData = data.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+                setOrderData(sortedData)
             }
         })
         // }
     }, [])
+    useEffect(() => {
+        if (orderData) {
+            const payloadData = orderData.map((val) => {
+                if (val.payment_status.toLowerCase() !== "completed") {
+                    return val.stripe_checkout_id;
+                }
+            })
+            const PaymentStatusPayload = {
+                "checkout_ids": [payloadData]
+            }
+            postRequest("/stripe/update-payment-status", (err, res) => {
+                if (err) {
+                    console.log("error in getting payment status updated", err);
+                } else {
+                    console.log("Latest Payment get Updated here");
+                }
+            }, PaymentStatusPayload)
+        }
+
+    }, [orderData])
 
     return (
         <div className="cartContainer">
@@ -34,12 +57,12 @@ const OrderHistory = () => {
                 </div>
                 <div className='foodCardHolder'>
 
-                    <div className="foodCardWrapper">
+                    <div className="">
                         <div className="lisProductWrapperOrderHistory">
                             {orderData.length > 0 && orderData.map((order, index) => {
                                 return (<div className="wrapper order-history-wrapper">
                                     <div className='order-history-card' key={index}>
-                                        <p className='orderDate'>{new Date(order?.created_at).toDateString()}</p>
+                                        <p className='orderDate'>{new Date(order?.created_at).toDateString()} <span>{new Date(order?.created_at).toLocaleTimeString()}</span></p>
 
                                         <p className='OrderNumber'>Order Number : #{order?.id}</p>
                                         <div className='allStatus'>
@@ -48,7 +71,7 @@ const OrderHistory = () => {
                                                 <p
                                                     // className={`${orderStatus}`}
                                                     className={`${order.order_status.toLowerCase()}`}
-                                                ><PiCookingPotDuotone />{order?.order_status.toLowerCase()}</p>
+                                                ><PiCookingPotDuotone />{order?.order_status.toLowerCase() === "accepted" ? "Confirmed " : order?.order_status.toLowerCase()}</p>
                                             </div>
                                             <div className={'status'}>
                                                 Payment Status :

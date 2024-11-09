@@ -1,20 +1,24 @@
 import React, { useContext, useState, useEffect } from 'react'
 import './orderNow.css'
 import { IoIosCard } from "react-icons/io";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FaApple } from "react-icons/fa";
 import { IoLogoGoogle } from "react-icons/io";
 import BackNavigate from '../BackNavgate/BackNavigate';
 import { AppContext } from '../../context/myContext';
 import { postRequest } from '../../Services/ApiController';
+import { AuthContext } from '../../context/AuthContext';
 const OrderNow = () => {
     const { myCart } = useContext(AppContext);
+    const { role } = useContext(AuthContext);
     const [subTotal, setSubTotal] = useState(0);
     const [selectedTable, setSelectedTable] = useState(1);
-    const [checkoutPyalod, setCheckoutPayload] = useState({
+    const [checkoutPaylod, setCheckoutPayload] = useState({
         "seat_number": selectedTable.toString(),
-        "items": []
+        "items": [],
+        "comment": ""
     })
+    const navigate = useNavigate();
 
     const handleSelectChange = (event) => {
         const newSeatNumber = event.target.value;
@@ -24,6 +28,12 @@ const OrderNow = () => {
             ...prevPayload,
             seat_number: newSeatNumber.toString()
         }));
+    };
+    const handleCommentsChange = (event) => {
+        setCheckoutPayload({
+            ...checkoutPaylod,
+            comment: event.target.value
+        });
     };
 
     useEffect(() => {
@@ -49,9 +59,13 @@ const OrderNow = () => {
             if (err) {
                 console.log("error in checkout : ", err);
             } else {
-                window.location.href = res.data.url;
+                if (role.toLowerCase() === "waiter") {
+                    navigate("/orderHistory")
+                } else {
+                    window.location.href = res.data.url;
+                }
             }
-        }, checkoutPyalod)
+        }, checkoutPaylod)
     }
     return (
         <div className='OrderNowContainer'>
@@ -105,7 +119,8 @@ const OrderNow = () => {
                                     className="form-textarea"
                                     id="comments"
                                     placeholder="Comments"
-                                    defaultValue={""}
+                                    value={checkoutPaylod.comment}
+                                    onChange={handleCommentsChange}
                                 />
                             </div>
                         </div>

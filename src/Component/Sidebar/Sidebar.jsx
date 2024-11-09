@@ -8,7 +8,7 @@ import { AuthContext } from '../../context/AuthContext';
 import { FaRegUser } from "react-icons/fa";
 const Sidebar = () => {
   const { showPopup, hidePopup, handleArrowClickVisibility, setShowCookiesPopUp, adjustScroll, sidebarRef } = useContext(AppContext);
-  const { role, userName } = useContext(AuthContext);
+  const { role, userName, isLogin } = useContext(AuthContext);
   const [validProfile, setValidProfie] = useState(false);
   const navigate = useNavigate();
 
@@ -43,7 +43,7 @@ const Sidebar = () => {
     if (item === "Privacy Policy") {
       navigate("/privacyPolicy")
     }
-    if(item == "orderHistory"){
+    if (item == "orderHistory") {
       navigate("/orderHistory");
     }
   }
@@ -111,9 +111,12 @@ const Sidebar = () => {
           }
         })}
       </ul>
-      <div className="logOutBtn" onClick={handelLogout}>
-        <AiOutlineLogout /> <span>logout</span>
-      </div>
+      {
+        isLogin && <div className="logOutBtn" onClick={handelLogout}>
+          <AiOutlineLogout /> <span>logout</span>
+        </div>
+      }
+
     </div>
   )
 }

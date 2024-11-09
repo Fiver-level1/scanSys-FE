@@ -6,7 +6,7 @@
 .order-history-card {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 7px;
 }
 
 
@@ -71,24 +71,47 @@ ACCEPTED = 'Accepted' --> green
     color: #c3a51d !important;
 }
 
-.completed,
 .accepted {
+    color: gray;
+}
+
+.completed {
     color: #38a506 !important;
 }
 
-.failure,
 .ready {
+    color: #4b57db;
+}
+
+.failure,
+.failed {
     color: #d1401b !important;
 }
 
 .cooking {
-    color: #dc7e1e !important;
+    color: rgb(185, 136, 106) !important;
 }
 
 .foodCardHolder h5 {
     opacity: 0.5;
 }
 
+.OrderNumber,
+.orderDate {
+    font-size: 14px;
+}
+
+.orderDate {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.orderDate span {
+    font-size: 13px;
+    /* font-family: "Nunito Sans", sans-serif !important; */
+    font-weight: 500;
+}
 
 @media only screen and (max-width:680px) {
 
