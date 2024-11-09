@@ -13,7 +13,7 @@ import { deleteItemInCart } from '../FoodCardHome/ListFoodCard';
 const ProductDescCard = ({ closeProductDesc, productDesData, parent }) => {
 
     const { setMyCart, setItemAdded, setDeleteItem } = useContext(AppDispatchContext);
-    const { myCart, productDesRef, itemAdded  } = useContext(AppContext);
+    const { myCart, productDesRef, itemAdded } = useContext(AppContext);
     const [itemState, setItemState] = useState(0);
     const [cookie, setCookie, removeCookie] = useCookies([MY_CART]);
 
@@ -34,48 +34,48 @@ const ProductDescCard = ({ closeProductDesc, productDesData, parent }) => {
     }, [myCart])
 
     const handleAddToCart = async () => {
-        let myCartItems = myCart; 
+        let myCartItems = myCart;
         const existingItem = myCartItems.find(item => item.product?.id === productDesData?.id);
         // console.log(existingItem)
         if (itemState != 0) {
             productDesData.qty = itemState;
             if (existingItem) {
-                await changeCartItemQuantity((error, response)=>{
+                await changeCartItemQuantity((error, response) => {
                     if (error) {
                         console.error("Error fetching products:", error);
-                      } else {
+                    } else {
                         // console.log("MY CART Products added successfully:", response.data);
                         // existingItem.quantity = itemState;
                         // myCartItems = [...myCartItems];
-                      }
+                    }
                 }, productDesData);
-                
+
             } else {
-                await addCartItems((error, response)=>{
+                await addCartItems((error, response) => {
                     if (error) {
                         console.error("Error fetching products:", error);
-                      } else {
+                    } else {
                         // console.log("MY CART Products added successfully:", response.data);
                         // myCartItems.push(productDesData);
-                      }
+                    }
                 }, productDesData)
-                
+
             }
         } else {
             if (existingItem) {
                 console.log(productDesData)
-                await deleteCartItem((error, response)=>{
-                    if(error){
+                await deleteCartItem((error, response) => {
+                    if (error) {
                         console.log("error: ", error);
                     }
-                    if(response){
+                    if (response) {
                         // console.log("Delted: ", response)
                     }
                 }, productDesData)
                 // myCartItems = myCartItems.filter((val, i) => val !== productDesData);
             }
         }
-       
+
         await getCartItems((error, response) => {
             if (error) {
                 console.error("Error fetching products:", error);
@@ -150,7 +150,7 @@ const ProductDescCard = ({ closeProductDesc, productDesData, parent }) => {
                             <span>{itemState}</span>
                             <button onClick={handleDecrementItem} disabled={parent == "foodContainer" && itemState == 0}><BsDash strokeWidth={1} /></button>
                         </div>
-                        <button onClick={handleAddToCart} disabled={parent == "foodContainer" && itemState == 0}>Add</button>
+                        <button onClick={handleAddToCart}>Add</button>
                     </div>
                 </div>
             </div>
