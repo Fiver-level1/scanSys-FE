@@ -1,0 +1,74 @@
+.paymentStatusWrapper {
+    width: 80%;
+    margin: 10px auto;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px;
+    gap: 20px;
+}
+
+.paymentDesc {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    text-align: center;
+}
+
+.paymentDesc svg {
+    font-size: 4.4rem;
+    color: rgb(75, 181, 67);
+}
+
+.paymentDesc h1 {
+    font-size: 16px;
+    color: #424767;
+}
+
+.paymentDesc p {
+    font-size: 12px;
+    color: #424767;
+    opacity: 0.5;
+}
+
+/* BUTTON */
+.redirectBtn button {
+    display: inline-block;
+    border-radius: 4px;
+    background-color: #3d405b;
+    border: none;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 12px;
+    padding: 14px 16px;
+    transition: all 0.5s;
+    cursor: pointer;
+}
+
+.redirectBtn button span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+}
+
+.redirectBtn button span:after {
+    content: '»';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -15px;
+    transition: 0.5s;
+}
+
+.redirectBtn button:hover span {
+    padding-right: 15px;
+}
+
+.redirectBtn button:hover span:after {
+    opacity: 1;
+    right: 0;
+}

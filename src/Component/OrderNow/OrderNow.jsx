@@ -1,11 +1,58 @@
-import React from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import './orderNow.css'
 import { IoIosCard } from "react-icons/io";
 import { Link } from 'react-router-dom';
 import { FaApple } from "react-icons/fa";
 import { IoLogoGoogle } from "react-icons/io";
 import BackNavigate from '../BackNavgate/BackNavigate';
+import { AppContext } from '../../context/myContext';
+import { postRequest } from '../../Services/ApiController';
 const OrderNow = () => {
+    const { myCart } = useContext(AppContext);
+    const [subTotal, setSubTotal] = useState(0);
+    const [selectedTable, setSelectedTable] = useState(1);
+    const [checkoutPyalod, setCheckoutPayload] = useState({
+        "seat_number": selectedTable.toString(),
+        "items": []
+    })
+
+    const handleSelectChange = (event) => {
+        const newSeatNumber = event.target.value;
+        setSelectedTable(newSeatNumber);
+
+        setCheckoutPayload(prevPayload => ({
+            ...prevPayload,
+            seat_number: newSeatNumber.toString()
+        }));
+    };
+
+    useEffect(() => {
+        const cartItems = myCart.map(val => ({
+            price: val.product.stripe_price_id,
+            quantity: val.quantity
+        }));
+
+        setCheckoutPayload(prevPayload => ({
+            ...prevPayload,
+            items: cartItems
+        }));
+
+        const newSubTotal = myCart.reduce((acc, item) =>
+            acc + (Number(item.product?.price || 0) * (item.quantity || 0)),
+            0
+        );
+        setSubTotal(newSubTotal.toFixed(2));
+    }, [myCart]);
+
+    const handleCheckout = () => {
+        postRequest("/stripe/create-checkout-session", (err, res) => {
+            if (err) {
+                console.log("error in checkout : ", err);
+            } else {
+                window.location.href = res.data.url;
+            }
+        }, checkoutPyalod)
+    }
     return (
         <div className='OrderNowContainer'>
             <div className="orderNowHolder1">
@@ -23,27 +70,33 @@ const OrderNow = () => {
                                 <label htmlFor="tableNo">
                                     Select number of tables:
                                 </label>
-                                <select className="form-select" id="tableNo">
+                                <select
+                                    className="form-select"
+                                    id="tableNo"
+                                    value={selectedTable}
+                                    onChange={handleSelectChange}
+                                >
                                     <option value={1}>1 tafel</option>
                                     <option value={2}>2 tafels</option>
                                     {/* Add more options as needed */}
                                 </select>
                             </div>
-                            <div className="form-group form-checkbox-label">
+                            {/* <div className="form-group form-checkbox-label">
                                 <input type="checkbox" className="form-checkbox" id="offers" />
                                 <label htmlFor="offers">
-                                    Send me exclusive offers from TaDa and Gare Maritime (optional) <Link to='/'>privacy policy</Link>
+                                    Want to get payment receipt by email. Read our <Link to='/'>Privacy Policy</Link>.
                                 </label>
                             </div>
                             <div className="form-group">
                                 <label htmlFor="email">Email address:</label>
                                 <input
+                                    required
                                     type="email"
                                     className="form-input"
                                     id="email"
                                     placeholder="Email address"
                                 />
-                            </div>
+                            </div> */}
                             <div className="form-group">
                                 <label htmlFor="comments">
                                     Do you have any further comments with your order?
@@ -56,8 +109,8 @@ const OrderNow = () => {
                                 />
                             </div>
                         </div>
-                        <h1>How would you like to pay <span>€6.70 ?</span></h1>
-                        <div className="payOptionWrapper">
+                        <h1>Total amount to pay : <span>€{subTotal}</span></h1>
+                        {/* <div className="payOptionWrapper">
                             <div className="payment-option">
                                 <FaApple />
                                 <span className='payOptMid'>apple pay</span>
@@ -73,9 +126,9 @@ const OrderNow = () => {
                                 <span className='payOptMid'>Card</span>
                                 <span className="payOptSm">pay</span>
                             </div>
-                        </div>
-                        <div className="submitBtn">
-                            <button>Submit</button>
+                        </div> */}
+                        <div className="submitBtn" onClick={handleCheckout}>
+                            <button>Checkout</button>
                         </div>
                     </div>
                 </div>

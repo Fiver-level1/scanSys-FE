@@ -12,7 +12,7 @@ const getHeaders = (type) => {
 export const getRequestAuth = async (endpoint, cb, data = {}) => {
     const headers = getHeaders();
     await axios
-        .get(`${domain}/${endpoint}/`, data, { headers })
+        .get(`${domain}${endpoint}`, data, { headers })
         .then((res) => cb(null, res))
         .catch((err) => cb(err, null));
 };
@@ -21,7 +21,7 @@ export const getRequestAuth = async (endpoint, cb, data = {}) => {
 export const postRequestAuth = async (endpoint, cb, data = {}) => {
     const headers = getHeaders();
     await axios
-        .post(`${domain}/${endpoint}/`, data, { headers })
+        .post(`${domain}${endpoint}`, data, { headers })
         .then((res) => cb(null, res))
         .catch((err) => cb(err, null));
 };

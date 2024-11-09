@@ -8,7 +8,7 @@ import { useCookies } from 'react-cookie';
 import { expireTime, MY_CART } from '../../Constants/cookieConst';
 import { BASE_URL } from '../../Services/Constant';
 import { addCartItems, changeCartItemQuantity, deleteCartItem, getCartItems } from '../../Services/CartApis';
-import { deleteItemInCart } from '../FoodCardHome/ListFoodCard';
+
 
 const ProductDescCard = ({ closeProductDesc, productDesData, parent }) => {
 

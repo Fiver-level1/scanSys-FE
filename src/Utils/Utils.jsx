@@ -2,7 +2,7 @@ import { postRequestAuth } from "../Services/AuthControllerWithoutToken";
 import { getRequest } from "../Services/ApiController";
 
 const getProfileFromPayload = (payload, callBackFunction, { setisLogin, setUserName, setRole }) => {
-    postRequestAuth("auth/token", (err, res) => {
+    postRequestAuth("/auth/token/", (err, res) => {
         callBackFunction();
         if (err) {
             console.error("Error in authentication:", err);
