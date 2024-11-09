@@ -69,7 +69,7 @@ const AppProvider = ({ children }) => {
                 }
             });
         }
-    }, [deleteItem, itemAdded, isLogin]);
+    }, [deleteItem, isLogin]);
 
 
     // console.log("my cart: ", myCart);

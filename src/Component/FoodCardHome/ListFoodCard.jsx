@@ -62,13 +62,13 @@ const ListFoodCard = ({ Qty, productData }) => {
     )
 }
 
-export const deleteItemInCart = (productData, setDeleteItem) => {
-    deleteCartItem((error, response)=>{
+export const deleteItemInCart = async(productData, setDeleteItem) => {
+    await deleteCartItem((error, response)=>{
         if(error){
             console.log("error: ", error);
         }
         if(response){
-            // console.log("response: ", response)
+            console.log("response: ", response)
         }
     }, productData)
 

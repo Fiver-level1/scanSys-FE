@@ -13,6 +13,7 @@ import { privacyPolicy } from './content/privacyAndPolicy'
 import ClickBoundary from './Component/onBlur/ClickBoundary'
 import { AppContext, AppDispatchContext } from './context/myContext'
 import { useContext } from 'react'
+import OrderHistory from './Component/OrderHistory/OrderHistory'
 
 function App() {
 
@@ -31,6 +32,7 @@ function App() {
           <Route path="/help" element={<Help />} />
           <Route path="/termsAndCondition" element={<TermsAndCondition content={termsAndConditions} heading="Terms and Conditions" />} />
           <Route path='/privacyPolicy' element={<TermsAndCondition content={privacyPolicy} heading="Privacy Policy" />} />
+          <Route path='/orderHistory' element={<OrderHistory/>} />
         </Routes>
       </CookiesProvider>
     </>

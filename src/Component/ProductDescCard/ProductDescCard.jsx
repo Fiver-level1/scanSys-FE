@@ -7,7 +7,7 @@ import { AppContext, AppDispatchContext } from '../../context/myContext';
 import { useCookies } from 'react-cookie';
 import { expireTime, MY_CART } from '../../Constants/cookieConst';
 import { BASE_URL } from '../../Services/Constant';
-import { addCartItems, changeCartItemQuantity } from '../../Services/CartApis';
+import { addCartItems, changeCartItemQuantity, deleteCartItem, getCartItems } from '../../Services/CartApis';
 import { deleteItemInCart } from '../FoodCardHome/ListFoodCard';
 
 const ProductDescCard = ({ closeProductDesc, productDesData, parent }) => {
@@ -31,51 +31,62 @@ const ProductDescCard = ({ closeProductDesc, productDesData, parent }) => {
         console.log(existingItem)
         const itemCount = existingItem ? existingItem.quantity : 1;
         setItemState(itemCount);
-    }, [])
+    }, [myCart])
 
-    const handleAddToCart = () => {
+    const handleAddToCart = async () => {
         let myCartItems = myCart; 
         const existingItem = myCartItems.find(item => item.product?.id === productDesData?.id);
-        console.log(existingItem)
+        // console.log(existingItem)
         if (itemState != 0) {
             productDesData.qty = itemState;
             if (existingItem) {
-                changeCartItemQuantity((error, response)=>{
+                await changeCartItemQuantity((error, response)=>{
                     if (error) {
                         console.error("Error fetching products:", error);
                       } else {
                         // console.log("MY CART Products added successfully:", response.data);
+                        // existingItem.quantity = itemState;
+                        // myCartItems = [...myCartItems];
                       }
                 }, productDesData);
-                existingItem.quantity = itemState;
-                myCartItems = [...myCartItems];
+                
             } else {
-                addCartItems((error, response)=>{
+                await addCartItems((error, response)=>{
                     if (error) {
                         console.error("Error fetching products:", error);
                       } else {
                         // console.log("MY CART Products added successfully:", response.data);
+                        // myCartItems.push(productDesData);
                       }
                 }, productDesData)
-                myCartItems.push(productDesData);
+                
             }
         } else {
             if (existingItem) {
                 console.log(productDesData)
-                // changeCartItemQuantity((error, response)=>{
-                //     if (error) {
-                //         console.error("Error fetching products:", error);
-                //       } else {
-                //         // console.log("MY CART Products added successfully:", response.data);
-                //       }
-                // }, productDesData);
-                deleteItemInCart(productDesData, setDeleteItem)
-                myCartItems = myCartItems.filter((val, i) => val !== productDesData);
+                await deleteCartItem((error, response)=>{
+                    if(error){
+                        console.log("error: ", error);
+                    }
+                    if(response){
+                        // console.log("Delted: ", response)
+                    }
+                }, productDesData)
+                // myCartItems = myCartItems.filter((val, i) => val !== productDesData);
             }
         }
        
-        setItemAdded((prev)=>!prev);
-        setMyCart(myCartItems);
+        await getCartItems((error, response) => {
+            if (error) {
+                console.error("Error fetching products:", error);
+            } else {
+                // console.log("response.data.cart_items",response.data.cart_items)
+                // setMy(response.data.cart_items);
+                setMyCart(response.data.cart_items)
+                // console.log("MY CART Products fetched successfully:", response.data);
+            }
+        });
+        // setMyCart(myCartItems);
         setCookie("myCart", myCartItems, { path: '/', expires: expireTime });
         closeProductDesc(false)
     }

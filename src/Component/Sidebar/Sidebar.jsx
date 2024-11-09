@@ -43,6 +43,9 @@ const Sidebar = () => {
     if (item === "Privacy Policy") {
       navigate("/privacyPolicy")
     }
+    if(item == "orderHistory"){
+      navigate("/orderHistory");
+    }
   }
   const handelLogout = () => {
     hidePopup();
