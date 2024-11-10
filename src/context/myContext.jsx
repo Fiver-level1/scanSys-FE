@@ -60,8 +60,6 @@ const AppProvider = ({ children }) => {
 
         const fetchCartDetails = async()=>{
             if(isLogin){
-                // if (localStorage.getItem("access_token")) {
-                    console.log(myCart)
                     let data = { items: [] };
                     myCart.forEach((item, index)=>{
                         let m = {};
@@ -69,7 +67,6 @@ const AppProvider = ({ children }) => {
                         m.quantity = item.quantity;
                         data.items.push(m);
                     })
-                    console.log(data)
                     await postRequest("/api/cart/", (error, response)=>{
                         if(error){
                             console.log("error in posting:  ", error);
@@ -82,8 +79,6 @@ const AppProvider = ({ children }) => {
                         if (error) {
                             console.error("Error fetching products:", error);
                         } else {
-                            console.log("response.data.cart_items",response.data.cart_items)
-                            // setMy(response.data.cart_items);
                             setMyCart(response.data.cart_items)
                         }
                         setIsLoader(false)
@@ -99,12 +94,6 @@ const AppProvider = ({ children }) => {
         
         fetchCartDetails();
     }, [ isLogin]);
-
-
-
-
-    // console.log("my cart: ", myCart);
-    console.log(isLoader)
 
 
     return (

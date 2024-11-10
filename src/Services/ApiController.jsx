@@ -27,7 +27,7 @@ export const getRequest = async (endpoint, cb) => {
 
 export const postRequest = async (endpoint, cb, data = {}) => {
     const headers = getHeaders();
-    console.log(data);
+
     await axios
         .post(`${domain}${endpoint}`, data, { headers })
         .then((res) => cb(null, res))

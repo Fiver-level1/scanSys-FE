@@ -11,7 +11,6 @@ const Home = () => {
     const {isLoader} = useContext(AppContext)
     const [productList, setProductList] = useState([])
     const { setIsLoader, } = useContext(AppDispatchContext);
-    console.log(isLoader)
 
     useEffect(() => {
         getProducts((error, response) => {

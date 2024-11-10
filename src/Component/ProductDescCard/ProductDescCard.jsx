@@ -12,7 +12,6 @@ import { AuthContext } from '../../context/AuthContext';
 
 
 const ProductDescCard = ({ closeProductDesc, productDesData, parent }) => {
-    console.log("productDesData: ", productDesData)
 
     const { setMyCart, setItemAdded, setDeleteItem } = useContext(AppDispatchContext);
     const { myCart, productDesRef, itemAdded } = useContext(AppContext);
@@ -20,16 +19,13 @@ const ProductDescCard = ({ closeProductDesc, productDesData, parent }) => {
     const [cookie, setCookie, removeCookie] = useCookies([MY_CART]);
     const { isLogin } = useContext(AuthContext);
 
-    // console.log(productDesRef)
     const handleDecrementItem = () => {
         if (itemState > 0) {
             setItemState(itemState - 1);
         }
     }
-    // console.log(parent == "foodContainer");
 
     useEffect(() => {
-        console.log(myCart);
         const existingItem = myCart.find(item => {
             if(isLogin){
                 if(item.product?.id === productDesData?.id)
@@ -40,12 +36,10 @@ const ProductDescCard = ({ closeProductDesc, productDesData, parent }) => {
             }
             
         });
-        console.log(existingItem)
         const itemCount = existingItem ? existingItem.quantity : 1;
         setItemState(itemCount);
     }, [myCart])
 
-    console.log("isLogin: ", isLogin);
 
     const handleAddToCart = async () => {
 
@@ -60,7 +54,6 @@ const ProductDescCard = ({ closeProductDesc, productDesData, parent }) => {
             }
             
         });
-        console.log("existing item product des", existingItem)
 
         if (itemState != 0) {
             productDesData.quantity = itemState;
@@ -70,9 +63,7 @@ const ProductDescCard = ({ closeProductDesc, productDesData, parent }) => {
                         if (error) {
                             console.error("Error fetching products:", error);
                         } else {
-                            // console.log("MY CART Products added successfully:", response.data);
-                            // existingItem.quantity = itemState;
-                            // myCartItems = [...myCartItems];
+                           
                         }
                     }, productDesData);
                 } else {
@@ -86,26 +77,24 @@ const ProductDescCard = ({ closeProductDesc, productDesData, parent }) => {
                         if (error) {
                             console.error("Error fetching products:", error);
                         } else {
-                            console.log("MY CART Products added successfully:", response.data);
-                            // myCartItems.push(productDesData);
+                        
                         }
                     }, productDesData)
                 } else {
-                    console.log("productDesData: ", productDesData)
                     myCartItems.push(productDesData);
                 }
             }
         }
          else {
             if (existingItem) {
-                console.log(productDesData)
+
                 if (isLogin) {
                     await deleteCartItem((error, response) => {
                         if (error) {
                             console.log("error: ", error);
                         }
                         if (response) {
-                            // console.log("Delted: ", response)
+
                         }
                     }, productDesData)
                     // myCartItems = myCartItems.filter((val, i) => val !== productDesData);
@@ -120,16 +109,12 @@ const ProductDescCard = ({ closeProductDesc, productDesData, parent }) => {
                 if (error) {
                     console.error("Error fetching products:", error);
                 } else {
-                    // console.log("response.data.cart_items",response.data.cart_items)
-                    // setMy(response.data.cart_items);
                     setMyCart(response.data.cart_items)
-                    // console.log("MY CART Products fetched successfully:", response.data);
                 }
             });
         } 
         else {
             setMyCart(myCartItems);
-            // console.log("myCartItems: ", myCartItems)
             setCookie("myCart", myCartItems, { path: '/', expires: expireTime });
         }
         
@@ -172,7 +157,6 @@ const ProductDescCard = ({ closeProductDesc, productDesData, parent }) => {
                     <div className="about">{productDesData?.description}</div>
                     <div className="social-icons">
                         {
-                            // console.log(productDesData.ing)
                             productDesData?.ingredients && productDesData.ingredients.split(",").map((ingredient, index) => {
                                 const { r, g, b } = getRandomMatteColor();
                                 const backgroundColor = `rgb(${r}, ${g}, ${b})`;

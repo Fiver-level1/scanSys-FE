@@ -48,7 +48,6 @@ const Popup = () => {
     const handleGoogleLogin = useGoogleLogin({
         onSuccess: (tokenResponse) => {
             hideArrowClick();
-            console.log('Google Login Success:', tokenResponse);
             const updatedPayload = {
                 ...googleAuthPaylod,
                 token: tokenResponse.access_token

@@ -34,7 +34,6 @@ const FoodContainer = ({productList}) => {
 
     useEffect(() => {
         let searchValueTemp = searchValue.trim();
-        // console.log(searchValueTemp, productList);
         const productDataFilter = productList.filter((item, index) => item?.title?.toLowerCase().includes(searchValueTemp?.toLowerCase()));
 
         if (searchValueTemp === "") {
@@ -42,14 +41,9 @@ const FoodContainer = ({productList}) => {
         } else {
             groupedDataFunc(productDataFilter);
         }
-
-
     }, [searchValue])
 
-
-
     const handleShowProductDesc = (productId) => {
-        console.log(productId)
         const productDescDataT = productList.filter((val) => val.id === productId);
         setShowProductDesc(true);
         setShowProductDescData(...productDescDataT);

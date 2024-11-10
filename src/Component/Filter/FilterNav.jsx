@@ -21,7 +21,6 @@ const FilterNav = () => {
 
     function adjustScroll(event, targetId) {
         event.preventDefault();
-        console.log(targetId);
         const targetElement = document.getElementById(targetId);
         let yOffset = -90;
         const yPosition = targetElement.getBoundingClientRect().top + window.scrollY + yOffset;

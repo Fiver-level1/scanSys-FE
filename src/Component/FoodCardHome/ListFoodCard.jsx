@@ -11,10 +11,7 @@ import FoodContainer from "../FoodContainer/FoodContainer";
 import { AuthContext } from "../../context/AuthContext";
 
 const ListFoodCard = ({ Qty, productData }) => {
-    // console.log("productData: ", productData);
-
-
-
+   
     const [cookies, setCookies] = useCookies([MY_CART]);
     const { myCart, deleteItem } = useContext(AppContext);
     const { setMyCart, setDeleteItem } = useContext(AppDispatchContext);
@@ -27,7 +24,6 @@ const ListFoodCard = ({ Qty, productData }) => {
                     console.log("error: ", error);
                 }
                 if(response){
-                    console.log("response: ", response)
                     setDeleteItem((prev)=>!prev);
                 }
             }, productData)
@@ -35,15 +31,12 @@ const ListFoodCard = ({ Qty, productData }) => {
                 if (error) {
                     console.error("Error fetching products:", error);
                 } else {
-                    console.log("response.data.cart_items",response.data.cart_items)
-                    // setMy(response.data.cart_items);
                     setMyCart(response.data.cart_items)
                 }
             });
         }else{
             let myCartItems = myCart
             myCartItems = myCartItems.filter((val, i) => val !== productData);
-            // console.log(myCartItems)
             setMyCart(myCartItems);
             setCookies("myCart", myCartItems, { path: '/', expires: expireTime });
         }

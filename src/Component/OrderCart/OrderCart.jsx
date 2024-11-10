@@ -21,8 +21,6 @@ const OrderCart = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        // setMyCartItems([...myCart]);
-        console.log(myCart)
         const newSubTotal = myCart.reduce((acc, item) => {
             if(isLogin){
                 return acc + (parseInt(item?.product?.price) * item?.quantity);
@@ -34,24 +32,8 @@ const OrderCart = () => {
         setSubTotal(newSubTotal.toFixed(2));
     }, [myCart, isLogin]);
 
-    // useEffect(() => {
-    //     // debugger;
-    //     getCartItems((error, response) => {
-    //         if (error) {
-    //             console.error("Error fetching products:", error);
-    //         } else {
-    //             // console.log(response.data.cart_items)
-    //             setMyCartItems(response.data.cart_items);
-    //             setMyCart(response.data.cart_items)
-    //             console.log("MY CART Products fetched successfully:", response.data);
-    //         }
-    //     });
-    // }, []);
-
     const handleShowProductDesc = (productId) => {
-        console.log(productId)
         const productDescDataT = myCart.find((val) => {
-            console.log("val: ",val.id)
             if(isLogin){
                 if (val?.product?.id === productId)
                     return val?.product
@@ -94,7 +76,6 @@ const OrderCart = () => {
                         <div className="cartContentHolder">
                             <div className="ListOfOrders">
                                 {myCart?.map((item, index) => {
-                                    console.log("item: ", item)
                                     return (
                                         <div className="listProductWrapper" key={index} onClick={() => handleShowProductDesc(isLogin ? item?.product?.id : item.id)}>
                                             <ListFoodCard Qty={item?.quantity} productData={isLogin ? item?.product : item} />

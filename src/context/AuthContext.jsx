@@ -34,7 +34,6 @@ const AuthProvider = ({ children }) => {
         }
     }, [isLogin]);
 
-    console.log("isLogin auth: ", isLogin);
     return (
         <AuthContext.Provider value={{ role, userName, setUserName, setRole, isLogin, setisLogin }}>
             {children}
