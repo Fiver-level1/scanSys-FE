@@ -12,7 +12,7 @@ import { AuthContext } from '../../context/AuthContext';
 
 
 const ProductDescCard = ({ closeProductDesc, productDesData, parent }) => {
-    // console.log("productDesData: ", productDesData)
+    console.log("productDesData: ", productDesData)
 
     const { setMyCart, setItemAdded, setDeleteItem } = useContext(AppDispatchContext);
     const { myCart, productDesRef, itemAdded } = useContext(AppContext);
@@ -48,11 +48,12 @@ const ProductDescCard = ({ closeProductDesc, productDesData, parent }) => {
     console.log("isLogin: ", isLogin);
 
     const handleAddToCart = async () => {
+
         let myCartItems = myCart;
         const existingItem = myCartItems.find(item => {
             if(isLogin){
-                item.product?.id === productDesData?.id
-                return item.product;
+                if(item.product?.id === productDesData?.id)
+                    return item.product;
             }else{
                 if(item?.id === productDesData?.id)
                     return item;
@@ -60,6 +61,7 @@ const ProductDescCard = ({ closeProductDesc, productDesData, parent }) => {
             
         });
         console.log("existing item product des", existingItem)
+
         if (itemState != 0) {
             productDesData.quantity = itemState;
             if (existingItem) {
@@ -84,7 +86,7 @@ const ProductDescCard = ({ closeProductDesc, productDesData, parent }) => {
                         if (error) {
                             console.error("Error fetching products:", error);
                         } else {
-                            // console.log("MY CART Products added successfully:", response.data);
+                            console.log("MY CART Products added successfully:", response.data);
                             // myCartItems.push(productDesData);
                         }
                     }, productDesData)
@@ -93,7 +95,8 @@ const ProductDescCard = ({ closeProductDesc, productDesData, parent }) => {
                     myCartItems.push(productDesData);
                 }
             }
-        } else {
+        }
+         else {
             if (existingItem) {
                 console.log(productDesData)
                 if (isLogin) {
@@ -123,11 +126,12 @@ const ProductDescCard = ({ closeProductDesc, productDesData, parent }) => {
                     // console.log("MY CART Products fetched successfully:", response.data);
                 }
             });
-        } else {
-            setMyCart(myCartItems);
-            // console.log("myCartItems: ", myCartItems)
-            setCookie("myCart", myCartItems, { path: '/', expires: expireTime });
-        }
+        } 
+        // else {
+        //     setMyCart(myCartItems);
+        //     // console.log("myCartItems: ", myCartItems)
+        //     setCookie("myCart", myCartItems, { path: '/', expires: expireTime });
+        // }
         
 
         closeProductDesc(false)
