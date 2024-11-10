@@ -13,14 +13,17 @@ import { privacyPolicy } from './content/privacyAndPolicy'
 import OrderHistory from './Component/OrderHistory/OrderHistory'
 import PaymentSucess from './Component/PaymentStatus/PaymentSucess'
 import PaymentFailed from './Component/PaymentStatus/PaymentFailed'
-import { useEffect } from 'react'
+import { useContext, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { AuthContext } from './context/AuthContext'
+import ProtectedRoute from './Component/ProtectionRoute/ProtectedRoute'
+import PageNotFound from './Component/PageNotFound/PageNotFound'
 function App() {
   const navigate = useNavigate();
+  const { isLogin } = useContext(AuthContext);
   useEffect(() => {
     const queryString = window.location.search;
     const params = new URLSearchParams(queryString);
-
     const success = params.get('success');
     const failed = params.get("canceled");
     const sessionId = params.get('session_id');
@@ -32,6 +35,7 @@ function App() {
     }
   }, []);
 
+
   return (
     <>
       <CookiesProvider>
@@ -42,11 +46,13 @@ function App() {
           <Route path="/cart" element={<OrderCart />} />
           <Route path="/orderNow" element={<OrderNow />} />
           <Route path="/help" element={<Help />} />
-          <Route path="/termsAndCondition" element={<TermsAndCondition content={termsAndConditions} heading="Terms and Conditions" />} />
-          <Route path='/privacyPolicy' element={<TermsAndCondition content={privacyPolicy} heading="Privacy Policy" />} />
-          <Route path='/orderHistory' element={<OrderHistory />} />
-          <Route path='/payment-successful' element={<PaymentSucess />} />
-          <Route path='/payment-fail' element={<PaymentFailed />} />
+          <Route path="/termsAndCondition" element={<TermsAndCondition contðent={termsAndConditions} heading="Terms and Conditions" />} />
+          <Route element={<ProtectedRoute isLoggedIn={isLogin} />}>
+            <Route path="/orderHistory" element={<OrderHistory />} />
+            <Route path="/payment-successful" element={<PaymentSucess />} />
+            <Route path="/payment-fail" element={<PaymentFailed />} />
+          </Route>
+          <Route path="*" element={<PageNotFound />} />
         </Routes>
       </CookiesProvider>
     </>

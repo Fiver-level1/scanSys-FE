@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css?family=Arvo');
+
+.page_404 {
+    padding: 40px 0;
+    background: #fff;
+    font-family: 'Arvo', serif;
+}
+
+.page_404 img {
+    width: 100%;
+}
+
+.four_zero_four_bg {
+    background-image: url(https://cdn.dribbble.com/users/285475/screenshots/2083086/dribbble_1.gif);
+    height: 400px;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+}
+
+.four_zero_four_bg h1 {
+    font-size: 80px;
+    font-family: Roboto;
+    opacity: 0.5;
+}
+
+.four_zero_four_bg h3 {
+    font-size: 80px;
+}
+
+.contant_box_404 p {
+    font-family: "Nunito Sans", sans-serif;
+    font-size: 13px;
+}
+
+.link_404 {
+    color: #fff !important;
+    padding: 10px 20px;
+    background: #39ac31;
+    margin: 10px 0;
+    display: inline-block;
+    border-radius: 6px;
+    box-shadow: 2px 2px 5px #BABECC, -5px -5px 10px #ffffff73;
+    font-size: 12px;
+    border-color: #ea755e;
+}
+
+.contant_box_404 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: -3rem;
+    gap: 6px;
+}
+
+@media only screen and (max-width:680px) {
+    .four_zero_four_bg h1 {
+        font-size: 60px;
+    }
+}

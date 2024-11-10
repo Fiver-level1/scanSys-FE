@@ -3,49 +3,53 @@ import "../FoodCardHome/listFoodCard.css"
 import "./OrderHistory.css";
 import { getRequestAuth } from '../../Services/AuthControllerWithoutToken';
 import { getRequest, postRequest } from '../../Services/ApiController';
-import { AuthContext } from '../../context/AuthContext';
 import BackNavigate from '../BackNavgate/BackNavigate';
 import { PiCookingPotDuotone } from "react-icons/pi";
 import { FaMoneyCheckDollar } from "react-icons/fa6";
 
 const OrderHistory = () => {
-    const { isLogin } = useContext(AuthContext);
     const [orderData, setOrderData] = useState([]);
 
-    useEffect(() => {
-        // if(!isLogin){
-
-        getRequest("/api/orders/", (error, response) => {
+    const RequestHandle = async () => {
+        let sortedOrderData = [];
+        await getRequest("/api/orders/", (error, response) => {
             if (error) {
+                console.log("can't get the order data ", error);
 
             } else {
                 const data = response.data;
-                const sortedData = data.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
-                setOrderData(sortedData)
+                sortedOrderData = data.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+                setOrderData(sortedOrderData)
             }
         })
-        // }
-    }, [])
-    useEffect(() => {
-        if (orderData) {
-            const payloadData = orderData.map((val) => {
-                if (val.payment_status.toLowerCase() !== "completed") {
-                    return val.stripe_checkout_id;
-                }
-            })
+        if (sortedOrderData) {
+            const payloadData = sortedOrderData
+                .filter(val => val.payment_status.toLowerCase() !== "completed")
+                .map(val => val.stripe_checkout_id);
             const PaymentStatusPayload = {
                 "checkout_ids": [payloadData]
             }
-            postRequest("/stripe/update-payment-status", (err, res) => {
+            await postRequest("/stripe/update-payment-status", (err, res) => {
                 if (err) {
                     console.log("error in getting payment status updated", err);
                 } else {
                     console.log("Latest Payment get Updated here");
                 }
             }, PaymentStatusPayload)
-        }
+            await getRequest("/api/orders/", (error, response) => {
+                if (error) {
 
-    }, [orderData])
+                } else {
+                    const data = response.data;
+                    const sortedData = data.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+                    setOrderData(sortedData)
+                }
+            })
+        }
+    }
+    useEffect(() => {
+        RequestHandle();
+    }, [])
 
     return (
         <div className="cartContainer">
@@ -60,7 +64,7 @@ const OrderHistory = () => {
                     <div className="">
                         <div className="lisProductWrapperOrderHistory">
                             {orderData.length > 0 && orderData.map((order, index) => {
-                                return (<div className="wrapper order-history-wrapper">
+                                return (<div className="wrapper order-history-wrapper" key={index}>
                                     <div className='order-history-card' key={index}>
                                         <p className='orderDate'>{new Date(order?.created_at).toDateString()} <span>{new Date(order?.created_at).toLocaleTimeString()}</span></p>
 
