@@ -5,12 +5,14 @@ import { Link, useNavigate } from 'react-router-dom';
 import { FaApple } from "react-icons/fa";
 import { IoLogoGoogle } from "react-icons/io";
 import BackNavigate from '../BackNavgate/BackNavigate';
-import { AppContext } from '../../context/myContext';
+import { AppContext, AppDispatchContext } from '../../context/myContext';
 import { postRequest } from '../../Services/ApiController';
 import { AuthContext } from '../../context/AuthContext';
+import Loader from '../Loader/Loader';
 const OrderNow = () => {
-    const { myCart } = useContext(AppContext);
+    const { myCart, isLoader } = useContext(AppContext);
     const { role } = useContext(AuthContext);
+    const { setIsLoader } = useContext(AppDispatchContext);
     const [subTotal, setSubTotal] = useState(0);
     const [selectedTable, setSelectedTable] = useState(1);
     const [checkoutPaylod, setCheckoutPayload] = useState({
@@ -65,37 +67,41 @@ const OrderNow = () => {
                     window.location.href = res.data.url;
                 }
             }
+            setIsLoader(false);
         }, checkoutPaylod)
     }
     return (
-        <div className='OrderNowContainer'>
-            <div className="orderNowHolder1">
-                <div className="orderNowTop">
-                    <BackNavigate />
-                    <div className="headerPrimary">
-                        <h1>Ready to Dine? Confirm and Pay</h1>
-                        <p>Select your table, choose how you'd like to pay, and add your email to receive a receipt. With just a few quick steps, your meal will be on its way!</p>
-                    </div>
-                </div>
-                <div className="orderNowWrapper">
-                    <div className="form-container">
-                        <div className="formGroupHolder">
-                            <div className="form-group">
-                                <label htmlFor="tableNo">
-                                    Select number of tables:
-                                </label>
-                                <select
-                                    className="form-select"
-                                    id="tableNo"
-                                    value={selectedTable}
-                                    onChange={handleSelectChange}
-                                >
-                                    <option value={1}>1 tafel</option>
-                                    <option value={2}>2 tafels</option>
-                                    {/* Add more options as needed */}
-                                </select>
+        <>
+            {isLoader ?
+                <Loader /> :
+                <div className='OrderNowContainer'>
+                    <div className="orderNowHolder1">
+                        <div className="orderNowTop">
+                            <BackNavigate />
+                            <div className="headerPrimary">
+                                <h1>Ready to Dine? Confirm and Pay</h1>
+                                <p>Select your table, choose how you'd like to pay, and add your email to receive a receipt. With just a few quick steps, your meal will be on its way!</p>
                             </div>
-                            {/* <div className="form-group form-checkbox-label">
+                        </div>
+                        <div className="orderNowWrapper">
+                            <div className="form-container">
+                                <div className="formGroupHolder">
+                                    <div className="form-group">
+                                        <label htmlFor="tableNo">
+                                            Select number of tables:
+                                        </label>
+                                        <select
+                                            className="form-select"
+                                            id="tableNo"
+                                            value={selectedTable}
+                                            onChange={handleSelectChange}
+                                        >
+                                            <option value={1}>1 tafel</option>
+                                            <option value={2}>2 tafels</option>
+                                            {/* Add more options as needed */}
+                                        </select>
+                                    </div>
+                                    {/* <div className="form-group form-checkbox-label">
                                 <input type="checkbox" className="form-checkbox" id="offers" />
                                 <label htmlFor="offers">
                                     Want to get payment receipt by email. Read our <Link to='/'>Privacy Policy</Link>.
@@ -111,21 +117,21 @@ const OrderNow = () => {
                                     placeholder="Email address"
                                 />
                             </div> */}
-                            <div className="form-group">
-                                <label htmlFor="comments">
-                                    Do you have any further comments with your order?
-                                </label>
-                                <textarea
-                                    className="form-textarea"
-                                    id="comments"
-                                    placeholder="Comments"
-                                    value={checkoutPaylod.comment}
-                                    onChange={handleCommentsChange}
-                                />
-                            </div>
-                        </div>
-                        <h1>Total amount to pay : <span>€{subTotal}</span></h1>
-                        {/* <div className="payOptionWrapper">
+                                    <div className="form-group">
+                                        <label htmlFor="comments">
+                                            Do you have any further comments with your order?
+                                        </label>
+                                        <textarea
+                                            className="form-textarea"
+                                            id="comments"
+                                            placeholder="Comments"
+                                            value={checkoutPaylod.comment}
+                                            onChange={handleCommentsChange}
+                                        />
+                                    </div>
+                                </div>
+                                <h1>Total amount to pay : <span>€{subTotal}</span></h1>
+                                {/* <div className="payOptionWrapper">
                             <div className="payment-option">
                                 <FaApple />
                                 <span className='payOptMid'>apple pay</span>
@@ -142,13 +148,15 @@ const OrderNow = () => {
                                 <span className="payOptSm">pay</span>
                             </div>
                         </div> */}
-                        <div className="submitBtn" onClick={handleCheckout}>
-                            <button>Checkout</button>
+                                <div className="submitBtn" onClick={handleCheckout}>
+                                    <button>Checkout</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
+            }
+        </>
     )
 }
 
