@@ -9,6 +9,7 @@ import { expireTime, MY_CART } from '../../Constants/cookieConst';
 import { BASE_URL } from '../../Services/Constant';
 import { addCartItems, changeCartItemQuantity, deleteCartItem, getCartItems } from '../../Services/CartApis';
 import { AuthContext } from '../../context/AuthContext';
+import { toast, ToastContainer } from 'react-toastify';
 
 
 const ProductDescCard = ({ closeProductDesc, productDesData, parent }) => {
@@ -76,6 +77,7 @@ const ProductDescCard = ({ closeProductDesc, productDesData, parent }) => {
                     await addCartItems((error, response) => {
                         if (error) {
                             console.error("Error fetching products:", error);
+                            toast.error("please try to add again")
                         } else {
                         
                         }
@@ -83,6 +85,7 @@ const ProductDescCard = ({ closeProductDesc, productDesData, parent }) => {
                 } else {
                     myCartItems.push(productDesData);
                 }
+                toast.success("item added in cart")
             }
         }
          else {
@@ -92,6 +95,7 @@ const ProductDescCard = ({ closeProductDesc, productDesData, parent }) => {
                     await deleteCartItem((error, response) => {
                         if (error) {
                             console.log("error: ", error);
+                            toast.error("please try to delete again")
                         }
                         if (response) {
 
@@ -101,6 +105,7 @@ const ProductDescCard = ({ closeProductDesc, productDesData, parent }) => {
                 } else {
                     myCartItems = myCartItems.filter((val, i) => val !== productDesData);
                 }
+                toast.success("item deleted from cart")
             }
         }
 

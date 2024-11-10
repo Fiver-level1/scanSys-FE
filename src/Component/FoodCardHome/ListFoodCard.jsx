@@ -9,6 +9,7 @@ import { BASE_URL } from "../../Services/Constant";
 import { deleteCartItem, getCartItems } from "../../Services/CartApis";
 import FoodContainer from "../FoodContainer/FoodContainer";
 import { AuthContext } from "../../context/AuthContext";
+import { toast } from "react-toastify";
 
 const ListFoodCard = ({ Qty, productData }) => {
    
@@ -22,6 +23,7 @@ const ListFoodCard = ({ Qty, productData }) => {
             await deleteCartItem((error, response)=>{
                 if(error){
                     console.log("error: ", error);
+                    toast.error("please try to delete again")
                 }
                 if(response){
                     setDeleteItem((prev)=>!prev);
@@ -40,6 +42,7 @@ const ListFoodCard = ({ Qty, productData }) => {
             setMyCart(myCartItems);
             setCookies("myCart", myCartItems, { path: '/', expires: expireTime });
         }
+        toast.success("item deleted from cart")
     }
 
 

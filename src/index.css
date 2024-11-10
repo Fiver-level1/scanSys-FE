@@ -75,6 +75,22 @@ a {
   animation: zoomIn 0.3s ease forwards;
 }
 
+.Toastify__toast {
+  top: 100px !important;
+}
+
+@media only screen and (max-width: 480px) {
+  .Toastify__toast-container {
+    left: unset !important;
+    right: 3px !important;
+  }
+
+  .Toastify__toast-container {
+    width: 90% !important;
+    /* set your desired width */
+  }
+}
+
 @keyframes zoomIn {
   0% {
     opacity: 0;

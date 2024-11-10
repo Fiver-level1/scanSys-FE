@@ -10,6 +10,7 @@ import { AuthContext } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { IoArrowBack } from "react-icons/io5";
 import Loader from '../Loader/Loader';
+import { ToastContainer } from 'react-toastify';
 
 const OrderCart = () => {
     const [subTotal, setSubTotal] = useState(0);
@@ -170,6 +171,7 @@ const OrderCart = () => {
                         </ClickBoundary> : <></>
                 }
             </div>
+            <ToastContainer position="top-right"/>
         </div>
         // <></>
     )

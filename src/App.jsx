@@ -18,6 +18,9 @@ import { useNavigate } from 'react-router-dom'
 import { AuthContext } from './context/AuthContext'
 import ProtectedRoute from './Component/ProtectionRoute/ProtectedRoute'
 import PageNotFound from './Component/PageNotFound/PageNotFound'
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
+
 function App() {
   const navigate = useNavigate();
   const { isLogin } = useContext(AuthContext);

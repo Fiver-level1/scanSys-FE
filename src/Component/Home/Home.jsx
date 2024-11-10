@@ -6,11 +6,14 @@ import FoodContainer from '../FoodContainer/FoodContainer';
 import Loader from '../Loader/Loader';
 import { AppContext, AppDispatchContext } from '../../context/myContext';
 import { getProducts } from '../../Services/ProductApis';
+import { AuthContext } from '../../context/AuthContext';
+import { toast, ToastContainer } from 'react-toastify';
 
 const Home = () => {
     const {isLoader} = useContext(AppContext)
     const [productList, setProductList] = useState([])
     const { setIsLoader, } = useContext(AppDispatchContext);
+    const {isLogin} = useContext(AuthContext);
 
     useEffect(() => {
         getProducts((error, response) => {
@@ -24,6 +27,7 @@ const Home = () => {
 
     }, []);
     
+    
     return (
         <div >
             <Banner />
@@ -32,6 +36,7 @@ const Home = () => {
                 <FoodContainer productList={productList} />
             </>
             }
+            <ToastContainer position="top-right"/>
         </div>
     )
 }

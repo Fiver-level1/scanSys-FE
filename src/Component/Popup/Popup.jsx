@@ -15,6 +15,7 @@ import { CLIENT_ID, CLIENT_SECRET } from '../../Services/Constant';
 import { AuthContext } from '../../context/AuthContext';
 import { getRequest } from '../../Services/ApiController';
 import { getProfileFromPayload } from '../../Utils/Utils';
+import { toast } from 'react-toastify';
 const Popup = () => {
     const { hideArrowClick, redirectTo, setredirectTo, setSigninPopUp } = useContext(AppContext);
     const { setArrowClick } = useContext(AppDispatchContext);
@@ -88,6 +89,7 @@ const Popup = () => {
             if (err) {
                 hideArrowClick();
                 console.log("error in register : ", err);
+                toast.error("Please retry to register")
             } else {
                 const loginInputPayload = {
                     "client_secret": CLIENT_SECRET,
@@ -97,7 +99,9 @@ const Popup = () => {
                     "grant_type": "password"
                 }
                 getProfileFromPayload(loginInputPayload, callBackFunction, { setisLogin, setUserName, setRole })
+                toast.success("Registered Successfully")
             }
+
         }, formRegister)
     }
 
