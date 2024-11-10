@@ -9,12 +9,15 @@ import { AppContext, AppDispatchContext } from '../../context/myContext';
 import { postRequest } from '../../Services/ApiController';
 import { AuthContext } from '../../context/AuthContext';
 import Loader from '../Loader/Loader';
+import { getRequest } from '../../Services/ApiController';
+import { toast, ToastContainer } from "react-toastify";
 const OrderNow = () => {
     const { myCart, isLoader } = useContext(AppContext);
     const { role } = useContext(AuthContext);
     const { setIsLoader } = useContext(AppDispatchContext);
     const [subTotal, setSubTotal] = useState(0);
     const [selectedTable, setSelectedTable] = useState(1);
+    const [listOfTable, setlistOfTable] = useState([]);
     const [checkoutPaylod, setCheckoutPayload] = useState({
         "seat_number": selectedTable.toString(),
         "items": [],
@@ -39,6 +42,10 @@ const OrderNow = () => {
     };
 
     useEffect(() => {
+        if (!myCart || !myCart.length) {
+            navigate("/cart")
+            return;
+        }
         const cartItems = myCart.map(val => ({
             price: val.product.stripe_price_id,
             quantity: val.quantity
@@ -56,13 +63,24 @@ const OrderNow = () => {
         setSubTotal(newSubTotal.toFixed(2));
     }, [myCart]);
 
+    useEffect(() => {
+        getRequest("/api/seats", (err, res) => {
+            if (err) {
+                toast.error("please contact Resturant for Table Number");
+            } else {
+                const data = res.data;
+                setlistOfTable(data);
+            }
+        })
+    }, [])
+
     const handleCheckout = () => {
         postRequest("/stripe/create-checkout-session", (err, res) => {
             if (err) {
                 console.log("error in checkout : ", err);
             } else {
                 if (role.toLowerCase() === "waiter") {
-                    navigate("/orderHistory")
+                    navigate("/payment-successful", { state: { waiter: true } });
                 } else {
                     window.location.href = res.data.url;
                 }
@@ -88,7 +106,7 @@ const OrderNow = () => {
                                 <div className="formGroupHolder">
                                     <div className="form-group">
                                         <label htmlFor="tableNo">
-                                            Select number of tables:
+                                            Select the table Number:
                                         </label>
                                         <select
                                             className="form-select"
@@ -96,8 +114,11 @@ const OrderNow = () => {
                                             value={selectedTable}
                                             onChange={handleSelectChange}
                                         >
-                                            <option value={1}>1 tafel</option>
-                                            <option value={2}>2 tafels</option>
+                                            {
+                                                listOfTable.map((val, ind) => {
+                                                    return <option key={ind} value={val.seat_number}>{val.seat_number}</option>
+                                                })
+                                            }
                                             {/* Add more options as needed */}
                                         </select>
                                     </div>
@@ -156,6 +177,7 @@ const OrderNow = () => {
                     </div>
                 </div>
             }
+            <ToastContainer />
         </>
     )
 }

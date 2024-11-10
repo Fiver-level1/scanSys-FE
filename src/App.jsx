@@ -31,7 +31,7 @@ function App() {
     const failed = params.get("canceled");
     const sessionId = params.get('session_id');
     if (failed) {
-      navigate('/payment-fail')
+      navigate('/payment-fail', { state: { afterPayment: true } })
     }
     if (success) {
       navigate('/payment-successful', { state: { sessionId } });
@@ -50,11 +50,11 @@ function App() {
           <Route path="/orderNow" element={<OrderNow />} />
           <Route path="/help" element={<Help />} />
           <Route path="/termsAndCondition" element={<TermsAndCondition contðent={termsAndConditions} heading="Terms and Conditions" />} />
-          <Route element={<ProtectedRoute isLoggedIn={isLogin} />}>
-            <Route path="/orderHistory" element={<OrderHistory />} />
-            <Route path="/payment-successful" element={<PaymentSucess />} />
-            <Route path="/payment-fail" element={<PaymentFailed />} />
-          </Route>
+          {/* <Route element={<ProtectedRoute isLoggedIn={isLogin} />}> */}
+          <Route path="/orderHistory" element={<OrderHistory />} />
+          <Route path="/payment-successful" element={<PaymentSucess />} />
+          <Route path="/payment-fail" element={<PaymentFailed />} />
+          {/* </Route> */}
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </CookiesProvider>
