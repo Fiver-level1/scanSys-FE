@@ -7,24 +7,12 @@ import { AppContext, AppDispatchContext } from '../../context/myContext';
 import ClickBoundary from '../onBlur/ClickBoundary';
 import { getProducts } from '../../Services/ProductApis';
 
-const FoodContainer = () => {
+const FoodContainer = ({productList}) => {
 
-    const { setShowProductDesc, setProductdata } = useContext(AppDispatchContext);
+    const { setShowProductDesc, setProductdata} = useContext(AppDispatchContext);
     const { showProductDesc, productdata, searchValue, productDesRef } = useContext(AppContext);
     const [productDesData, setShowProductDescData] = useState({});
-    const [productList, setProductList] = useState([])
 
-    useEffect(() => {
-
-        getProducts((error, response) => {
-            if (error) {
-                console.error("Error fetching products:", error);
-            } else {
-                setProductList(response.data);
-            }
-        });
-
-    }, []);
 
     useEffect(() => {
         groupedDataFunc();
@@ -47,7 +35,7 @@ const FoodContainer = () => {
     useEffect(() => {
         let searchValueTemp = searchValue.trim();
         // console.log(searchValueTemp, productList);
-        const productDataFilter = productList.filter((item, index) => item.title.toLowerCase().includes(searchValueTemp.toLowerCase()));
+        const productDataFilter = productList.filter((item, index) => item?.title?.toLowerCase().includes(searchValueTemp?.toLowerCase()));
 
         if (searchValueTemp === "") {
             groupedDataFunc([]);
@@ -61,6 +49,7 @@ const FoodContainer = () => {
 
 
     const handleShowProductDesc = (productId) => {
+        console.log(productId)
         const productDescDataT = productList.filter((val) => val.id === productId);
         setShowProductDesc(true);
         setShowProductDescData(...productDescDataT);
@@ -70,13 +59,13 @@ const FoodContainer = () => {
 
     return (
         <>
-            <section className="foodCardContainer">
+         <section className="foodCardContainer">
                 <div className="foodCardHolder">
                     {
                         productdata.map((val, ind) => (
                             <div key={ind} >
                                 {/* <a href={`#${val.category}`}></a> */}
-                                <h1 className='secondaryHeader' id={val.category} >{val.category}</h1>
+                                <h1 className='secondaryHeader' id={val?.category} >{val?.category}</h1>
                                 <div className="foodCardWrapper">
                                     {
                                         val.data.map((obj, index) => (

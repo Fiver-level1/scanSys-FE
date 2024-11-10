@@ -9,19 +9,28 @@ import { getCartItems } from '../../Services/CartApis';
 import { AuthContext } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { IoArrowBack } from "react-icons/io5";
+import Loader from '../Loader/Loader';
 
 const OrderCart = () => {
     const [subTotal, setSubTotal] = useState(0);
     const [myCartItems, setMyCartItems] = useState([]);
-    const { myCart, handleArrowClickVisibility, setredirectTo, redirectTo, showProductDesc, productDesRef, deleteItem } = useContext(AppContext);
-    const { setShowProductDesc, setMyCart } = useContext(AppDispatchContext);
+    const { myCart, handleArrowClickVisibility, setredirectTo, redirectTo, showProductDesc, productDesRef, isLoader } = useContext(AppContext);
+    const { setShowProductDesc, setIsLoader } = useContext(AppDispatchContext);
     const { isLogin } = useContext(AuthContext);
     const [productDesData, setShowProductDescData] = useState({});
     const navigate = useNavigate();
 
     useEffect(() => {
         // setMyCartItems([...myCart]);
-        const newSubTotal = myCart.reduce((acc, item) => acc + (parseInt(item?.product?.price) * item?.quantity), 0);
+        console.log(myCart)
+        const newSubTotal = myCart.reduce((acc, item) => {
+            if(isLogin){
+                return acc + (parseInt(item?.product?.price) * item?.quantity);
+            }else{
+                return acc + (parseInt(item?.price) * item?.quantity);
+            }
+        }, 0);
+        
         setSubTotal(newSubTotal.toFixed(2));
     }, [myCart]);
 
@@ -40,9 +49,20 @@ const OrderCart = () => {
     // }, []);
 
     const handleShowProductDesc = (productId) => {
-        const productDescDataT = myCart.find((val) => { if (val?.product?.id === productId) return val?.product });
+        console.log(productId)
+        const productDescDataT = myCart.find((val) => {
+            console.log("val: ",val.id)
+            if(isLogin){
+                if (val?.product?.id === productId)
+                    return val?.product
+            }else{
+                if (val.id === productId)
+                    return val
+            }
+            
+        });
         setShowProductDesc(true);
-        setShowProductDescData(productDescDataT.product);
+        setShowProductDescData(isLogin? productDescDataT.product: productDescDataT);
     };
 
 
@@ -64,7 +84,8 @@ const OrderCart = () => {
                 <div className="BackIcon" onClick={() => navigate('/')} style={{ cursor: 'pointer', margin: '10px 0px' }}>
                     <IoArrowBack />
                 </div>
-                {(myCart && myCart?.length > 0) ?
+                {isLoader? <Loader/>:
+                (myCart && myCart?.length > 0) ?
                     <>
                         <div className="headerPrimary">
                             <h1>Almost There – Your Feast Awaits!</h1>
@@ -73,10 +94,10 @@ const OrderCart = () => {
                         <div className="cartContentHolder">
                             <div className="ListOfOrders">
                                 {myCart?.map((item, index) => {
-                                    // console.log("item: ", item)
+                                    console.log("item: ", item)
                                     return (
-                                        <div className="listProductWrapper" key={index} onClick={() => handleShowProductDesc(item?.product?.id)}>
-                                            <ListFoodCard Qty={item?.quantity} productData={item?.product} />
+                                        <div className="listProductWrapper" key={index} onClick={() => handleShowProductDesc(isLogin ? item?.product?.id : item.id)}>
+                                            <ListFoodCard Qty={item?.quantity} productData={isLogin ? item?.product : item} />
                                         </div>
                                     )
                                 })}

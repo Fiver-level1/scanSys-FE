@@ -6,9 +6,13 @@ import { getRequest, postRequest } from '../../Services/ApiController';
 import BackNavigate from '../BackNavgate/BackNavigate';
 import { PiCookingPotDuotone } from "react-icons/pi";
 import { FaMoneyCheckDollar } from "react-icons/fa6";
+import { AppContext, AppDispatchContext } from '../../context/myContext';
+import Loader from '../Loader/Loader';
 
 const OrderHistory = () => {
     const [orderData, setOrderData] = useState([]);
+    const { setIsLoader } = useContext(AppDispatchContext)
+    const { isLoader} = useContext(AppContext);
 
     const RequestHandle = async () => {
         let sortedOrderData = [];
@@ -21,6 +25,7 @@ const OrderHistory = () => {
                 sortedOrderData = data.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
                 setOrderData(sortedOrderData)
             }
+            setIsLoader(false);
         })
         if (sortedOrderData) {
             const payloadData = sortedOrderData
@@ -61,7 +66,7 @@ const OrderHistory = () => {
                 </div>
                 <div className='foodCardHolder'>
 
-                    <div className="">
+                   { isLoader ? <Loader/>:<div className="">
                         <div className="lisProductWrapperOrderHistory">
                             {orderData.length > 0 && orderData.map((order, index) => {
                                 return (<div className="wrapper order-history-wrapper" key={index}>
@@ -93,7 +98,7 @@ const OrderHistory = () => {
                                 )
                             })}
                         </div>
-                    </div>
+                    </div>}
                 </div>
             </div>
         </div>

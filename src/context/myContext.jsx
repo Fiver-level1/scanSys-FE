@@ -2,6 +2,7 @@ import React, { createContext, useRef, useState, useEffect, useContext } from "r
 import { useCookies } from "react-cookie";
 import { getCartItems } from "../Services/CartApis";
 import { AuthContext } from "./AuthContext";
+import { postRequest } from "../Services/ApiController";
 const AppContext = createContext("");
 const AppDispatchContext = createContext("");
 
@@ -20,6 +21,7 @@ const AppProvider = ({ children }) => {
     const [searchValue, setSearchValue] = useState("");
     const [deleteItem, setDeleteItem] = useState(false);
     const [itemAdded, setItemAdded] = useState(false);
+    const [isLoader, setIsLoader] = useState(true);
     const sidebarRef = useRef(null);
     const productDesRef = useRef(null);
 
@@ -55,26 +57,59 @@ const AppProvider = ({ children }) => {
 
     useEffect(() => {
         // debugger;
-        if (localStorage.getItem("access_token")) {
-            getCartItems((error, response) => {
-                if (error) {
-                    console.error("Error fetching products:", error);
-                } else {
-                    // console.log("response.data.cart_items",response.data.cart_items)
-                    // setMy(response.data.cart_items);
-                    setMyCart(response.data.cart_items)
-                }
-            });
+
+        const fetchCartDetails = async()=>{
+            if(isLogin){
+                // if (localStorage.getItem("access_token")) {
+                    // console.log(myCart)
+                    // let data = { items: [] };
+                    // myCart.forEach((item, index)=>{
+                    //     let m = {};
+                    //     m.product_id = item.id;
+                    //     m.quantity = item.quantity;
+                    //     data.items.push(m);
+                    // })
+                    // console.log(data)
+                    // await postRequest("/api/cart/", (error, response)=>{
+                    //     if(error){
+                    //         console.log("error in posting:  ", error);
+                    //     }
+                    //     if(response){
+                            
+                    //     }
+                    // }, data)
+                    await getCartItems((error, response) => {
+                        if (error) {
+                            console.error("Error fetching products:", error);
+                        } else {
+                            console.log("response.data.cart_items",response.data.cart_items)
+                            // setMy(response.data.cart_items);
+                            setMyCart(response.data.cart_items)
+                        }
+                        setIsLoader(false)
+                    });
+                // }
+                
+            }else{
+                setIsLoader(false);
+                setMyCart(cookie.myCart)
+            }
         }
-    }, [deleteItem, isLogin]);
+        
+        
+        fetchCartDetails();
+    }, [ isLogin]);
+
+
 
 
     // console.log("my cart: ", myCart);
+    console.log(isLoader)
 
 
     return (
-        <AppContext.Provider value={{ showPopup, arrowClick, hidePopup, handlePopUpVisibility, handleArrowClickVisibility, hideArrowClick, myCart, showCookiesPopUp, setShowCookiesPopUp, setredirectTo, redirectTo, showProductDesc, productdata, searchValue, adjustScroll, sidebarRef, productDesRef, deleteItem, itemAdded, signinPopUp, setSigninPopUp }}>
-            <AppDispatchContext.Provider value={{ setMyCart, setShowProductDesc, setProductdata, setSearchValue, setShowPopup, setArrowClick, setDeleteItem, setItemAdded }}>
+        <AppContext.Provider value={{ showPopup, arrowClick, hidePopup, handlePopUpVisibility, handleArrowClickVisibility, hideArrowClick, myCart, showCookiesPopUp, setShowCookiesPopUp, setredirectTo, redirectTo, showProductDesc, productdata, searchValue, adjustScroll, sidebarRef, productDesRef, deleteItem, itemAdded, signinPopUp, setSigninPopUp, isLoader }}>
+            <AppDispatchContext.Provider value={{ setMyCart, setShowProductDesc, setProductdata, setSearchValue, setShowPopup, setArrowClick, setDeleteItem, setItemAdded, setIsLoader }}>
                 {children}
             </AppDispatchContext.Provider>
         </AppContext.Provider>

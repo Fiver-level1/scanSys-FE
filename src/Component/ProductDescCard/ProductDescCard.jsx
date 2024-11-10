@@ -11,11 +11,13 @@ import { addCartItems, changeCartItemQuantity, deleteCartItem, getCartItems } fr
 
 
 const ProductDescCard = ({ closeProductDesc, productDesData, parent }) => {
+    // console.log("productDesData: ", productDesData)
 
     const { setMyCart, setItemAdded, setDeleteItem } = useContext(AppDispatchContext);
     const { myCart, productDesRef, itemAdded } = useContext(AppContext);
     const [itemState, setItemState] = useState(0);
     const [cookie, setCookie, removeCookie] = useCookies([MY_CART]);
+    const { isLogin } = useContext(AppContext);
 
     // console.log(productDesRef)
     const handleDecrementItem = () => {
@@ -26,8 +28,17 @@ const ProductDescCard = ({ closeProductDesc, productDesData, parent }) => {
     // console.log(parent == "foodContainer");
 
     useEffect(() => {
-        // console.log(myCart);
-        const existingItem = myCart.find((item) => item.product?.id === productDesData.id);
+        console.log(myCart);
+        const existingItem = myCart.find(item => {
+            if(isLogin){
+                if(item.product?.id === productDesData?.id)
+                    return item.product;
+            }else{
+                if(item?.id === productDesData?.id)
+                    return item;
+            }
+            
+        });
         console.log(existingItem)
         const itemCount = existingItem ? existingItem.quantity : 1;
         setItemState(itemCount);
@@ -35,59 +46,87 @@ const ProductDescCard = ({ closeProductDesc, productDesData, parent }) => {
 
     const handleAddToCart = async () => {
         let myCartItems = myCart;
-        const existingItem = myCartItems.find(item => item.product?.id === productDesData?.id);
-        // console.log(existingItem)
+        const existingItem = myCartItems.find(item => {
+            if(isLogin){
+                item.product?.id === productDesData?.id
+                return item.product;
+            }else{
+                if(item?.id === productDesData?.id)
+                    return item;
+            }
+            
+        });
+        console.log(existingItem)
         if (itemState != 0) {
-            productDesData.qty = itemState;
+            productDesData.quantity = itemState;
             if (existingItem) {
-                await changeCartItemQuantity((error, response) => {
-                    if (error) {
-                        console.error("Error fetching products:", error);
-                    } else {
-                        // console.log("MY CART Products added successfully:", response.data);
-                        // existingItem.quantity = itemState;
-                        // myCartItems = [...myCartItems];
-                    }
-                }, productDesData);
+                if (isLogin) {
+                    await changeCartItemQuantity((error, response) => {
+                        if (error) {
+                            console.error("Error fetching products:", error);
+                        } else {
+                            // console.log("MY CART Products added successfully:", response.data);
+                            // existingItem.quantity = itemState;
+                            // myCartItems = [...myCartItems];
+                        }
+                    }, productDesData);
+                } else {
+                    existingItem.quantity = itemState;
+                    myCartItems = [...myCartItems];
+                }
 
             } else {
-                await addCartItems((error, response) => {
-                    if (error) {
-                        console.error("Error fetching products:", error);
-                    } else {
-                        // console.log("MY CART Products added successfully:", response.data);
-                        // myCartItems.push(productDesData);
-                    }
-                }, productDesData)
-
+                if (isLogin) {
+                    await addCartItems((error, response) => {
+                        if (error) {
+                            console.error("Error fetching products:", error);
+                        } else {
+                            // console.log("MY CART Products added successfully:", response.data);
+                            // myCartItems.push(productDesData);
+                        }
+                    }, productDesData)
+                } else {
+                    console.log("productDesData: ", productDesData)
+                    myCartItems.push(productDesData);
+                }
             }
         } else {
             if (existingItem) {
                 console.log(productDesData)
-                await deleteCartItem((error, response) => {
-                    if (error) {
-                        console.log("error: ", error);
-                    }
-                    if (response) {
-                        // console.log("Delted: ", response)
-                    }
-                }, productDesData)
-                // myCartItems = myCartItems.filter((val, i) => val !== productDesData);
+                if (isLogin) {
+                    await deleteCartItem((error, response) => {
+                        if (error) {
+                            console.log("error: ", error);
+                        }
+                        if (response) {
+                            // console.log("Delted: ", response)
+                        }
+                    }, productDesData)
+                    // myCartItems = myCartItems.filter((val, i) => val !== productDesData);
+                } else {
+                    myCartItems = myCartItems.filter((val, i) => val !== productDesData);
+                }
             }
         }
 
-        await getCartItems((error, response) => {
-            if (error) {
-                console.error("Error fetching products:", error);
-            } else {
-                // console.log("response.data.cart_items",response.data.cart_items)
-                // setMy(response.data.cart_items);
-                setMyCart(response.data.cart_items)
-                // console.log("MY CART Products fetched successfully:", response.data);
-            }
-        });
-        // setMyCart(myCartItems);
-        setCookie("myCart", myCartItems, { path: '/', expires: expireTime });
+        if (isLogin) {
+            await getCartItems((error, response) => {
+                if (error) {
+                    console.error("Error fetching products:", error);
+                } else {
+                    // console.log("response.data.cart_items",response.data.cart_items)
+                    // setMy(response.data.cart_items);
+                    setMyCart(response.data.cart_items)
+                    // console.log("MY CART Products fetched successfully:", response.data);
+                }
+            });
+        } else {
+            setMyCart(myCartItems);
+            // console.log("myCartItems: ", myCartItems)
+            setCookie("myCart", myCartItems, { path: '/', expires: expireTime });
+        }
+        
+
         closeProductDesc(false)
     }
     const getRandomMatteColor = () => {
