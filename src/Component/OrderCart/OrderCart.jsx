@@ -32,7 +32,7 @@ const OrderCart = () => {
         }, 0);
         
         setSubTotal(newSubTotal.toFixed(2));
-    }, [myCart]);
+    }, [myCart, isLogin]);
 
     // useEffect(() => {
     //     // debugger;

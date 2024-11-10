@@ -8,6 +8,7 @@ import { useCookies } from 'react-cookie';
 import { expireTime, MY_CART } from '../../Constants/cookieConst';
 import { BASE_URL } from '../../Services/Constant';
 import { addCartItems, changeCartItemQuantity, deleteCartItem, getCartItems } from '../../Services/CartApis';
+import { AuthContext } from '../../context/AuthContext';
 
 
 const ProductDescCard = ({ closeProductDesc, productDesData, parent }) => {
@@ -17,7 +18,7 @@ const ProductDescCard = ({ closeProductDesc, productDesData, parent }) => {
     const { myCart, productDesRef, itemAdded } = useContext(AppContext);
     const [itemState, setItemState] = useState(0);
     const [cookie, setCookie, removeCookie] = useCookies([MY_CART]);
-    const { isLogin } = useContext(AppContext);
+    const { isLogin } = useContext(AuthContext);
 
     // console.log(productDesRef)
     const handleDecrementItem = () => {
@@ -44,6 +45,8 @@ const ProductDescCard = ({ closeProductDesc, productDesData, parent }) => {
         setItemState(itemCount);
     }, [myCart])
 
+    console.log("isLogin: ", isLogin);
+
     const handleAddToCart = async () => {
         let myCartItems = myCart;
         const existingItem = myCartItems.find(item => {
@@ -56,7 +59,7 @@ const ProductDescCard = ({ closeProductDesc, productDesData, parent }) => {
             }
             
         });
-        console.log(existingItem)
+        console.log("existing item product des", existingItem)
         if (itemState != 0) {
             productDesData.quantity = itemState;
             if (existingItem) {
