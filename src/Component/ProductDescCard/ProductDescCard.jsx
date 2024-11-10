@@ -127,11 +127,11 @@ const ProductDescCard = ({ closeProductDesc, productDesData, parent }) => {
                 }
             });
         } 
-        // else {
-        //     setMyCart(myCartItems);
-        //     // console.log("myCartItems: ", myCartItems)
-        //     setCookie("myCart", myCartItems, { path: '/', expires: expireTime });
-        // }
+        else {
+            setMyCart(myCartItems);
+            // console.log("myCartItems: ", myCartItems)
+            setCookie("myCart", myCartItems, { path: '/', expires: expireTime });
+        }
         
 
         closeProductDesc(false)
