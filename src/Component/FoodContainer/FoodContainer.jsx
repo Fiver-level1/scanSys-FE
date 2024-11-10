@@ -34,7 +34,7 @@ const FoodContainer = ({productList}) => {
 
     useEffect(() => {
         let searchValueTemp = searchValue.trim();
-        const productDataFilter = productList.filter((item, index) => item?.title?.toLowerCase().includes(searchValueTemp?.toLowerCase()));
+        const productDataFilter = productList.filter((item, index) => item?.name?.toLowerCase().includes(searchValueTemp?.toLowerCase()));
 
         if (searchValueTemp === "") {
             groupedDataFunc([]);

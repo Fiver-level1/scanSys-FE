@@ -10,6 +10,7 @@ const FilterNav = () => {
 
     const handleSearchValue = (e) => {
         setInput(e.target.value);
+        // console.log(e.target.value)
     }
 
     useEffect(() => {
