@@ -14,6 +14,7 @@ import { toast, ToastContainer } from 'react-toastify';
 
 const ProductDescCard = ({ closeProductDesc, productDesData, parent }) => {
 
+
     const { setMyCart, setItemAdded, setDeleteItem } = useContext(AppDispatchContext);
     const { myCart, productDesRef, itemAdded } = useContext(AppContext);
     const [itemState, setItemState] = useState(0);
@@ -28,14 +29,14 @@ const ProductDescCard = ({ closeProductDesc, productDesData, parent }) => {
 
     useEffect(() => {
         const existingItem = myCart.find(item => {
-            if(isLogin){
-                if(item.product?.id === productDesData?.id)
+            if (isLogin) {
+                if (item.product?.id === productDesData?.id)
                     return item.product;
-            }else{
-                if(item?.id === productDesData?.id)
+            } else {
+                if (item?.id === productDesData?.id)
                     return item;
             }
-            
+
         });
         const itemCount = existingItem ? existingItem.quantity : 1;
         setItemState(itemCount);
@@ -46,14 +47,14 @@ const ProductDescCard = ({ closeProductDesc, productDesData, parent }) => {
 
         let myCartItems = myCart;
         const existingItem = myCartItems.find(item => {
-            if(isLogin){
-                if(item.product?.id === productDesData?.id)
+            if (isLogin) {
+                if (item.product?.id === productDesData?.id)
                     return item.product;
-            }else{
-                if(item?.id === productDesData?.id)
+            } else {
+                if (item?.id === productDesData?.id)
                     return item;
             }
-            
+
         });
 
         if (itemState != 0) {
@@ -64,7 +65,7 @@ const ProductDescCard = ({ closeProductDesc, productDesData, parent }) => {
                         if (error) {
                             console.error("Error fetching products:", error);
                         } else {
-                           
+
                         }
                     }, productDesData);
                 } else {
@@ -79,7 +80,7 @@ const ProductDescCard = ({ closeProductDesc, productDesData, parent }) => {
                             console.error("Error fetching products:", error);
                             toast.error("please try to add again")
                         } else {
-                        
+
                         }
                     }, productDesData)
                 } else {
@@ -88,7 +89,7 @@ const ProductDescCard = ({ closeProductDesc, productDesData, parent }) => {
                 toast.success("item added in cart")
             }
         }
-         else {
+        else {
             if (existingItem) {
 
                 if (isLogin) {
@@ -117,12 +118,12 @@ const ProductDescCard = ({ closeProductDesc, productDesData, parent }) => {
                     setMyCart(response.data.cart_items)
                 }
             });
-        } 
+        }
         else {
             setMyCart(myCartItems);
             setCookie("myCart", myCartItems, { path: '/', expires: expireTime });
         }
-        
+
 
         closeProductDesc(false)
     }

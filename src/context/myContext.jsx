@@ -4,9 +4,11 @@ import { getCartItems } from "../Services/CartApis";
 import { AuthContext } from "./AuthContext";
 import { postRequest } from "../Services/ApiController";
 const AppContext = createContext("");
+import { COOKIE_CONSENT, expireTime } from '../Constants/cookieConst'
 const AppDispatchContext = createContext("");
 
 const AppProvider = ({ children }) => {
+    ;
 
     const { isLogin, setisLogin } = useContext(AuthContext);
     const [cookie, setCookie, removeCookie] = useCookies(["myCart"]);
@@ -56,44 +58,47 @@ const AppProvider = ({ children }) => {
     }
 
     useEffect(() => {
-        // debugger;
+        const fetchCartDetails = async () => {
+            if (isLogin) {
+                let data = { items: [] };
+                myCart.forEach((item, index) => {
+                    let m = {};
+                    m.product_id = item.id;
+                    m.quantity = item.quantity;
+                    data.items.push(m);
+                })
+                await postRequest("/api/cart/", (error, response) => {
+                    if (error) {
+                        console.log("error in posting:  ", error);
+                    }
+                    if (response) {
 
-        const fetchCartDetails = async()=>{
-            if(isLogin){
-                    let data = { items: [] };
-                    myCart.forEach((item, index)=>{
-                        let m = {};
-                        m.product_id = item.id;
-                        m.quantity = item.quantity;
-                        data.items.push(m);
-                    })
-                    await postRequest("/api/cart/", (error, response)=>{
-                        if(error){
-                            console.log("error in posting:  ", error);
-                        }
-                        if(response){
-                            
-                        }
-                    }, data)
-                    await getCartItems((error, response) => {
-                        if (error) {
-                            console.error("Error fetching products:", error);
-                        } else {
-                            setMyCart(response.data.cart_items)
-                        }
-                        setIsLoader(false)
-                    });
+                    }
+                }, data)
+                await getCartItems((error, response) => {
+                    if (error) {
+                        console.error("Error fetching products:", error);
+                    } else {
+                        setMyCart(response.data.cart_items)
+                    }
+                    setIsLoader(false)
+                });
                 // }
-                
-            }else{
+
+            } else {
+                if (!localStorage.getItem("access_token")) {
+                    setMyCart(cookie.myCart ? cookie.myCart : [])
+                }
                 setIsLoader(false);
-                setMyCart(cookie.myCart)
             }
         }
-        
-        
+
         fetchCartDetails();
-    }, [ isLogin]);
+    }, [isLogin]);
+
+    useEffect(() => {
+        setCookie(COOKIE_CONSENT, 'true', { path: '/', expires: expireTime });
+    }, [])
 
 
     return (

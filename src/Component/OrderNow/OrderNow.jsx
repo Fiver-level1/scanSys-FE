@@ -12,9 +12,10 @@ import Loader from '../Loader/Loader';
 import { getRequest } from '../../Services/ApiController';
 import { toast, ToastContainer } from "react-toastify";
 const OrderNow = () => {
+
     const { myCart, isLoader } = useContext(AppContext);
     const { role } = useContext(AuthContext);
-    const { setIsLoader } = useContext(AppDispatchContext);
+    const { setIsLoader, setMyCart } = useContext(AppDispatchContext);
     const [subTotal, setSubTotal] = useState(0);
     const [selectedTable, setSelectedTable] = useState(1);
     const [listOfTable, setlistOfTable] = useState([]);
@@ -66,7 +67,7 @@ const OrderNow = () => {
     useEffect(() => {
         getRequest("/api/seats", (err, res) => {
             if (err) {
-                toast.error("please contact Resturant for Table Number");
+                // toast.error("please contact Resturant for Table Number");
             } else {
                 const data = res.data;
                 setlistOfTable(data);
@@ -75,10 +76,12 @@ const OrderNow = () => {
     }, [])
 
     const handleCheckout = () => {
+        setIsLoader(true)
         postRequest("/stripe/create-checkout-session", (err, res) => {
             if (err) {
                 console.log("error in checkout : ", err);
             } else {
+                setMyCart([]);
                 if (role.toLowerCase() === "waiter") {
                     navigate("/payment-successful", { state: { waiter: true } });
                 } else {

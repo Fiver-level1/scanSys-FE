@@ -43,7 +43,7 @@ const Navbar = () => {
             <Link to='/cart'>
                 <div className="cartIcon">
                     <FaShoppingCart />
-                    <span>{myCart.length && myCart.length}</span>
+                    <span>{myCart?.length && myCart?.length}</span>
                 </div>
             </Link>
 

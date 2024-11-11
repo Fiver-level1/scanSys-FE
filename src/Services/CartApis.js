@@ -7,6 +7,7 @@ export const getCartItems = async (cb) => {
 }
 
 export const addCartItems = async (cb, data) => {
+
     let m = {};
     m.product_id = data.id;
     m.quantity = data.quantity;

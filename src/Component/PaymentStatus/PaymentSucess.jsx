@@ -6,11 +6,17 @@ import { postRequest } from '../../Services/ApiController';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from "react-toastify";
+import { AppDispatchContext } from '../../context/myContext';
+import { useContext } from 'react';
+import { deleteRequest } from '../../Services/ApiController';
 const PaymentSucess = () => {
+
+    const { setMyCart } = useContext(AppDispatchContext);
     const location = useLocation();
     const navigate = useNavigate();
     const { sessionId, waiter } = location.state || {};
     useEffect(() => {
+        setMyCart([]);
         if (!sessionId && !waiter) {
             navigate("/");
             return;
@@ -22,9 +28,15 @@ const PaymentSucess = () => {
             if (err) {
                 toast.error("Payment verification failed. Please contact the restaurant.")
             } else {
-                toast.success("Payment Successful!")
+                // toast.success("Payment Successful!")
             }
         }, payload);
+        deleteRequest("/api/cart/clear/", (err, res) => {
+            if (err) {
+                console.error("error in delete request : ", err);
+            } else {
+            }
+        })
     }, [sessionId]);
     return (
         <>

@@ -36,6 +36,7 @@
     line-height: 40px;
     border-radius: 50%;
     font-size: 16px;
+    mix-blend-mode: difference;
 }
 
 .productDescWrapper .wrapper .icon i {
