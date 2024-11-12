@@ -49,7 +49,8 @@ function App() {
           <Route path="/cart" element={<OrderCart />} />
           <Route path="/orderNow" element={<OrderNow />} />
           <Route path="/help" element={<Help />} />
-          <Route path="/termsAndCondition" element={<TermsAndCondition contðent={termsAndConditions} heading="Terms and Conditions" />} />
+          <Route path="/termsAndCondition" element={<TermsAndCondition content={termsAndConditions} heading="Terms and Conditions" />} />
+          <Route path="/privacyPolicy" element={<TermsAndCondition content={privacyPolicy} heading="Privacy and Policy" />} />
           {/* <Route element={<ProtectedRoute isLoggedIn={isLogin} />}> */}
           <Route path="/orderHistory" element={<OrderHistory />} />
           <Route path="/payment-successful" element={<PaymentSucess />} />
