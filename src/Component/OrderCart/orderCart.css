@@ -1,6 +1,7 @@
 .cartWrapper {
     width: 80%;
     margin: 2rem auto;
+    margin-bottom: 3.6rem;
 }
 
 .cartContentHolder {
@@ -19,7 +20,6 @@
     max-height: 100vh;
     overflow: scroll;
     padding: 10px;
-    width: 60%;
     margin: 10px 0;
 }
 
@@ -136,12 +136,43 @@
     background: #f9f7f3 !important;
 }
 
+.scrollPreview {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    opacity: 0.6;
+    position: absolute;
+    bottom: -1.5rem;
+    left: 15px;
+}
+
+.lsitOrderWrapper {
+    display: flex;
+    position: relative;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 60%;
+    align-items: center;
+}
+
+.scrollPreview span {
+    font-size: 12px;
+}
+
+.scrollPreview img {
+    width: 16px;
+}
+
 @media only screen and (max-width:991px) {
     .cartContentHolder {
         flex-direction: column;
         justify-content: center;
         align-items: center;
         gap: 2rem;
+    }
+
+    .lsitOrderWrapper {
+        width: 100%;
     }
 
     .ListOfOrders {

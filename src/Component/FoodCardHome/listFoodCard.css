@@ -81,6 +81,11 @@
     font-size: 15px;
     font-family: Poppins;
     font-weight: 400;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .secondArea {
@@ -156,6 +161,28 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.type {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    justify-content: center;
+}
+
+.type span {
+    font-size: 12px;
+    text-transform: lowercase;
+    opacity: 0.6;
+}
+
+.type svg {
+    font-size: 14px;
+    color: #A91E2C;
+}
+
+.veg svg {
+    color: green;
 }
 
 @media only screen and (max-width:991px) {

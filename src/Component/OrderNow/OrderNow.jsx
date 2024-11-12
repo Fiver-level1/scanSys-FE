@@ -81,12 +81,12 @@ const OrderNow = () => {
             if (err) {
                 console.log("error in checkout : ", err);
             } else {
-                setMyCart([]);
                 if (role.toLowerCase() === "waiter") {
                     navigate("/payment-successful", { state: { waiter: true } });
                 } else {
                     window.location.href = res.data.url;
                 }
+                setMyCart([]);
             }
             setIsLoader(false);
         }, checkoutPaylod)

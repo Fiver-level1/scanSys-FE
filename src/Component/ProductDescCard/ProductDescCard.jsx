@@ -10,7 +10,7 @@ import { BASE_URL } from '../../Services/Constant';
 import { addCartItems, changeCartItemQuantity, deleteCartItem, getCartItems } from '../../Services/CartApis';
 import { AuthContext } from '../../context/AuthContext';
 import { toast, ToastContainer } from 'react-toastify';
-
+import { FaRegStopCircle } from "react-icons/fa";
 
 const ProductDescCard = ({ closeProductDesc, productDesData, parent }) => {
 
@@ -26,6 +26,9 @@ const ProductDescCard = ({ closeProductDesc, productDesData, parent }) => {
             setItemState(itemState - 1);
         }
     }
+
+    console.log(productDesData);
+
 
     useEffect(() => {
         const existingItem = myCart.find(item => {
@@ -159,7 +162,9 @@ const ProductDescCard = ({ closeProductDesc, productDesData, parent }) => {
                     <RxCross2 />
                 </div>
                 <div className="DetailsWrapper">
-                    <div className="name">{productDesData?.title}</div>
+                    <div className="name">{productDesData?.name}</div>
+                    <div className={`type ${productDesData?.type.toLowerCase()}`}>
+                        <FaRegStopCircle /> <span>{`${productDesData.type}`}</span></div>
                     <div className="about">{productDesData?.description}</div>
                     <div className="social-icons">
                         {
