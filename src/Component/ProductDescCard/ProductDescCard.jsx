@@ -27,8 +27,6 @@ const ProductDescCard = ({ closeProductDesc, productDesData, parent }) => {
         }
     }
 
-    console.log(productDesData);
-
 
     useEffect(() => {
         const existingItem = myCart.find(item => {
