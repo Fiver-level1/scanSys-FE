@@ -36,7 +36,6 @@
     line-height: 40px;
     border-radius: 50%;
     font-size: 16px;
-    mix-blend-mode: difference;
 }
 
 .productDescWrapper .wrapper .icon i {
@@ -49,12 +48,20 @@
 }
 
 .productDescWrapper .wrapper .icon.dots {
+    right: 3px !important;
+    top: 5px;
+    background: #fff;
     right: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 25px;
+    height: 25px;
 }
 
 .productDescWrapper .wrapper .icon.dots svg {
-    font-size: 1.2rem;
-    color: #fff;
+    font-size: 15px;
+    color: #000;
 }
 
 .productDescWrapper .wrapper .icon.dots:hover {

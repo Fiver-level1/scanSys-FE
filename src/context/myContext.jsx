@@ -62,6 +62,7 @@ const AppProvider = ({ children }) => {
     useEffect(() => {
         const fetchCartDetails = async () => {
             if (isLogin) {
+                removeCookie('myCart', { path: '/' });
                 let data = { items: [] };
                 myCart.forEach((item, index) => {
                     let m = {};
