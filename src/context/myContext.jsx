@@ -5,6 +5,7 @@ import { AuthContext } from "./AuthContext";
 import { postRequest } from "../Services/ApiController";
 const AppContext = createContext("");
 import { COOKIE_CONSENT, expireTime } from '../Constants/cookieConst'
+import { getProducts } from "../Services/ProductApis";
 const AppDispatchContext = createContext("");
 
 const AppProvider = ({ children }) => {
@@ -24,6 +25,7 @@ const AppProvider = ({ children }) => {
     const [deleteItem, setDeleteItem] = useState(false);
     const [itemAdded, setItemAdded] = useState(false);
     const [isLoader, setIsLoader] = useState(true);
+    const [productList, setProductList] = useState([])
     const sidebarRef = useRef(null);
     const productDesRef = useRef(null);
 
@@ -72,7 +74,7 @@ const AppProvider = ({ children }) => {
                         console.log("error in posting:  ", error);
                     }
                     if (response) {
-
+                        
                     }
                 }, data)
                 await getCartItems((error, response) => {
@@ -100,10 +102,39 @@ const AppProvider = ({ children }) => {
         setCookie(COOKIE_CONSENT, 'true', { path: '/', expires: expireTime });
     }, [])
 
+    useEffect(() => {
+        getProducts((error, response) => {
+            if (error) {
+                console.error("Error fetching products:", error);
+            } else {
+                setProductList(response.data);
+                setCookieProductListChange(response.data);
+
+            }
+            setIsLoader(false);
+        });
+
+    }, []);
+
+    const setCookieProductListChange = (products)=>{
+        const productsArray = cookie.myCart.map((cp) => {
+            const productT = products.find((p) => p?.id === cp?.id);
+            if (productT) {
+                return { ...productT, quantity: cp?.quantity };
+            }
+            return null; // Handle the case where the product is not found
+        }).filter(Boolean); 
+
+        setMyCart(productsArray);
+        if(!isLogin){
+            setCookie("myCart", productsArray, { path: '/', expires: expireTime });
+        }
+    }
+
 
     return (
-        <AppContext.Provider value={{ showPopup, arrowClick, hidePopup, handlePopUpVisibility, handleArrowClickVisibility, hideArrowClick, myCart, showCookiesPopUp, setShowCookiesPopUp, setredirectTo, redirectTo, showProductDesc, productdata, searchValue, adjustScroll, sidebarRef, productDesRef, deleteItem, itemAdded, signinPopUp, setSigninPopUp, isLoader }}>
-            <AppDispatchContext.Provider value={{ setMyCart, setShowProductDesc, setProductdata, setSearchValue, setShowPopup, setArrowClick, setDeleteItem, setItemAdded, setIsLoader }}>
+        <AppContext.Provider value={{ showPopup, arrowClick, hidePopup, handlePopUpVisibility, handleArrowClickVisibility, hideArrowClick, myCart, showCookiesPopUp, setShowCookiesPopUp, setredirectTo, redirectTo, showProductDesc, productdata, searchValue, adjustScroll, sidebarRef, productDesRef, deleteItem, itemAdded, signinPopUp, setSigninPopUp, isLoader, productList }}>
+            <AppDispatchContext.Provider value={{ setMyCart, setShowProductDesc, setProductdata, setSearchValue, setShowPopup, setArrowClick, setDeleteItem, setItemAdded, setIsLoader, setProductList }}>
                 {children}
             </AppDispatchContext.Provider>
         </AppContext.Provider>
