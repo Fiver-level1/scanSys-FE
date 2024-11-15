@@ -8,11 +8,9 @@ import { AppContext, AppDispatchContext } from '../../context/myContext';
 import { useContext } from 'react';
 import ClickBoundary from '../onBlur/ClickBoundary';
 import { CLIENT_ID, CLIENT_SECRET } from '../../Services/Constant';
-import { postRequestAuth } from '../../Services/AuthControllerWithoutToken';
-import { getRequest } from '../../Services/ApiController';
 import { getProfileFromPayload } from '../../Utils/Utils';
 import { AuthContext } from '../../context/AuthContext';
-
+import { toast } from "react-toastify";
 const SignIn = () => {
     const { hideArrowClick, setSigninPopUp } = useContext(AppContext);
     const { setisLogin, setUserName, setRole } = useContext(AuthContext);
@@ -42,35 +40,41 @@ const SignIn = () => {
     }
     const handleFormLogin = (e) => {
         e.preventDefault();
-        getProfileFromPayload(loginInput, callBackFunction, { setisLogin, setUserName, setRole });
+        if (!loginInput.username || !loginInput.password) {
+            toast.error("Email and password are required")
+        } else {
+            getProfileFromPayload(loginInput, callBackFunction, { setisLogin, setUserName, setRole });
+        }
     };
 
     return (
-        <div className="singinContainer">
-            <ClickBoundary ref={loginRef} onOutsideClick={() => setArrowClick(false)} >
-                <div className="content" ref={loginRef}>
-                    <div className="text">Login</div>
-                    <form action="#">
-                        <div className="field">
-                            <input required type="text" className="input" name='username' value={loginInput.username} onChange={handleInputChange} placeholder='Email' />
-                            <span className="span">
-                                <AiTwotoneMail />
-                            </span>
+        <>
+            <div className="singinContainer">
+                <ClickBoundary ref={loginRef} onOutsideClick={() => setArrowClick(false)} >
+                    <div className="content" ref={loginRef}>
+                        <div className="text">Login</div>
+                        <form action="#">
+                            <div className="field">
+                                <input required type="text" className="input" name='username' value={loginInput.username} onChange={handleInputChange} placeholder='Email' />
+                                <span className="span">
+                                    <AiTwotoneMail />
+                                </span>
+                            </div>
+                            <div className="field">
+                                <input required type="password" className="input" name='password' value={loginInput.password} onChange={handleInputChange} placeholder='Password' />
+                                <span className="span">
+                                    <AiTwotoneLock />
+                                </span>
+                            </div>
+                            <button className="button" onClick={handleFormLogin}>Login</button>
+                        </form>
+                        <div className="closePopUp" onClick={hideCloseArrow}>
+                            <IoClose />
                         </div>
-                        <div className="field">
-                            <input required="" type="password" className="input" name='password' value={loginInput.password} onChange={handleInputChange} placeholder='Password' />
-                            <span className="span">
-                                <AiTwotoneLock />
-                            </span>
-                        </div>
-                        <button className="button" onClick={handleFormLogin}>Login</button>
-                    </form>
-                    <div className="closePopUp" onClick={hideCloseArrow}>
-                        <IoClose />
                     </div>
-                </div>
-            </ClickBoundary>
-        </div>
+                </ClickBoundary>
+            </div>
+        </>
     )
 }
 

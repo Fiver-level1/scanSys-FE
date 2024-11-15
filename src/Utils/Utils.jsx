@@ -6,8 +6,8 @@ const getProfileFromPayload = (payload, callBackFunction, { setisLogin, setUserN
     postRequestAuth("/auth/token/", (err, res) => {
         callBackFunction();
         if (err) {
-            console.error("Error in authentication:", err);
-            toast.error("Please retry to login");
+            console.log("Error in authentication:", err);
+            toast.error("Invalid email or password!");
         } else {
             const accessToken = res?.data?.access_token;
             if (accessToken) {
@@ -15,7 +15,7 @@ const getProfileFromPayload = (payload, callBackFunction, { setisLogin, setUserN
                 getRequest("/api/profile/", (err, res) => {
                     if (err) {
                         console.log("error ", err);
-                        toast.error("Please retry to login");
+                        toast.error("Something went wrong Please try again!");
                     } else {
                         toast.success("logged In successfully!");
                         setisLogin(true);

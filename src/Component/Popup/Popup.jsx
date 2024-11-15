@@ -89,7 +89,7 @@ const Popup = () => {
             if (err) {
                 hideArrowClick();
                 console.log("error in register : ", err);
-                toast.error("Please retry to register")
+                toast.error(err.response.data.error)
             } else {
                 const loginInputPayload = {
                     "client_secret": CLIENT_SECRET,
@@ -99,7 +99,6 @@ const Popup = () => {
                     "grant_type": "password"
                 }
                 getProfileFromPayload(loginInputPayload, callBackFunction, { setisLogin, setUserName, setRole })
-                toast.success("Registered Successfully")
             }
 
         }, formRegister)
