@@ -86,7 +86,7 @@ const OrderCart = () => {
                                             )
                                         })}
                                     </div>
-                                    {myCart?.length > 1 ?
+                                    {myCart?.length > 2 ?
                                         <div className="scrollPreview">
                                             <span>scroll to see all items</span>
                                             <img src={scrollRight} alt="" />
