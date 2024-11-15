@@ -34,22 +34,24 @@ const OrderHistory = () => {
             const PaymentStatusPayload = {
                 "checkout_ids": payloadData
             }
-            await postRequest("/stripe/update-payment-status", (err, res) => {
-                if (err) {
-                    console.log("error in getting payment status updated", err);
-                } else {
-                    console.log("Latest Payment get Updated here");
-                }
-            }, PaymentStatusPayload)
-            await getRequest("/api/orders/", (error, response) => {
-                if (error) {
+            if (payloadData && payloadData.length) {
+                await postRequest("/stripe/update-payment-status", (err, res) => {
+                    if (err) {
+                        console.log("error in getting payment status updated", err);
+                    } else {
+                        console.log("Latest Payment get Updated here");
+                    }
+                }, PaymentStatusPayload)
+                await getRequest("/api/orders/", (error, response) => {
+                    if (error) {
 
-                } else {
-                    const data = response.data;
-                    const sortedData = data.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
-                    setOrderData(sortedData)
-                }
-            })
+                    } else {
+                        const data = response.data;
+                        const sortedData = data.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+                        setOrderData(sortedData)
+                    }
+                })
+            }
         }
     }
     useEffect(() => {

@@ -80,6 +80,7 @@ const OrderNow = () => {
         postRequest("/stripe/create-checkout-session", (err, res) => {
             if (err) {
                 console.log("error in checkout : ", err);
+                toast.error("Something went wrong with payment checkout!");
             } else {
                 if (role.toLowerCase() === "waiter") {
                     navigate("/payment-successful", { state: { waiter: true } });
