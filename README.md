@@ -1,7 +1,3 @@
-
-# Clone the repository:
-   git clone https://github.com/Fiver-level1/scanSys-FE.git
-
 # Navigate to the project directory:
     cd scanSys-FE
     npm i
