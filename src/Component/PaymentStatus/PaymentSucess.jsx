@@ -9,9 +9,14 @@ import { toast, ToastContainer } from "react-toastify";
 import { AppDispatchContext } from '../../context/myContext';
 import { useContext } from 'react';
 import { deleteRequest } from '../../Services/ApiController';
+import { AuthContext } from '../../context/AuthContext';
+import { useCookies } from "react-cookie";
+import { MY_CART } from '../../Constants/cookieConst';
 const PaymentSucess = () => {
 
     const { setMyCart } = useContext(AppDispatchContext);
+    const [cookie, setCookies, removeCookie] = useCookies([MY_CART]);
+    const { isLogin } = useContext(AuthContext);
     const location = useLocation();
     const navigate = useNavigate();
     const { sessionId, waiter } = location.state || {};
@@ -24,6 +29,7 @@ const PaymentSucess = () => {
         const payload = {
             "checkout_ids": [sessionId]
         }
+
         postRequest(`/stripe/update-payment-status`, (err, res) => {
             if (err) {
                 toast.error("Payment verification failed. Please contact the restaurant.")
@@ -37,6 +43,7 @@ const PaymentSucess = () => {
             } else {
             }
         })
+
     }, [sessionId]);
     return (
         <>
@@ -45,13 +52,17 @@ const PaymentSucess = () => {
                     <div className="paymentDesc">
                         <PiSealCheckFill />
                         <h1>Order Successful!</h1>
-                        <p>{waiter ? "Thank you for the Order. Your order is being prepared. Visit Order History for updates on your meal status." : "Receipt has been sent to your email. Your order is being prepared. Visit Order History for updates on your meal status."}</p>
+                        {!isLogin ?
+                            <p>Thank you for the Order ! Your order is being prepared</p> :
+                            <p>{waiter ? "Thank you for the Order. Your order is being prepared. Visit Order History for updates on your meal status." : "Receipt has been sent to your email. Your order is being prepared. Visit Order History for updates on your meal status."}</p>
+                        }
                     </div>
-                    <Link to="/orderHistory">
-                        <div className="redirectBtn">
-                            <button>View Order History</button>
-                        </div>
-                    </Link>
+                    <div className="redirectBtn">
+                        {
+                            isLogin ?
+                                <Link to="/orderHistory"><button>View Order History</button></Link> : <Link to="/"><button>Back To Home</button></Link>
+                        }
+                    </div>
                 </div>
             </div>
             <ToastContainer />

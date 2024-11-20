@@ -14,7 +14,7 @@ import { toast, ToastContainer } from "react-toastify";
 const OrderNow = () => {
 
     const { myCart, isLoader } = useContext(AppContext);
-    const { role } = useContext(AuthContext);
+    const { role, isLogin } = useContext(AuthContext);
     const { setIsLoader, setMyCart } = useContext(AppDispatchContext);
     const [subTotal, setSubTotal] = useState(0);
     const [selectedTable, setSelectedTable] = useState(1);
@@ -47,21 +47,39 @@ const OrderNow = () => {
             navigate("/cart")
             return;
         }
-        const cartItems = myCart.map(val => ({
-            price: val.product.stripe_price_id,
-            quantity: val.quantity
-        }));
+        if (isLogin) {
+            const cartItems = myCart.map(val => ({
+                price: val?.product?.stripe_price_id,
+                quantity: val?.quantity
+            }));
 
-        setCheckoutPayload(prevPayload => ({
-            ...prevPayload,
-            items: cartItems
-        }));
+            setCheckoutPayload(prevPayload => ({
+                ...prevPayload,
+                items: cartItems
+            }));
 
-        const newSubTotal = myCart.reduce((acc, item) =>
-            acc + (Number(item.product?.price || 0) * (item.quantity || 0)),
-            0
-        );
-        setSubTotal(newSubTotal.toFixed(2));
+            const newSubTotal = myCart.reduce((acc, item) =>
+                acc + (Number(item.product?.price || 0) * (item.quantity || 0)),
+                0
+            );
+            setSubTotal(newSubTotal.toFixed(2));
+        } else {
+            const cartItems = myCart.map(val => ({
+                price: val?.stripe_price_id,
+                quantity: val?.quantity
+            }));
+
+            setCheckoutPayload(prevPayload => ({
+                ...prevPayload,
+                items: cartItems
+            }));
+
+            const newSubTotal = myCart.reduce((acc, item) =>
+                acc + (Number(item?.price || 0) * (item?.quantity || 0)),
+                0
+            );
+            setSubTotal(newSubTotal.toFixed(2));
+        }
     }, [myCart]);
 
     useEffect(() => {
