@@ -75,7 +75,7 @@ const AppProvider = ({ children }) => {
                         console.log("error in posting:  ", error);
                     }
                     if (response) {
-                        
+
                     }
                 }, data)
                 await getCartItems((error, response) => {
@@ -135,15 +135,14 @@ const AppProvider = ({ children }) => {
 
 
     const setCookieProductListChange = (products) => {
-        console.log("Current cookies:", document.cookie);
-    
+
         // Parse 'myCart' from document.cookie
         const myCartCookie = document.cookie
             .split('; ')
             .find(row => row.startsWith('myCart='))
             ?.split('=')[1];
         const myCart = myCartCookie ? JSON.parse(decodeURIComponent(myCartCookie)) : [];
-    
+
         // Update product list by matching IDs
         const productsArray = myCart.map((cp) => {
             const productT = products.find((p) => p?.id === cp?.id);
@@ -152,19 +151,19 @@ const AppProvider = ({ children }) => {
             }
             return null; // Handle the case where the product is not found
         }).filter(Boolean);
-    
+
         setMyCart(productsArray);
-    
+
         // Set or update the cookie if the user is not logged in
         if (!isLogin) {
             const expireTime = new Date();
             expireTime.setTime(expireTime.getTime() + (7 * 24 * 60 * 60 * 1000)); // 7 days expiry
-    
+
             document.cookie = `myCart=${encodeURIComponent(JSON.stringify(productsArray))}; path=/; expires=${expireTime.toUTCString()}`;
             console.log("Updated myCart cookie:", document.cookie);
         }
     };
-    
+
 
 
     return (
