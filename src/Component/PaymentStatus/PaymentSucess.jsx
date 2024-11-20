@@ -21,11 +21,12 @@ const PaymentSucess = () => {
     const navigate = useNavigate();
     const { sessionId, waiter } = location.state || {};
     useEffect(() => {
-        setMyCart([]);
-        if (!sessionId && !waiter) {
-            navigate("/");
-            return;
-        }
+        removeCookie('myCart', { path: '/' });
+        // if (!sessionId && !waiter) {
+        //     navigate("/");
+        //     return;
+        // }
+
         const payload = {
             "checkout_ids": [sessionId]
         }

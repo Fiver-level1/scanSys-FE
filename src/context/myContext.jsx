@@ -4,7 +4,7 @@ import { getCartItems } from "../Services/CartApis";
 import { AuthContext } from "./AuthContext";
 import { postRequest } from "../Services/ApiController";
 const AppContext = createContext("");
-import { COOKIE_CONSENT, expireTime } from '../Constants/cookieConst'
+import { COOKIE_CONSENT, expireTime, MY_CART } from '../Constants/cookieConst'
 import { getProducts } from "../Services/ProductApis";
 const AppDispatchContext = createContext("");
 
@@ -12,7 +12,7 @@ const AppProvider = ({ children }) => {
     ;
 
     const { isLogin, setisLogin } = useContext(AuthContext);
-    const [cookie, setCookie, removeCookie] = useCookies(["myCart"]);
+    const [cookie, setCookie, removeCookie] = useCookies([MY_CART]);
     const [showPopup, setShowPopup] = useState(false);
     const [signinPopUp, setSigninPopUp] = useState(false);
     const [redirectTo, setredirectTo] = useState('/');
@@ -117,20 +117,54 @@ const AppProvider = ({ children }) => {
 
     }, []);
 
-    const setCookieProductListChange = (products)=>{
-        const productsArray = cookie.myCart.map((cp) => {
+    // const setCookieProductListChange = (products)=>{
+    //     console.log(document.cookie)
+    //     const productsArray = cookie.myCart.map((cp) => {
+    //         const productT = products.find((p) => p?.id === cp?.id);
+    //         if (productT) {
+    //             return { ...productT, quantity: cp?.quantity };
+    //         }
+    //         return null; // Handle the case where the product is not found
+    //     }).filter(Boolean); 
+
+    //     setMyCart(productsArray);
+    //     if(!isLogin){
+    //         setCookie("myCart", productsArray, { path: '/', expires: expireTime });
+    //     }
+    // }
+
+
+    const setCookieProductListChange = (products) => {
+        console.log("Current cookies:", document.cookie);
+    
+        // Parse 'myCart' from document.cookie
+        const myCartCookie = document.cookie
+            .split('; ')
+            .find(row => row.startsWith('myCart='))
+            ?.split('=')[1];
+        const myCart = myCartCookie ? JSON.parse(decodeURIComponent(myCartCookie)) : [];
+    
+        // Update product list by matching IDs
+        const productsArray = myCart.map((cp) => {
             const productT = products.find((p) => p?.id === cp?.id);
             if (productT) {
                 return { ...productT, quantity: cp?.quantity };
             }
             return null; // Handle the case where the product is not found
-        }).filter(Boolean); 
-
+        }).filter(Boolean);
+    
         setMyCart(productsArray);
-        if(!isLogin){
-            setCookie("myCart", productsArray, { path: '/', expires: expireTime });
+    
+        // Set or update the cookie if the user is not logged in
+        if (!isLogin) {
+            const expireTime = new Date();
+            expireTime.setTime(expireTime.getTime() + (7 * 24 * 60 * 60 * 1000)); // 7 days expiry
+    
+            document.cookie = `myCart=${encodeURIComponent(JSON.stringify(productsArray))}; path=/; expires=${expireTime.toUTCString()}`;
+            console.log("Updated myCart cookie:", document.cookie);
         }
-    }
+    };
+    
 
 
     return (
